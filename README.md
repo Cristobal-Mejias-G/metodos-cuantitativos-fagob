@@ -5,7 +5,7 @@ Este repositorio centraliza los recursos, códigos y presentaciones diseñados p
 
 ## 🚀 Programa de Sesiones (2026)
 
-| Sesión | Tema Principal | Código (Repo) | Presentación (Live) |
+| Sesión | Tema Principal | Repositorio | Presentación |
 | :--- | :--- | :--- | :--- |
 | **01** | Introducción a R y RStudio | [Repo 01](https://github.com/Cristobal-Mejias-G/Clase-1-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-1-MC-FAGOB/ay1_presentacion.html) |
 | **02** | Procesamiento de datos con tidyverse | [Repo 02](https://github.com/Cristobal-Mejias-G/Clase-2-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-2-MC-FAGOB/ay2_presentacion.html) |
