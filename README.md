@@ -15,7 +15,7 @@ Este repositorio centraliza los recursos, códigos y presentaciones diseñados p
 | **06** | Inferencia estadística y correlaciones | [Repo 06](https://github.com/Cristobal-Mejias-G/Clase-6-MC-FAGOB) | Próximamente |
 | **07** | Ejercicios aplicados 1| Próximamente | Próximamente |
 | **08** | Apoyo entrega 2 Proyecto de investigación | Próximamente | Próximamente |
-| **09** | Estimación de modelos, exportación de tablas | Próximamente | Próximamente |
+| **09** | Modelos estadísticos| Próximamente | Próximamente |
 | **10** | Ejercicios aplicados 2 | Próximamente | Próximamente |
 | **11** | Repaso prueba de cátedra 2 | Próximamente | Próximamente |
 | **12** | Apoyo entrega 3 Proyecto de investigación | Próximamente | Próximamente |
