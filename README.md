@@ -13,8 +13,8 @@ Este repositorio centraliza los recursos, códigos y presentaciones diseñados p
 | **04** | Documentos dinámicos y Quarto | [Repo 04](https://github.com/Cristobal-Mejias-G/Clase-4-MC-FAGOB) | [Ver Documento](https://cristobal-mejias-g.github.io/Clase-4-MC-FAGOB/ay4_documento.html) |
 | **05** | Repaso prueba de cátedra 1 | [Repo 05](https://github.com/Cristobal-Mejias-G/Clase-5-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-5-MC-FAGOB/ay5_presentacion.html) |
 | **06** | Inferencia estadística y correlaciones | [Repo 06](https://github.com/Cristobal-Mejias-G/Clase-6-MC-FAGOB) | Próximamente |
-| **07** | Ejercicios aplicados 1| Próximamente | Próximamente |
-| **08** | Apoyo entrega 2 Proyecto de investigación | Próximamente | Próximamente |
+| **07** | Ejercicios aplicados 1| --- | --- |
+| **08** | Apoyo entrega 2 Proyecto de investigación | --- | --- |
 | **09** | Modelos estadísticos| Próximamente | Próximamente |
 | **10** | Ejercicios aplicados 2 | Próximamente | Próximamente |
 | **11** | Repaso prueba de cátedra 2 | Próximamente | Próximamente |
