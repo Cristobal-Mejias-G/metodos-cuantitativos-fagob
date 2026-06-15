@@ -14,8 +14,8 @@ Este repositorio centraliza los recursos, códigos y presentaciones diseñados p
 | **05** | Repaso prueba de cátedra 1 | [Repo 05](https://github.com/Cristobal-Mejias-G/Clase-5-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-5-MC-FAGOB/ay5_presentacion.html) |
 | **06** | Inferencia, correlaciín y regresión lineal | [Repo 06](https://github.com/Cristobal-Mejias-G/Clase-6-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-6-MC-FAGOB/ay6_presentacion.html) |
 | **07** | Modelos estadísticos| [Repo 07](https://github.com/Cristobal-Mejias-G/Clase-7-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-7-MC-FAGOB/ay7_presentacion.html) |
-| **08** | Ejercicios aplicados | Próximamente | Próximamente |
-| **09** | Repaso prueba de cátedra 2 | Próximamente | Próximamente |
+| **08** | Ejercicios aplicados |[Repo 08](https://github.com/Cristobal-Mejias-G/Clase-8-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-8-MC-FAGOB/ay8_presentacion.html) |
+| **09** | Repaso prueba de cátedra 2 | [Repo 09](https://github.com/Cristobal-Mejias-G/Clase-9-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-9-MC-FAGOB/ay9_presentacion.html) |
 
 **Para ver más recursos de cada sesión, ingresar a al repositorio correspondiente**
 
