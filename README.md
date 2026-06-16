@@ -12,9 +12,9 @@ Este repositorio centraliza los recursos, códigos y presentaciones diseñados p
 | **03** | Análisis descriptivo, bivariado y gráficos | [Repo 03](https://github.com/Cristobal-Mejias-G/Clase-3-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-3-MC-FAGOB/ay3_presentacion.html) |
 | **04** | Documentos dinámicos y Quarto | [Repo 04](https://github.com/Cristobal-Mejias-G/Clase-4-MC-FAGOB) | [Ver Documento](https://cristobal-mejias-g.github.io/Clase-4-MC-FAGOB/ay4_documento.html) |
 | **05** | Repaso prueba de cátedra 1 | [Repo 05](https://github.com/Cristobal-Mejias-G/Clase-5-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-5-MC-FAGOB/ay5_presentacion.html) |
-| **06** | Inferencia, correlaciín y regresión lineal | [Repo 06](https://github.com/Cristobal-Mejias-G/Clase-6-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-6-MC-FAGOB/ay6_presentacion.html) |
+| **06** | Inferencia, correlación y regresión lineal | [Repo 06](https://github.com/Cristobal-Mejias-G/Clase-6-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-6-MC-FAGOB/ay6_presentacion.html) |
 | **07** | Modelos estadísticos| [Repo 07](https://github.com/Cristobal-Mejias-G/Clase-7-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-7-MC-FAGOB/ay7_presentacion.html) |
-| **08** | Ejercicios aplicados |[Repo 08](https://github.com/Cristobal-Mejias-G/Clase-8-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-8-MC-FAGOB/ay8_presentacion.html) |
+| **08** | Ejercicios aplicados: Regresión Lineal Simple y Múltiple |[Repo 08](https://github.com/Cristobal-Mejias-G/Clase-8-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-8-MC-FAGOB/ay8_presentacion.html) |
 | **09** | Repaso prueba de cátedra 2 | [Repo 09](https://github.com/Cristobal-Mejias-G/Clase-9-MC-FAGOB) | [Ver Slides](https://cristobal-mejias-g.github.io/Clase-9-MC-FAGOB/ay9_presentacion.html) |
 
 **Para ver más recursos de cada sesión, ingresar a al repositorio correspondiente**
