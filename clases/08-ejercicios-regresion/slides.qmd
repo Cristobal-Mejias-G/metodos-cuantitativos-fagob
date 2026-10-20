@@ -1,0 +1,189 @@
+---
+title: "Ejercicios aplicados: regresión lineal simple y múltiple"
+subtitle: "Ayudantía 08 · FAGOB 2026"
+institute: "Métodos Cuantitativos para la Administración Pública"
+author: "Cristóbal Mejías · Facultad de Gobierno"
+date: 2026-06-19
+format: fagob-revealjs
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+source(here::here("R", "setup.R"))
+library(tidyverse)
+```
+
+## Estructura de la sesión
+
+Pondremos en práctica la regresión lineal simple y múltiple. Los ejercicios se trabajan con **lápiz y papel**, y usamos R para verificar los cálculos. Todos los contextos son de la administración pública chilena.
+
+1.  Predicción e interpretación: regresión simple
+2.  Residuos y ajuste del modelo
+3.  Regresión múltiple e interpretación de coeficientes
+4.  Modelos anidados y selección de modelo
+5.  Correlación espuria y diseño crítico
+
+[[Pauta de resolución](pauta.qmd){.button}]{.chico}
+
+# Ejercicio 1 · Gasto municipal y satisfacción ciudadana
+
+## Contexto
+
+Un investigador de la SUBDERE analizó datos de 120 municipios para estudiar la relación entre el gasto per cápita en servicios municipales (miles de pesos) y el índice de satisfacción ciudadana con los servicios locales (escala 0–100):
+
+$$\widehat{\text{Satisfacción}} = 22{,}5 + 0{,}38 \cdot \text{GastoPC} \qquad R^2 = 0{,}41$$
+
+## Preguntas
+
+::: ejercicio
+a)  Calcule la satisfacción predicha para un gasto per cápita de 50, 100 y 150. Muestre la sustitución.
+b)  Interprete el coeficiente 0,38: dirección, magnitud, unidades y la expresión "en promedio".
+c)  ¿Qué representa la constante 22,5? ¿Tiene interpretación sustantiva en este contexto?
+d)  ¿Qué porcentaje de la variación de la satisfacción **no** explica el gasto? ¿Qué implica?
+e)  Un municipio tiene un gasto de 90 y una satisfacción de 62. ¿Cuál es su residuo? ¿Cómo se interpreta?
+:::
+
+## Verificar con R
+
+```{r ej1-r}
+#| output-location: fragment
+b0 <- 22.5
+b1 <- 0.38
+
+tibble(gasto = c(50, 100, 150, 90)) |>
+  mutate(satisfaccion_predicha = b0 + b1 * gasto)
+
+62 - (b0 + b1 * 90)   # residuo = observado - predicho
+```
+
+# Ejercicio 2 · Ausentismo en salud primaria
+
+## Contexto
+
+El Ministerio de Salud estimó un modelo del ausentismo en CESFAM de la Región Metropolitana. La variable dependiente es el promedio de días de licencia médica por funcionario en el trimestre:
+
+$$\widehat{\text{Ausentismo}} = 4{,}2 + 0{,}18 \cdot \text{Carga} + 0{,}95 \cdot \text{Antigüedad}$$
+
+:::: columns
+::: {.column width="55%" .chico}
+-   `Carga`: atenciones mensuales promedio por funcionario
+-   `Antigüedad`: antigüedad promedio del personal (años)
+:::
+
+::: {.column width="45%"}
+| CESFAM | Carga | Antigüedad | Días obs. |
+|:--:|:--:|:--:|:--:|
+| A | 180 | 3 | 40 |
+| B | 220 | 8 | 55 |
+| C | 150 | 1 | 33 |
+| D | 200 | 12 | 72 |
+| E | 190 | 5 | 28 |
+:::
+::::
+
+## Preguntas
+
+::: ejercicio
+a)  Calcule el valor predicho y el residuo de cada CESFAM.
+b)  ¿Qué CESFAM tiene el mayor residuo en valor absoluto? ¿Qué implica para el análisis?
+c)  El CESFAM E tiene un residuo negativo. ¿Qué significa? Proponga al menos dos explicaciones.
+d)  Un inspector concluye que "el modelo falla para el CESFAM D porque está muy equivocado". ¿Es correcto? ¿Qué debería considerar?
+e)  Proponga al menos tres variables omitidas que podrían afectar la precisión del modelo.
+:::
+
+## Verificar con R
+
+```{r ej2-r}
+#| output-location: fragment
+cesfam <- tibble(
+  cesfam     = c("A", "B", "C", "D", "E"),
+  carga      = c(180, 220, 150, 200, 190),
+  antiguedad = c(3, 8, 1, 12, 5),
+  observado  = c(40, 55, 33, 72, 28)
+)
+
+cesfam |>
+  mutate(predicho = 4.2 + 0.18 * carga + 0.95 * antiguedad,
+         residuo  = observado - predicho) |>
+  arrange(desc(abs(residuo)))
+```
+
+# Ejercicio 3 · Postulaciones a becas
+
+## Contexto
+
+El Ministerio de Educación estudió las postulaciones exitosas a becas de posgrado entre funcionarios de 95 servicios públicos:
+
+$$\widehat{\text{Postulaciones}} = -3{,}1 + 0{,}42 \cdot \text{Estudio} + 2{,}1 \cdot \text{Capacitación} - 0{,}08 \cdot \text{Edad}$$
+
+$R^2 = 0{,}55$, $R^2_{\text{ajustado}} = 0{,}52$, $n = 95$.
+
+-   `Estudio`: años de estudio formal promedio del personal
+-   `Capacitación`: horas de capacitación anuales promedio por funcionario
+-   `Edad`: edad promedio del personal (años)
+
+## Preguntas
+
+::: ejercicio
+a)  Interprete los tres coeficientes: dirección, magnitud, unidades y "manteniendo los demás factores constantes".
+b)  ¿Qué representa la constante −3,1? ¿Tiene sentido sustantivo?
+c)  Un analista propone eliminar `Edad` porque su coeficiente es pequeño (−0,08). ¿Está en lo correcto? ¿Qué criterios debería usar?
+d)  ¿Por qué difieren el $R^2$ (0,55) y el $R^2$ ajustado (0,52)? ¿Cuál es más apropiado aquí?
+e)  Calcule las postulaciones predichas para `Estudio = 16`, `Capacitación = 40`, `Edad = 44`.
+:::
+
+# Ejercicio 4 · Modelos anidados: transparencia municipal
+
+## Contexto
+
+La Contraloría estudió los determinantes del índice de transparencia activa de los municipios (0–100), con cuatro modelos anidados ($n = 256$):
+
+::: muy-chico
+| Variable | M1 | M2 | M3 | M4 |
+|:--|:--:|:--:|:--:|:--:|
+| Intercepto | 28,3\*\*\* | 21,5\*\*\* | 18,9\*\*\* | 19,2\*\*\* |
+| Presupuesto per cápita (miles \$) | 1,8\*\*\* | 1,2\*\*\* | 0,9\*\*\* | 0,8\*\*\* |
+| Tamaño del concejo (N° concejales) | | 2,4\*\* | 2,1\*\* | 2,0\*\* |
+| Profesionales en planta (%) | | | 0,6\*\*\* | 0,5\*\*\* |
+| Sistema informático de gestión (1 = sí) | | | | 1,4 n.s. |
+| $R^2$ | 0,38 | 0,44 | 0,51 | 0,52 |
+| $R^2$ ajustado | 0,37 | 0,43 | 0,50 | 0,50 |
+
+\*\*\* p \< 0,001; \*\* p \< 0,01; \* p \< 0,05; n.s. = no significativo.
+:::
+
+## Preguntas
+
+::: ejercicio
+a)  ¿Qué ocurre con el coeficiente del presupuesto a medida que se agregan variables? Explique el mecanismo.
+b)  ¿Qué pasa con el $R^2$ y el $R^2$ ajustado de M3 a M4? ¿Qué indica sobre la variable agregada?
+c)  ¿Qué modelo recomendaría? Use al menos tres criterios: significancia, parsimonia y capacidad explicativa ajustada.
+d)  Con el modelo recomendado, calcule la transparencia predicha para un municipio con presupuesto 80, 8 concejales y 35% de profesionales.
+e)  Un concejal dice que "lo más importante es el presupuesto, porque tiene el coeficiente más alto". ¿Es correcto? ¿Qué está ignorando?
+:::
+
+# Ejercicio 5 · Correlación espuria y diseño crítico
+
+## Contexto
+
+En un comité de gestión de personas de un servicio público se presentó:
+
+> *"Con datos de 80 servicios públicos, el número de computadores por funcionario predice significativamente el índice de productividad institucional ($\beta = 12{,}4^{***}$, $R^2 = 0{,}43$). Concluimos que invertir en equipamiento aumenta la productividad en 12,4 puntos por computador adicional."*
+
+Al agregar `Profesionalización` (% de funcionarios con título profesional) y `Años de acreditación`, el coeficiente de computadores cae a 2,1 y deja de ser significativo ($R^2 = 0{,}58$).
+
+## Preguntas
+
+::: ejercicio
+a)  ¿Qué error conceptual cometió el equipo al concluir causalidad con el modelo bivariado?
+b)  ¿Cuál es la variable de confusión más probable? Explique el mecanismo de la correlación espuria.
+c)  ¿Es correcto concluir, con el modelo múltiple, que los computadores no tienen ningún efecto? ¿Qué limitaciones tiene?
+d)  Proponga al menos tres variables adicionales para un modelo más completo.
+e)  ¿Qué diseño de investigación permitiría establecer con más rigor si el equipamiento causa mejoras en la productividad?
+:::
+
+# Nos vemos en la próxima ayudantía. ¡Gracias por su atención!

@@ -41,17 +41,26 @@ clases/NN-tema/
 -   Sin `rm(list = ls())` ni `setwd()`: el proyecto `.Rproj` y `here::here()` resuelven las rutas.
 -   Casos perdidos con `drop_na()` sobre las variables seleccionadas.
 -   Semilla fija (`set.seed(2026)`, ya incluida en `R/setup.R`).
+-   Bases de Stata/SPSS: quitar etiquetas con `haven::zap_labels`, **siempre con el prefijo `haven::`**. `sjlabelled` tiene una función con el mismo nombre que convierte en NA los valores etiquetados.
+-   Códigos de no respuesta (-8, -9, -88, -99) a `NA` con `sjlabelled::set_na()` antes de cualquier análisis.
 
 ## Paquetes recomendados
 
 | Tarea | Antes | Ahora |
 |:--|:--|:--|
-| Recodificar | `car::recode()` | `dplyr::case_when()`, `sjmisc::rec()` |
-| Frecuencias | `table()`, `prop.table()` | `sjmisc::frq()`, `janitor::tabyl()` |
-| Descriptivos | `summary()` | `sjmisc::descr()` |
-| Etiquetas | `haven` | `sjlabelled` |
+| Recodificar códigos a categorías | `car::recode()` | `factor(x, levels = , labels = )` |
+| Crear tramos | `ifelse()` anidados | `if_else()`, `case_when(..., .default = )` |
+| Valores especiales a NA | `car::recode("-88 = NA")` | `sjlabelled::set_na(..., na = c(-88, -99))` |
+| Invertir una escala | `sjmisc::rec("1=4; 2=3...")` | `5 - x` dentro de `across()` |
+| Casos perdidos | `na.omit()` sobre toda la base | `drop_na()` con las variables del análisis |
+| Frecuencias | `table()`, `prop.table()` | `count()`, `sjmisc::frq()` |
+| Tablas cruzadas | `table(x, y)` | `janitor::tabyl()` + `adorn_*()` |
+| Descriptivos | `summary()`, `stargazer` | `sjmisc::descr()`, `gtsummary::tbl_summary()` |
+| Tablas para informe | `kableExtra` | `gt` |
+| Valores perdidos | `colSums(is.na())` | `naniar::gg_miss_var()` |
 | Resultados de tests | `Publish`, `rempsyc::nice_table()` | `parameters::model_parameters()` |
-| Tablas de regresión | `stargazer` | `modelsummary`, `sjPlot::tab_model()` |
+| Tablas de regresión | `stargazer`, `texreg::screenreg()` | `modelsummary()`, `sjPlot::tab_model()` |
+| Coeficientes en gráfico | no había | `modelsummary::modelplot()` |
 | Gráficos de dispersión | `car::scatterplot()` | `ggplot2` + `geom_smooth(method = "lm")` |
 | Supuestos de regresión | gráficos base | `performance::check_model()` |
-| Valores predichos | cálculo manual | `ggeffects::predict_response()` |
+| Probabilidades / valores predichos | cálculo manual | `ggeffects::predict_response()` |

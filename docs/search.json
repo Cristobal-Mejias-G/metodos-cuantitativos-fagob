@@ -1,5 +1,89 @@
 [
   {
+    "objectID": "clases/04-quarto/documento.html",
+    "href": "clases/04-quarto/documento.html",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "",
+    "text": "En el trabajo cuantitativo, el flujo habitual consiste en correr código en R, copiar resultados a un procesador de texto, ajustar manualmente tablas y gráficos, y repetir el ciclo cada vez que algo cambia. Este proceso es lento, propenso a errores y dificulta la reproducibilidad: la capacidad de que cualquier persona pueda llegar exactamente a los mismos resultados a partir de los mismos datos y procedimientos.\nLos documentos dinámicos resuelven este problema al integrar en un solo archivo el texto, el código y los resultados del análisis. Si los datos cambian, el documento se actualiza automáticamente al renderizarlo.\n\n\nUn análisis es reproducible cuando:\n\nEl código fuente está disponible y documentado.\nLos datos de entrada están accesibles o descritos con precisión.\nEl entorno de trabajo (paquetes, versiones) está registrado.\nCualquier persona puede llegar al mismo resultado siguiendo los mismos pasos.\n\n\n\n\n\n\n\n\n\n\n\nConcepto\nDescripción\n\n\n\n\nMarkdown\nTexto plano con marcas mínimas de formato (.md). Solo texto y estructura.\n\n\nR Markdown\nMarkdown con código R ejecutable (.Rmd). Específico para R.\n\n\nQuarto\nSistema moderno y multilenguaje (R, Python, Julia) para documentos dinámicos (.qmd). Estándar del curso."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#reproducibilidad",
+    "href": "clases/04-quarto/documento.html#reproducibilidad",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "",
+    "text": "Un análisis es reproducible cuando:\n\nEl código fuente está disponible y documentado.\nLos datos de entrada están accesibles o descritos con precisión.\nEl entorno de trabajo (paquetes, versiones) está registrado.\nCualquier persona puede llegar al mismo resultado siguiendo los mismos pasos."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#markdown-vs.-quarto",
+    "href": "clases/04-quarto/documento.html#markdown-vs.-quarto",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "",
+    "text": "Concepto\nDescripción\n\n\n\n\nMarkdown\nTexto plano con marcas mínimas de formato (.md). Solo texto y estructura.\n\n\nR Markdown\nMarkdown con código R ejecutable (.Rmd). Específico para R.\n\n\nQuarto\nSistema moderno y multilenguaje (R, Python, Julia) para documentos dinámicos (.qmd). Estándar del curso."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#creación-del-archivo",
+    "href": "clases/04-quarto/documento.html#creación-del-archivo",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "2.1 Creación del archivo",
+    "text": "2.1 Creación del archivo\n\nFile → New File → Quarto Document…\n\n\n\nEscribimos un título y autor/a, y hacemos clic en Create."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#escritura-en-markdown",
+    "href": "clases/04-quarto/documento.html#escritura-en-markdown",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "2.2 Escritura en Markdown",
+    "text": "2.2 Escritura en Markdown\nTodo el texto de un archivo .qmd se escribe en Markdown.\n\n\n\nCódigo\nResultado\n\n\n\n\n**negrita**\nnegrita\n\n\n*cursiva*\ncursiva\n\n\n# Título 1\nEncabezado de nivel 1\n\n\n## Título 2\nEncabezado de nivel 2\n\n\n[texto](https://www.markdownguide.org/)\ntexto\n\n\n![](img/fagob.jpg)\n\n\n\n&gt; cita\ncita en bloque\n\n\n- ítem\nlista\n\n\n1. ítem\nlista numerada"
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#código-los-chunks",
+    "href": "clases/04-quarto/documento.html#código-los-chunks",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "2.3 Código: los chunks",
+    "text": "2.3 Código: los chunks\nPara escribir código en un documento Quarto creamos un chunk: con Ctrl + Alt + I o en Code → Insert Chunk.\n\n\nLos chunks comienzan y terminan con tres comillas invertidas (```).\n{r} indica el lenguaje: en este caso, R.\nLas opciones se escriben al inicio del chunk con #|. Si no se indica nada, se aplican los valores por defecto.\n\n\n\n\nOpción\nDescripción\n\n\n\n\necho\nMuestra u oculta el código\n\n\neval\nEjecuta o no el código\n\n\noutput\nIncluye o excluye los resultados\n\n\nwarning\nMuestra u oculta advertencias\n\n\nmessage\nMuestra u oculta mensajes\n\n\ninclude\nSuprime código y resultados a la vez\n\n\nlabel\nIdentifica el chunk para referencias cruzadas\n\n\nfig-cap\nTítulo para gráficos (con label: fig-...)\n\n\ntbl-cap\nTítulo para tablas (con label: tbl-...)"
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#referencias-cruzadas",
+    "href": "clases/04-quarto/documento.html#referencias-cruzadas",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "2.4 Referencias cruzadas",
+    "text": "2.4 Referencias cruzadas\n\nEtiqueta: las tablas llevan label: tbl-nombre y los gráficos label: fig-nombre. Así Quarto las numera.\nReferencia: en el texto se escribe @tbl-nombre y Quarto lo reemplaza por “Tabla 1”, “Tabla 2”, etc. La numeración depende del orden de aparición en el documento.\nTexto personalizado: [ver resumen de datos](#tbl-nombre) crea un enlace con el texto que elijas.\n\n\n\n\n\n\n\nTip\n\n\n\nHaz todo el procesamiento en un chunk al inicio del documento y guarda los resultados en objetos. Luego, donde quieras que aparezca cada tabla, crea un chunk pequeño con solo el label, el tbl-cap y el nombre del objeto."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#preparación",
+    "href": "clases/04-quarto/documento.html#preparación",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "3.1 Preparación",
+    "text": "3.1 Preparación\nUn chunk sin opciones muestra todos los mensajes al cargar paquetes:\n\npacman::p_load(tidyverse, sjmisc, sjPlot)\n\nPara ocultarlos agregamos #| message: false y #| warning: false:\n\npacman::p_load(tidyverse, sjmisc, sjPlot, knitr)"
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#carga-de-datos",
+    "href": "clases/04-quarto/documento.html#carga-de-datos",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "3.2 Carga de datos",
+    "text": "3.2 Carga de datos\n\nload(url(\"https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/issp_2009_chile.RData\"))\n\n\nglimpse(issp)\n\nRows: 1,505\nColumns: 12\n$ sex           &lt;fct&gt; 1, 1, 1, 2, 2, 1, 2, 1, 2, 1, 1, 2, 1, 1, 1, 1, 2, 2, 1,…\n$ age           &lt;dbl&gt; 23, 33, 36, 65, 20, 19, 41, 42, 50, 47, 21, 55, 58, 35, …\n$ educyrs       &lt;dbl&gt; 12, 13, 7, 6, 13, 13, 13, 10, 13, 22, 12, 6, 8, 10, 8, 1…\n$ income        &lt;dbl&gt; 5, 5, 7, 3, 1, 5, 9, 1, 5, 10, 8, 1, 6, 6, 9, 9, 1, 4, 9…\n$ topbot        &lt;dbl&gt; 5, 5, 5, 6, 6, 4, 5, 6, 4, 6, 4, 6, 4, 1, 3, 5, 2, 5, 4,…\n$ pref_redis    &lt;dbl&gt; 1, 4, 5, 2, 5, 4, 4, 3, 4, 3, 4, 4, 4, 4, 4, 3, 4, 4, 4,…\n$ perc_ineq     &lt;dbl&gt; 3, 5, 5, 4, 5, 4, 5, 5, 5, 4, 5, 2, 2, 4, 5, 2, 4, 4, 4,…\n$ conflict_rp   &lt;dbl&gt; 4, 1, 4, 3, 3, 2, 2, 2, 3, 2, 3, 1, 1, 3, 2, 4, 3, 3, 2,…\n$ conflict_wcmc &lt;dbl&gt; 3, 2, 4, 3, 3, 1, 3, 1, 3, 1, 2, 1, 3, 3, 1, 2, 2, 3, NA…\n$ conflict_mw   &lt;dbl&gt; 1, 3, 4, 2, 4, 3, 3, 3, 3, 2, 3, 1, 4, 3, 2, 2, 2, 3, 3,…\n$ conflict_tb   &lt;dbl&gt; 4, 1, 3, 3, 3, 2, 3, 2, 3, 1, 1, 2, 4, 3, 2, 4, 3, 4, 3,…\n$ perc_conflict &lt;dbl&gt; 8, 3, 11, 7, 9, 4, 7, 4, 8, 2, 5, 1, 8, 8, 3, 8, 6, 9, N…"
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#tabla-descriptiva",
+    "href": "clases/04-quarto/documento.html#tabla-descriptiva",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "3.3 Tabla descriptiva",
+    "text": "3.3 Tabla descriptiva\n\ndescr(issp, show = c(\"label\", \"range\", \"mean\", \"sd\", \"NA.prc\", \"n\")) |&gt;\n  kable(digits = 2)\n\n\n\nTabla 1: Estadísticos descriptivos de variables seleccionadas\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nvar\nlabel\nn\nNA.prc\nmean\nsd\nrange\n\n\n\n\n11\nsex\nSexo\n1505\n0.00\n1.58\n0.49\n1 (1-2)\n\n\n1\nage\nEdad\n1505\n0.00\n46.56\n17.64\n73 (18-91)\n\n\n6\neducyrs\nNivel educativo\n1451\n3.59\n10.76\n4.41\n24 (1-25)\n\n\n7\nincome\nDecil ingreso\n1146\n23.85\n5.49\n2.87\n9 (1-10)\n\n\n12\ntopbot\nEstatus social subjetivo\n1490\n1.00\n4.03\n1.66\n9 (1-10)\n\n\n10\npref_redis\nPreferencia por redistribución\n1477\n1.86\n3.83\n0.88\n4 (1-5)\n\n\n9\nperc_ineq\nPercepción desigualdad\n1492\n0.86\n4.19\n0.83\n4 (1-5)\n\n\n3\nconflict_rp\nConflictos: ricos - pobres\n1438\n4.45\n2.61\n0.87\n3 (1-4)\n\n\n5\nconflict_wcmc\nConflictos: clase trabajadora - clase media\n1426\n5.25\n2.29\n0.90\n3 (1-4)\n\n\n2\nconflict_mw\nConflictos: directivos - trabajadores\n1427\n5.18\n2.71\n0.83\n3 (1-4)\n\n\n4\nconflict_tb\nConflictos: gente de arriba - gente de abajo\n1425\n5.32\n2.66\n0.90\n3 (1-4)\n\n\n8\nperc_conflict\nPercepción conflictos\n1390\n7.64\n6.30\n2.79\n12 (0-12)\n\n\n\n\n\n\n\n\nLa Tabla 1 resume las variables con las que trabajaremos."
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#modelos-de-regresión-lineal",
+    "href": "clases/04-quarto/documento.html#modelos-de-regresión-lineal",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "3.4 Modelos de regresión lineal",
+    "text": "3.4 Modelos de regresión lineal\n\nmodelo_1 &lt;- lm(topbot ~ educyrs, data = issp)\nmodelo_2 &lt;- lm(topbot ~ educyrs + income, data = issp)\n\n\ntab_model(\n  modelo_1, modelo_2,\n  show.ci     = FALSE,\n  show.se     = TRUE,\n  dv.labels   = c(\"Modelo 1\", \"Modelo 2\"),\n  pred.labels = c(\"(Intercepto)\", \"Años de educación\", \"Decil de ingreso\")\n)\n\n\n\nTabla 2: Modelos de regresión: estatus social subjetivo\n\n\n\n\n\n\n \nModelo 1\nModelo 2\n\n\nPredictors\nEstimates\nstd. Error\np\nEstimates\nstd. Error\np\n\n\n(Intercepto)\n2.45\n0.11\n&lt;0.001\n2.14\n0.13\n&lt;0.001\n\n\nAños de educación\n0.15\n0.01\n&lt;0.001\n0.12\n0.01\n&lt;0.001\n\n\nDecil de ingreso\n\n\n\n0.11\n0.02\n&lt;0.001\n\n\nObservations\n1440\n1099\n\n\nR2 / R2 adjusted\n0.162 / 0.161\n0.190 / 0.189"
+  },
+  {
+    "objectID": "clases/04-quarto/documento.html#visualización",
+    "href": "clases/04-quarto/documento.html#visualización",
+    "title": "Sesión 4: Documentos dinámicos y Quarto",
+    "section": "3.5 Visualización",
+    "text": "3.5 Visualización\n\nggplot(issp, aes(x = educyrs, y = topbot)) +\n  geom_jitter(alpha = 0.2, color = \"#40666e\", width = 0.3, height = 0.3) +\n  geom_smooth(method = \"lm\", color = \"#D49A3B\", linewidth = 1.2) +\n  labs(\n    x       = \"Años de educación\",\n    y       = \"Estatus social subjetivo (1–10)\",\n    caption = \"Fuente: elaboración propia en base a ISSP 2009.\"\n  )\n\n`geom_smooth()` using formula = 'y ~ x'\n\n\nWarning: Removed 65 rows containing non-finite outside the scale range\n(`stat_smooth()`).\n\n\nWarning: Removed 65 rows containing missing values or values outside the scale range\n(`geom_point()`).\n\n\n\n\n\n\n\n\nFigura 1: Relación entre educación y estatus social subjetivo\n\n\n\n\n\nLa Figura 1 muestra la asociación positiva entre años de escolaridad y estatus percibido."
+  },
+  {
     "objectID": "clases/06-inferencia-regresion/pauta.html",
     "href": "clases/06-inferencia-regresion/pauta.html",
     "title": "Pauta ayudantía 06",
@@ -42,60 +126,95 @@
     "text": "Ejercicio 5: regresión 3\n\n\n\n\n\n\nNota\n\n\n\nPendiente."
   },
   {
-    "objectID": "guia-estilo.html",
-    "href": "guia-estilo.html",
-    "title": "Guía de estilo de las ayudantías",
-    "section": "",
-    "text": "Convenciones comunes para que todas las sesiones se vean y se programen igual. Antes de crear una sesión nueva, copiar _plantilla/clase/ a clases/NN-tema/."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#estructura-de-la-sesión",
+    "href": "clases/08-ejercicios-regresion/slides.html#estructura-de-la-sesión",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Estructura de la sesión",
+    "text": "Estructura de la sesión\nPondremos en práctica la regresión lineal simple y múltiple. Los ejercicios se trabajan con lápiz y papel, y usamos R para verificar los cálculos. Todos los contextos son de la administración pública chilena.\n\nPredicción e interpretación: regresión simple\nResiduos y ajuste del modelo\nRegresión múltiple e interpretación de coeficientes\nModelos anidados y selección de modelo\nCorrelación espuria y diseño crítico\n\nPauta de resolución"
   },
   {
-    "objectID": "guia-estilo.html#estructura-del-repositorio",
-    "href": "guia-estilo.html#estructura-del-repositorio",
-    "title": "Guía de estilo de las ayudantías",
-    "section": "Estructura del repositorio",
-    "text": "Estructura del repositorio\n_quarto.yml              configuración del sitio\n_extensions/fagob/       tema de las presentaciones (formato fagob-revealjs)\n_plantilla/clase/        plantilla para una sesión nueva\nR/setup.R                opciones comunes (se carga oculto en cada sesión)\ndatos/                   todas las bases, una sola copia\nclases/NN-tema/\n  slides.qmd             presentación\n  pauta.qmd              resolución de ejercicios"
+    "objectID": "clases/08-ejercicios-regresion/slides.html#contexto",
+    "href": "clases/08-ejercicios-regresion/slides.html#contexto",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Contexto",
+    "text": "Contexto\nUn investigador de la SUBDERE analizó datos de 120 municipios para estudiar la relación entre el gasto per cápita en servicios municipales (miles de pesos) y el índice de satisfacción ciudadana con los servicios locales (escala 0–100):\n\\[\\widehat{\\text{Satisfacción}} = 22{,}5 + 0{,}38 \\cdot \\text{GastoPC} \\qquad R^2 = 0{,}41\\]"
   },
   {
-    "objectID": "guia-estilo.html#presentaciones",
-    "href": "guia-estilo.html#presentaciones",
-    "title": "Guía de estilo de las ayudantías",
-    "section": "Presentaciones",
-    "text": "Presentaciones\n\nFormato único: format: fagob-revealjs. La portada se arma desde el YAML (title, subtitle, institute, author, date).\nLas secciones se escriben como # Parte 1: ...; el fondo institucional lo pone el tema automáticamente.\nNada de style=\"...\" en el texto. Usar las clases del tema:\n\n\n\n\nClase\nUso\n\n\n\n\n[texto]{.destacado}\nresaltar una idea clave\n\n\n::: chico / ::: muy-chico\nreducir el tamaño de un bloque\n\n\n::: ejercicio\ncaja con instrucciones de ejercicio\n\n\n[texto](url){.button}\nbotón de enlace\n\n\n::: {.columns} + .column\ndos columnas\n\n\n\n\nUn solo chunk por resultado. Si el código y el resultado no caben juntos, usar #| output-location: fragment o #| output-location: column en vez de duplicar el chunk con eval: false.\nLos valores interpretados en el texto se escriben con R en línea (`r round(b1, 2)`), para que no queden desactualizados."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#preguntas",
+    "href": "clases/08-ejercicios-regresion/slides.html#preguntas",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\nCalcule la satisfacción predicha para un gasto per cápita de 50, 100 y 150. Muestre la sustitución.\nInterprete el coeficiente 0,38: dirección, magnitud, unidades y la expresión “en promedio”.\n¿Qué representa la constante 22,5? ¿Tiene interpretación sustantiva en este contexto?\n¿Qué porcentaje de la variación de la satisfacción no explica el gasto? ¿Qué implica?\nUn municipio tiene un gasto de 90 y una satisfacción de 62. ¿Cuál es su residuo? ¿Cómo se interpreta?"
   },
   {
-    "objectID": "guia-estilo.html#código",
-    "href": "guia-estilo.html#código",
-    "title": "Guía de estilo de las ayudantías",
-    "section": "Código",
-    "text": "Código\n\nPipe nativo |&gt;.\nPaquetes con pacman::p_load() al inicio de cada sesión, con un comentario por paquete.\nSin rm(list = ls()) ni setwd(): el proyecto .Rproj y here::here() resuelven las rutas.\nCasos perdidos con drop_na() sobre las variables seleccionadas.\nSemilla fija (set.seed(2026), ya incluida en R/setup.R)."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#verificar-con-r",
+    "href": "clases/08-ejercicios-regresion/slides.html#verificar-con-r",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Verificar con R",
+    "text": "Verificar con R\n\nb0 &lt;- 22.5\nb1 &lt;- 0.38\n\ntibble(gasto = c(50, 100, 150, 90)) |&gt;\n  mutate(satisfaccion_predicha = b0 + b1 * gasto)\n\n\n\n# A tibble: 4 × 2\n  gasto satisfaccion_predicha\n  &lt;dbl&gt;                 &lt;dbl&gt;\n1    50                  41.5\n2   100                  60.5\n3   150                  79.5\n4    90                  56.7\n\n62 - (b0 + b1 * 90)   # residuo = observado - predicho\n\n[1] 5.3"
   },
   {
-    "objectID": "guia-estilo.html#paquetes-recomendados",
-    "href": "guia-estilo.html#paquetes-recomendados",
-    "title": "Guía de estilo de las ayudantías",
-    "section": "Paquetes recomendados",
-    "text": "Paquetes recomendados\n\n\n\n\n\n\n\n\nTarea\nAntes\nAhora\n\n\n\n\nRecodificar\ncar::recode()\ndplyr::case_when(), sjmisc::rec()\n\n\nFrecuencias\ntable(), prop.table()\nsjmisc::frq(), janitor::tabyl()\n\n\nDescriptivos\nsummary()\nsjmisc::descr()\n\n\nEtiquetas\nhaven\nsjlabelled\n\n\nResultados de tests\nPublish, rempsyc::nice_table()\nparameters::model_parameters()\n\n\nTablas de regresión\nstargazer\nmodelsummary, sjPlot::tab_model()\n\n\nGráficos de dispersión\ncar::scatterplot()\nggplot2 + geom_smooth(method = \"lm\")\n\n\nSupuestos de regresión\ngráficos base\nperformance::check_model()\n\n\nValores predichos\ncálculo manual\nggeffects::predict_response()"
+    "objectID": "clases/08-ejercicios-regresion/slides.html#contexto-1",
+    "href": "clases/08-ejercicios-regresion/slides.html#contexto-1",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Contexto",
+    "text": "Contexto\nEl Ministerio de Salud estimó un modelo del ausentismo en CESFAM de la Región Metropolitana. La variable dependiente es el promedio de días de licencia médica por funcionario en el trimestre:\n\\[\\widehat{\\text{Ausentismo}} = 4{,}2 + 0{,}18 \\cdot \\text{Carga} + 0{,}95 \\cdot \\text{Antigüedad}\\]\n\n\n\nCarga: atenciones mensuales promedio por funcionario\nAntigüedad: antigüedad promedio del personal (años)\n\n\n\n\n\nCESFAM\nCarga\nAntigüedad\nDías obs.\n\n\n\n\nA\n180\n3\n40\n\n\nB\n220\n8\n55\n\n\nC\n150\n1\n33\n\n\nD\n200\n12\n72\n\n\nE\n190\n5\n28"
   },
   {
-    "objectID": "index.html",
-    "href": "index.html",
-    "title": "Métodos Cuantitativos para la Administración Pública",
-    "section": "",
-    "text": "Sitio con las presentaciones, códigos y pautas de las sesiones prácticas de R del curso dictado por el profesor Carlos Budnevich."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#preguntas-1",
+    "href": "clases/08-ejercicios-regresion/slides.html#preguntas-1",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\nCalcule el valor predicho y el residuo de cada CESFAM.\n¿Qué CESFAM tiene el mayor residuo en valor absoluto? ¿Qué implica para el análisis?\nEl CESFAM E tiene un residuo negativo. ¿Qué significa? Proponga al menos dos explicaciones.\nUn inspector concluye que “el modelo falla para el CESFAM D porque está muy equivocado”. ¿Es correcto? ¿Qué debería considerar?\nProponga al menos tres variables omitidas que podrían afectar la precisión del modelo."
   },
   {
-    "objectID": "index.html#sesiones",
-    "href": "index.html#sesiones",
-    "title": "Métodos Cuantitativos para la Administración Pública",
-    "section": "Sesiones",
-    "text": "Sesiones\n\n\n\nSesión\nTema\nPresentación\nPauta\n\n\n\n\n01\nIntroducción a R y RStudio\nSlides 2026\n\n\n\n02\nProcesamiento de datos con tidyverse\nSlides 2026\n\n\n\n03\nAnálisis descriptivo, bivariado y gráficos\nSlides 2026\n\n\n\n04\nDocumentos dinámicos y Quarto\nDocumento 2026\n\n\n\n05\nRepaso prueba de cátedra 1\nSlides 2026\n\n\n\n06\nInferencia, correlación y regresión simple\nSlides\nPauta\n\n\n07\nModelos de regresión múltiple\nSlides 2026\n\n\n\n08\nEjercicios aplicados: regresión simple y múltiple\nSlides 2026\n\n\n\n09\nRepaso prueba de cátedra 2\nSlides 2026\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nSesiones en migración: las que dicen “Slides 2026” enlazan todavía a su repositorio original. La sesión 06 es la primera migrada al formato unificado."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#verificar-con-r-1",
+    "href": "clases/08-ejercicios-regresion/slides.html#verificar-con-r-1",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Verificar con R",
+    "text": "Verificar con R\n\ncesfam &lt;- tibble(\n  cesfam     = c(\"A\", \"B\", \"C\", \"D\", \"E\"),\n  carga      = c(180, 220, 150, 200, 190),\n  antiguedad = c(3, 8, 1, 12, 5),\n  observado  = c(40, 55, 33, 72, 28)\n)\n\ncesfam |&gt;\n  mutate(predicho = 4.2 + 0.18 * carga + 0.95 * antiguedad,\n         residuo  = observado - predicho) |&gt;\n  arrange(desc(abs(residuo)))\n\n\n\n# A tibble: 5 × 6\n  cesfam carga antiguedad observado predicho residuo\n  &lt;chr&gt;  &lt;dbl&gt;      &lt;dbl&gt;     &lt;dbl&gt;    &lt;dbl&gt;   &lt;dbl&gt;\n1 D        200         12        72     51.6  20.4  \n2 E        190          5        28     43.2 -15.2  \n3 B        220          8        55     51.4   3.60 \n4 C        150          1        33     32.2   0.850\n5 A        180          3        40     39.4   0.550"
   },
   {
-    "objectID": "index.html#cómo-usar-este-repositorio",
-    "href": "index.html#cómo-usar-este-repositorio",
-    "title": "Métodos Cuantitativos para la Administración Pública",
-    "section": "Cómo usar este repositorio",
-    "text": "Cómo usar este repositorio\n\nDescarga el repositorio (botón Code → Download ZIP en GitHub) y abre metodos-cuantitativos-fagob.Rproj en RStudio o Positron.\nTodas las bases están en la carpeta datos/.\nCada sesión está en clases/NN-tema/, con su presentación (slides.qmd) y su pauta (pauta.qmd)."
+    "objectID": "clases/08-ejercicios-regresion/slides.html#contexto-2",
+    "href": "clases/08-ejercicios-regresion/slides.html#contexto-2",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Contexto",
+    "text": "Contexto\nEl Ministerio de Educación estudió las postulaciones exitosas a becas de posgrado entre funcionarios de 95 servicios públicos:\n\\[\\widehat{\\text{Postulaciones}} = -3{,}1 + 0{,}42 \\cdot \\text{Estudio} + 2{,}1 \\cdot \\text{Capacitación} - 0{,}08 \\cdot \\text{Edad}\\]\n\\(R^2 = 0{,}55\\), \\(R^2_{\\text{ajustado}} = 0{,}52\\), \\(n = 95\\).\n\nEstudio: años de estudio formal promedio del personal\nCapacitación: horas de capacitación anuales promedio por funcionario\nEdad: edad promedio del personal (años)"
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/slides.html#preguntas-2",
+    "href": "clases/08-ejercicios-regresion/slides.html#preguntas-2",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\nInterprete los tres coeficientes: dirección, magnitud, unidades y “manteniendo los demás factores constantes”.\n¿Qué representa la constante −3,1? ¿Tiene sentido sustantivo?\nUn analista propone eliminar Edad porque su coeficiente es pequeño (−0,08). ¿Está en lo correcto? ¿Qué criterios debería usar?\n¿Por qué difieren el \\(R^2\\) (0,55) y el \\(R^2\\) ajustado (0,52)? ¿Cuál es más apropiado aquí?\nCalcule las postulaciones predichas para Estudio = 16, Capacitación = 40, Edad = 44."
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/slides.html#contexto-3",
+    "href": "clases/08-ejercicios-regresion/slides.html#contexto-3",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Contexto",
+    "text": "Contexto\nLa Contraloría estudió los determinantes del índice de transparencia activa de los municipios (0–100), con cuatro modelos anidados (\\(n = 256\\)):\n\n\n\n\n\n\n\n\n\n\n\nVariable\nM1\nM2\nM3\nM4\n\n\n\n\nIntercepto\n28,3***\n21,5***\n18,9***\n19,2***\n\n\nPresupuesto per cápita (miles $)\n1,8***\n1,2***\n0,9***\n0,8***\n\n\nTamaño del concejo (N° concejales)\n\n2,4**\n2,1**\n2,0**\n\n\nProfesionales en planta (%)\n\n\n0,6***\n0,5***\n\n\nSistema informático de gestión (1 = sí)\n\n\n\n1,4 n.s.\n\n\n\\(R^2\\)\n0,38\n0,44\n0,51\n0,52\n\n\n\\(R^2\\) ajustado\n0,37\n0,43\n0,50\n0,50\n\n\n\n*** p &lt; 0,001; ** p &lt; 0,01; * p &lt; 0,05; n.s. = no significativo."
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/slides.html#preguntas-3",
+    "href": "clases/08-ejercicios-regresion/slides.html#preguntas-3",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\n¿Qué ocurre con el coeficiente del presupuesto a medida que se agregan variables? Explique el mecanismo.\n¿Qué pasa con el \\(R^2\\) y el \\(R^2\\) ajustado de M3 a M4? ¿Qué indica sobre la variable agregada?\n¿Qué modelo recomendaría? Use al menos tres criterios: significancia, parsimonia y capacidad explicativa ajustada.\nCon el modelo recomendado, calcule la transparencia predicha para un municipio con presupuesto 80, 8 concejales y 35% de profesionales.\nUn concejal dice que “lo más importante es el presupuesto, porque tiene el coeficiente más alto”. ¿Es correcto? ¿Qué está ignorando?"
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/slides.html#contexto-4",
+    "href": "clases/08-ejercicios-regresion/slides.html#contexto-4",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Contexto",
+    "text": "Contexto\nEn un comité de gestión de personas de un servicio público se presentó:\n\n“Con datos de 80 servicios públicos, el número de computadores por funcionario predice significativamente el índice de productividad institucional (\\(\\beta = 12{,}4^{***}\\), \\(R^2 = 0{,}43\\)). Concluimos que invertir en equipamiento aumenta la productividad en 12,4 puntos por computador adicional.”\n\nAl agregar Profesionalización (% de funcionarios con título profesional) y Años de acreditación, el coeficiente de computadores cae a 2,1 y deja de ser significativo (\\(R^2 = 0{,}58\\))."
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/slides.html#preguntas-4",
+    "href": "clases/08-ejercicios-regresion/slides.html#preguntas-4",
+    "title": "Ejercicios aplicados: regresión lineal simple y múltiple",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\n¿Qué error conceptual cometió el equipo al concluir causalidad con el modelo bivariado?\n¿Cuál es la variable de confusión más probable? Explique el mecanismo de la correlación espuria.\n¿Es correcto concluir, con el modelo múltiple, que los computadores no tienen ningún efecto? ¿Qué limitaciones tiene?\nProponga al menos tres variables adicionales para un modelo más completo.\n¿Qué diseño de investigación permitiría establecer con más rigor si el equipamiento causa mejoras en la productividad?"
   },
   {
     "objectID": "clases/06-inferencia-regresion/slides.html#qué-veremos-hoy",
@@ -257,5 +376,915 @@
     "title": "Inferencia, correlación y regresión simple",
     "section": "Lo que vimos hoy",
     "text": "Lo que vimos hoy\n\nIntervalo de confianza: rango plausible para el parámetro poblacional, calculado paso a paso y con t.test()\nTest t: contraste de medias entre dos grupos independientes\nCorrelación de Pearson: asociación lineal entre dos variables continuas\nRegresión lineal simple: coeficientes e interpretación\n\n\nRepositorio de ayudantías"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#qué-veremos-hoy",
+    "href": "clases/03-descriptivos-graficos/slides.html#qué-veremos-hoy",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\nCargar los datos procesados en la AY-2\nTablas de frecuencia\nEstadísticos descriptivos por grupo\nTablas listas para reportar en una línea\nGráficos con ggplot2\nPráctica autónoma\n\nAl final de la sesión sabrás generar tablas y gráficos listos para un informe."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#qué-hicimos-en-la-ay-2",
+    "href": "clases/03-descriptivos-graficos/slides.html#qué-hicimos-en-la-ay-2",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "¿Qué hicimos en la AY-2?",
+    "text": "¿Qué hicimos en la AY-2?\n\nSeleccionamos y renombramos variables con select()\nRecodificamos con mutate() + factor()\nConvertimos -88 y -99 en NA\nCreamos tramos con case_when() e if_else()\nGuardamos la base con saveRDS()\n\nHoy retomamos desde ahí: describir, cruzar y visualizar."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#paquetes-y-datos",
+    "href": "clases/03-descriptivos-graficos/slides.html#paquetes-y-datos",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Paquetes y datos",
+    "text": "Paquetes y datos\n\npacman::p_load(\n  tidyverse,   # manipulación de datos y gráficos (dplyr, ggplot2)\n  janitor,     # tablas cruzadas rápidas (tabyl)\n  gt,          # tablas con formato para informes\n  gtsummary,   # tablas descriptivas en una línea\n  sjmisc       # frecuencias rápidas (frq)\n)\n\n\n# Opción 1: desde tu carpeta output/\ncasen_proc &lt;- readRDS(\"output/casen_proc.rds\")\n\n# Opción 2: desde GitHub\ncasen_proc &lt;- readRDS(gzcon(url(\"https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/casen_proc.rds\")))"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#la-lógica-procesar-formatear",
+    "href": "clases/03-descriptivos-graficos/slides.html#la-lógica-procesar-formatear",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "La lógica: procesar → formatear",
+    "text": "La lógica: procesar → formatear\n\n\n\n\n\n\n\n\nPaso\nHerramienta\n¿Para qué?\n\n\n\n\n1. Procesar\ndplyr\nCalcular frecuencias, medias, porcentajes\n\n\n2. Formatear\ngt\nTítulo, nombres de columnas, separador de miles, fuente"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#paso-1-procesar-con-count",
+    "href": "clases/03-descriptivos-graficos/slides.html#paso-1-procesar-con-count",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Paso 1: procesar con count()",
+    "text": "Paso 1: procesar con count()\n\n\ntab_pobreza &lt;- casen_proc |&gt;\n  count(pobreza) |&gt;\n  mutate(porcentaje = n / sum(n) * 100)\n\ntab_pobreza\n\n\n# A tibble: 4 × 3\n  pobreza                      n porcentaje\n  &lt;fct&gt;                    &lt;int&gt;      &lt;dbl&gt;\n1 Pobreza severa              33       2.18\n2 Pobreza por ingresos        83       5.49\n3 Pobreza multidimensional   152      10.1 \n4 No pobre                  1243      82.3 \n\n\ncount() resume en una línea lo que antes hacíamos con group_by() + summarise(n = n())."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#paso-2-formatear-con-gt",
+    "href": "clases/03-descriptivos-graficos/slides.html#paso-2-formatear-con-gt",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Paso 2: formatear con gt",
+    "text": "Paso 2: formatear con gt\n\n\ntab_pobreza |&gt;\n  gt() |&gt;\n  cols_label(\n    pobreza    = \"Situación de pobreza\",\n    n          = \"N\",\n    porcentaje = \"%\"\n  ) |&gt;\n  fmt_number(porcentaje, decimals = 1,\n             dec_mark = \",\") |&gt;\n  tab_header(\"Distribución por situación de pobreza\") |&gt;\n  tab_source_note(\"Fuente: elaboración propia en base a CASEN 2024.\")\n\n\n\n\n\n\n\n\nDistribución por situación de pobreza\n\n\nSituación de pobreza\nN\n%\n\n\n\n\nPobreza severa\n33\n2,2\n\n\nPobreza por ingresos\n83\n5,5\n\n\nPobreza multidimensional\n152\n10,1\n\n\nNo pobre\n1243\n82,3\n\n\n\nFuente: elaboración propia en base a CASEN 2024."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#tablas-cruzadas-janitortabyl",
+    "href": "clases/03-descriptivos-graficos/slides.html#tablas-cruzadas-janitortabyl",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Tablas cruzadas: janitor::tabyl()",
+    "text": "Tablas cruzadas: janitor::tabyl()\n\n\ncasen_proc |&gt;\n  tabyl(pobreza, sexo) |&gt;\n  adorn_totals(\"row\") |&gt;\n  adorn_percentages(\"col\") |&gt;\n  adorn_pct_formatting(digits = 1) |&gt;\n  adorn_ns()\n\n\n                  pobreza       Hombre        Mujer\n           Pobreza severa   2.0%  (17)   2.4%  (16)\n     Pobreza por ingresos   5.0%  (42)   6.1%  (41)\n Pobreza multidimensional  10.3%  (86)   9.8%  (66)\n                 No pobre  82.7% (694)  81.7% (549)\n                    Total 100.0% (839) 100.0% (672)\n\n\nCada adorn_*() agrega una capa: totales, porcentajes por columna, formato y los N entre paréntesis."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#variable-numérica-según-una-categórica",
+    "href": "clases/03-descriptivos-graficos/slides.html#variable-numérica-según-una-categórica",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Variable numérica según una categórica",
+    "text": "Variable numérica según una categórica\n\ntab_ingreso &lt;- casen_proc |&gt;\n  group_by(sexo) |&gt;\n  summarise(\n    n       = n(),\n    media   = mean(ingreso, na.rm = TRUE),\n    de      = sd(ingreso, na.rm = TRUE),\n    mediana = median(ingreso, na.rm = TRUE)\n  )\n\n\ntab_ingreso |&gt;\n  gt() |&gt;\n  cols_label(sexo = \"Sexo\", n = \"N\", media = \"Media\", de = \"DE\", mediana = \"Mediana\") |&gt;\n  fmt_number(c(media, de, mediana), decimals = 0, sep_mark = \".\") |&gt;\n  tab_header(\"Ingreso laboral según sexo\")\n\n\n\n\n\n\n\n\n\nIngreso laboral según sexo\n\n\nSexo\nN\nMedia\nDE\nMediana\n\n\n\n\nHombre\n839\n927.848\n900.966\n630.000\n\n\nMujer\n672\n732.491\n621.797\n550.000"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#el-mismo-patrón-con-otra-agrupación",
+    "href": "clases/03-descriptivos-graficos/slides.html#el-mismo-patrón-con-otra-agrupación",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "El mismo patrón con otra agrupación",
+    "text": "El mismo patrón con otra agrupación\n\n\ncasen_proc |&gt;\n  group_by(tramo_edad) |&gt;\n  summarise(\n    n       = n(),\n    media   = mean(ingreso, na.rm = TRUE),\n    mediana = median(ingreso, na.rm = TRUE)\n  ) |&gt;\n  gt() |&gt;\n  fmt_number(c(media, mediana),\n             decimals = 0, sep_mark = \".\") |&gt;\n  tab_header(\"Ingreso laboral según tramo etario\")\n\n\n\n\n\n\n\n\nIngreso laboral según tramo etario\n\n\ntramo_edad\nn\nmedia\nmediana\n\n\n\n\nMenor de edad\n1\n120.000\n120.000\n\n\nAdulto joven\n675\n802.667\n600.000\n\n\nAdulto\n661\n913.713\n600.000\n\n\nAdulto mayor\n174\n717.322\n530.000"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#tablas-listas-en-una-línea-gtsummary",
+    "href": "clases/03-descriptivos-graficos/slides.html#tablas-listas-en-una-línea-gtsummary",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Tablas listas en una línea: gtsummary",
+    "text": "Tablas listas en una línea: gtsummary\n\n\ntheme_gtsummary_language(\"es\",\n                         big.mark = \".\",\n                         decimal.mark = \",\")\n\ncasen_proc |&gt;\n  select(sexo, edad, ingreso,\n         tramo_edad) |&gt;\n  tbl_summary(by = sexo)\n\n\n\n\n\n\n\n\n\n\n\n\n\nCaracterística\nHombre\nN = 8391\nMujer\nN = 6721\n\n\n\n\nEdad\n42 (32 – 54)\n41 (31 – 52)\n\n\nIngreso ocupación principal corregido\n630.000 (500.000 – 1.000.000)\n550.000 (460.000 – 800.000)\n\n\ntramo_edad\n\n\n\n\n\n\n    Menor de edad\n0 (0%)\n1 (0,1%)\n\n\n    Adulto joven\n362 (43%)\n313 (47%)\n\n\n    Adulto\n365 (44%)\n296 (44%)\n\n\n    Adulto mayor\n112 (13%)\n62 (9,2%)\n\n\n\n1 Mediana (Q1 – Q3); n (%)\n\n\n\n\n\n\n\n\nDetecta solo si cada variable es categórica (N y %) o numérica (mediana y rango intercuartílico)."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#la-lógica-de-ggplot2-capas",
+    "href": "clases/03-descriptivos-graficos/slides.html#la-lógica-de-ggplot2-capas",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "La lógica de ggplot2: capas",
+    "text": "La lógica de ggplot2: capas\n\n\n\n\nCapa\nFunción\n¿Para qué?\n\n\n\n\n1. Datos y ejes\nggplot(datos, aes(...))\nEl lienzo\n\n\n2. Geometría\ngeom_*()\nLa forma: barras, puntos, cajas\n\n\n3. Etiquetas\nlabs()\nTítulos, ejes, leyenda\n\n\n4. Estética\ntheme_*(), scale_*()\nEl estilo visual"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#barras-frecuencia-de-una-variable",
+    "href": "clases/03-descriptivos-graficos/slides.html#barras-frecuencia-de-una-variable",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Barras: frecuencia de una variable",
+    "text": "Barras: frecuencia de una variable\n\n\nggplot(casen_proc,\n       aes(x = pobreza, fill = pobreza)) +\n  geom_bar() +\n  scale_fill_manual(values = c(\n    \"#d73027\", \"#f46d43\", \"#fdae61\", \"#4575b4\"\n  )) +\n  labs(\n    title   = \"Situación de pobreza\",\n    x       = NULL,\n    y       = \"Frecuencia\",\n    caption = \"Fuente: CASEN 2024.\"\n  ) +\n  theme(legend.position = \"none\") +\n  coord_flip()"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#barras-agrupadas-dos-variables-categóricas",
+    "href": "clases/03-descriptivos-graficos/slides.html#barras-agrupadas-dos-variables-categóricas",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Barras agrupadas: dos variables categóricas",
+    "text": "Barras agrupadas: dos variables categóricas\n\n\n\nggplot(casen_proc,\n       aes(x = tramo_ingreso, fill = sexo)) +\n  geom_bar(position = \"dodge\") +\n  labs(x = \"Tramo de ingreso\",\n       y = \"Frecuencia\", fill = \"Sexo\")\n\n\n\n\n\n\n\n\n\n\nggplot(casen_proc,\n       aes(x = tramo_ingreso, fill = sexo)) +\n  geom_bar(position = \"fill\") +\n  scale_y_continuous(labels = scales::label_percent()) +\n  labs(x = \"Tramo de ingreso\",\n       y = \"Porcentaje\", fill = \"Sexo\")\n\n\n\n\n\n\n\n\n\n\"dodge\" pone las barras lado a lado; \"fill\" las apila al 100%, útil para comparar proporciones."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#boxplot-variable-continua-por-grupo",
+    "href": "clases/03-descriptivos-graficos/slides.html#boxplot-variable-continua-por-grupo",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Boxplot: variable continua por grupo",
+    "text": "Boxplot: variable continua por grupo\n\n\ncasen_proc |&gt;\n  drop_na(ingreso) |&gt;\n  ggplot(aes(x = sexo, y = ingreso,\n             fill = sexo)) +\n  geom_boxplot(alpha = 0.7) +\n  scale_y_continuous(\n    labels = scales::label_dollar(big.mark = \".\")\n  ) +\n  labs(title = \"Ingreso laboral según sexo\",\n       x = NULL, y = \"Ingreso\") +\n  theme(legend.position = \"none\")"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#dispersión-con-línea-de-tendencia",
+    "href": "clases/03-descriptivos-graficos/slides.html#dispersión-con-línea-de-tendencia",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Dispersión con línea de tendencia",
+    "text": "Dispersión con línea de tendencia\n\n\ncasen_proc |&gt;\n  drop_na(ingreso) |&gt;\n  ggplot(aes(x = edad, y = ingreso)) +\n  geom_point(alpha = 0.2) +\n  geom_smooth(method = \"lm\") +\n  scale_y_continuous(\n    labels = scales::label_dollar(big.mark = \".\")\n  ) +\n  labs(title = \"Edad e ingreso laboral\",\n       x = \"Edad\", y = \"Ingreso\")\n\n\n\n\n\n\n\n\n\ngeom_smooth(method = \"lm\") agrega la recta de regresión con su intervalo de confianza al 95%."
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#para-seguir-aprendiendo",
+    "href": "clases/03-descriptivos-graficos/slides.html#para-seguir-aprendiendo",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Para seguir aprendiendo",
+    "text": "Para seguir aprendiendo\n\nR for Data Science (2e): visualización\nDocumentación de ggplot2\nDocumentación de gt y gtsummary"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#tu-turno-10-min",
+    "href": "clases/03-descriptivos-graficos/slides.html#tu-turno-10-min",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Tu turno (10 min)",
+    "text": "Tu turno (10 min)\nCon casen_proc, trabaja con actividad, tramo_edad e ingreso_pc.\n\n\nTabla de frecuencias de actividad con count() + gt(): N, porcentaje, título y fuente\nTabla de ingreso_pc por tramo_edad: n, media, desviación estándar y mediana\nBoxplot de ingreso_pc según actividad\nExtra: compara tus tablas con tbl_summary(by = actividad)"
+  },
+  {
+    "objectID": "clases/03-descriptivos-graficos/slides.html#resumen-de-la-sesión",
+    "href": "clases/03-descriptivos-graficos/slides.html#resumen-de-la-sesión",
+    "title": "Análisis descriptivo, bivariado y gráficos",
+    "section": "Resumen de la sesión",
+    "text": "Resumen de la sesión\n\n\n\n\n\n\n\nTarea\nFunción(es)\n\n\n\n\nFrecuencias\ncount() + mutate()\n\n\nTablas cruzadas\ntabyl() + adorn_*()\n\n\nDescriptivos por grupo\ngroup_by() + summarise()\n\n\nFormato para informe\ngt(), fmt_number(), tab_header()\n\n\nTabla descriptiva rápida\ntbl_summary()\n\n\nBarras / boxplot / dispersión\ngeom_bar(), geom_boxplot(), geom_point() + geom_smooth()"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#qué-veremos-hoy",
+    "href": "clases/01-intro-r/slides.html#qué-veremos-hoy",
+    "title": "Introducción a R y RStudio",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\nDiagnóstico inicial\nEl ecosistema de software\n¿Qué es R y por qué usarlo?\nConociendo RStudio\nSistema de carpetas\nCargar y explorar CASEN 2024\n\nAl final de la sesión vas a poder abrir una base de datos real y explorarla en R."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#dónde-estamos-parados",
+    "href": "clases/01-intro-r/slides.html#dónde-estamos-parados",
+    "title": "Introducción a R y RStudio",
+    "section": "¿Dónde estamos parados?",
+    "text": "¿Dónde estamos parados?\n\n¿Ya tienen R y RStudio instalados?\n¿Han usado antes algún software estadístico? (SPSS, Stata, Excel…)\n¿Tienen computador para traer a las próximas ayudantías?"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#qué-herramienta-uso-para-qué",
+    "href": "clases/01-intro-r/slides.html#qué-herramienta-uso-para-qué",
+    "title": "Introducción a R y RStudio",
+    "section": "¿Qué herramienta uso para qué?",
+    "text": "¿Qué herramienta uso para qué?\n\n\n\n\n\n\n\n\nHerramienta\n¿Qué es?\n¿Para qué se usa?\n\n\n\n\nR\nLenguaje estadístico\nAnálisis de datos, modelos, visualizaciones\n\n\nRStudio / Positron\nEntorno de trabajo (IDE)\nInterfaz para escribir código en R\n\n\nPython\nLenguaje de programación general\nMachine learning, automatización, web\n\n\nVS Code\nEditor de código universal\nProgramar en cualquier lenguaje\n\n\n\nEn este curso usamos R + RStudio: es el estándar en ciencias sociales cuantitativas, es gratuito y produce análisis reproducibles."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#qué-es-r",
+    "href": "clases/01-intro-r/slides.html#qué-es-r",
+    "title": "Introducción a R y RStudio",
+    "section": "¿Qué es R?",
+    "text": "¿Qué es R?\n\n\nR es un lenguaje de programación estadístico de código abierto, creado en 1993 por Ross Ihaka y Robert Gentleman (Universidad de Auckland).\n\n+20.000 paquetes en CRAN\nComunidad científica global\nCompletamente gratuito\nAnálisis reproducibles\n\n\n\n\n\n\n\n\n¿Qué significa reproducible?\n\n\nQue otra persona puede tomar tu código y llegar exactamente al mismo resultado.\n\n\n\nR lo usan el INE, el Banco Mundial y el Ministerio de Desarrollo Social, entre muchas otras instituciones públicas."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#r-vs.-otros-softwares",
+    "href": "clases/01-intro-r/slides.html#r-vs.-otros-softwares",
+    "title": "Introducción a R y RStudio",
+    "section": "R vs. otros softwares",
+    "text": "R vs. otros softwares\n\n\n\n\nR\nSPSS\nExcel\n\n\n\n\nGratuito\n✅\n❌\n❌\n\n\nReproducible\n✅\n⚠️\n❌\n\n\nCódigo abierto\n✅\n❌\n❌\n\n\nGráficos avanzados\n✅\n⚠️\n⚠️\n\n\n\nEn administración pública, la transparencia y reproducibilidad de los análisis es cada vez más exigida."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#proyectos-de-r-.rproj",
+    "href": "clases/01-intro-r/slides.html#proyectos-de-r-.rproj",
+    "title": "Introducción a R y RStudio",
+    "section": "Proyectos de R (.Rproj)",
+    "text": "Proyectos de R (.Rproj)\nVamos a trabajar dentro de proyectos: el proyecto es nuestro “hogar”. El primer paso es construirlo."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#crear-un-proyecto",
+    "href": "clases/01-intro-r/slides.html#crear-un-proyecto",
+    "title": "Introducción a R y RStudio",
+    "section": "Crear un proyecto",
+    "text": "Crear un proyecto\n\n\n\n\n\nFile → New Project → New Directory → New Project\nDirectory name: un nombre sin espacios, por ej. ayudantia-1\nBrowse: dónde guardarlo, por ej. “Métodos cuantitativos”\nCreate Project\n¡Tienen su primer proyecto en R!"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#un-proyecto-sin-orden",
+    "href": "clases/01-intro-r/slides.html#un-proyecto-sin-orden",
+    "title": "Introducción a R y RStudio",
+    "section": "Un proyecto sin orden",
+    "text": "Un proyecto sin orden"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#explorando-rstudio-por-primera-vez",
+    "href": "clases/01-intro-r/slides.html#explorando-rstudio-por-primera-vez",
+    "title": "Introducción a R y RStudio",
+    "section": "Explorando RStudio por primera vez",
+    "text": "Explorando RStudio por primera vez\n\nAl abrirlo verán tres paneles."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#abrir-un-script",
+    "href": "clases/01-intro-r/slides.html#abrir-un-script",
+    "title": "Introducción a R y RStudio",
+    "section": "Abrir un script",
+    "text": "Abrir un script\n\nFile → New File → R Script, o Ctrl + Shift + N."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#los-4-paneles-de-rstudio",
+    "href": "clases/01-intro-r/slides.html#los-4-paneles-de-rstudio",
+    "title": "Introducción a R y RStudio",
+    "section": "Los 4 paneles de RStudio",
+    "text": "Los 4 paneles de RStudio\n\n\n\n\n\n\n\n\n\n\n\n\nPanel\nUbicación\n¿Para qué sirve?\n\n\n\n\nScript\nArriba izquierda\nEscribir y guardar tu código\n\n\nConsola\nAbajo izquierda\nEjecutar código y ver resultados\n\n\nEntorno\nArriba derecha\nVer objetos y datos cargados\n\n\nArchivos / Gráficos\nAbajo derecha\nExplorar carpetas y ver gráficos"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#cómo-organizar-tu-trabajo-sistema-ipo",
+    "href": "clases/01-intro-r/slides.html#cómo-organizar-tu-trabajo-sistema-ipo",
+    "title": "Introducción a R y RStudio",
+    "section": "Cómo organizar tu trabajo: sistema IPO",
+    "text": "Cómo organizar tu trabajo: sistema IPO\n\n\nInput, Procesamiento, Output:\nayudantia-1/\n├── ayudantia-1.Rproj\n├── input/          datos originales\n├── procesamiento/  scripts\n└── output/         resultados\n\nSiempre sabes dónde está cada cosa\nEvita rutas de archivo rotas\nFacilita el trabajo colaborativo"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#así-se-ve-ordenado",
+    "href": "clases/01-intro-r/slides.html#así-se-ve-ordenado",
+    "title": "Introducción a R y RStudio",
+    "section": "Así se ve ordenado",
+    "text": "Así se ve ordenado"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#primer-contacto-con-r",
+    "href": "clases/01-intro-r/slides.html#primer-contacto-con-r",
+    "title": "Introducción a R y RStudio",
+    "section": "Primer contacto con R",
+    "text": "Primer contacto con R\nEscribe en tu script y ejecuta con Ctrl + Enter (el cursor puede estar en cualquier parte de la línea):\n\n\n\n\n# R como calculadora\n2 + 2\n\n\n[1] 4\n\nsqrt(144)\n\n[1] 12\n\nlog(100)\n\n[1] 4.60517\n\n\n\n\n# Crear objetos con &lt;-\ncaja &lt;- \"gatos\"\ncaja\n\n[1] \"gatos\"\n\na &lt;- 4\na * 5\n\n[1] 20\n\n\n\n&lt;- es el operador de asignación. Atajo: Alt + -"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#instalar-y-cargar-paquetes",
+    "href": "clases/01-intro-r/slides.html#instalar-y-cargar-paquetes",
+    "title": "Introducción a R y RStudio",
+    "section": "Instalar y cargar paquetes",
+    "text": "Instalar y cargar paquetes\n\ninstall.packages(\"tidyverse\")   # instalar: SOLO UNA VEZ por computador\n\n\nlibrary(tidyverse)              # cargar: CADA VEZ que abres R\n\nInstalar un paquete es traerlo a tu computador; cargarlo es usarlo en esta sesión."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#cargar-la-base-de-datos",
+    "href": "clases/01-intro-r/slides.html#cargar-la-base-de-datos",
+    "title": "Introducción a R y RStudio",
+    "section": "Cargar la base de datos",
+    "text": "Cargar la base de datos\nGuarda casen_ay1.csv en tu carpeta input/ y luego:\n\ncasen &lt;- read_csv(\"input/casen_ay1.csv\")\n\n\n\n\n\n\n\nNota\n\n\nLa ruta \"input/casen_ay1.csv\" funciona porque trabajamos dentro del proyecto: R busca los archivos a partir de la carpeta del .Rproj."
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#explorar-la-base",
+    "href": "clases/01-intro-r/slides.html#explorar-la-base",
+    "title": "Introducción a R y RStudio",
+    "section": "Explorar la base",
+    "text": "Explorar la base\n\ndim(casen)       # filas (casos) y columnas (variables)\n\n[1] 1000   10\n\nglimpse(casen)   # nombre, tipo y primeros valores de cada variable\n\nRows: 1,000\nColumns: 10\n$ region            &lt;dbl&gt; 5, 5, 10, 4, 9, 13, 6, 14, 4, 13, 13, 7, 1, 2, 13, 1…\n$ sexo              &lt;chr&gt; \"Mujer\", \"Mujer\", \"Hombre\", \"Hombre\", \"Mujer\", \"Muje…\n$ edad              &lt;dbl&gt; 17, 76, 20, 10, 38, 10, 44, 43, 44, 49, 6, 49, 76, 2…\n$ educc             &lt;chr&gt; \"Media incompleta\", \"Básica incompleta\", \"Media comp…\n$ activ             &lt;chr&gt; \"Inactivo/a\", \"Inactivo/a\", \"Desocupado/a\", NA, \"Ina…\n$ yoprcor           &lt;dbl&gt; NA, NA, NA, NA, NA, NA, NA, NA, NA, 2600000, NA, 400…\n$ ypchtotcor        &lt;dbl&gt; 652352, 232541, 321076, 120713, 198122, 399678, 2049…\n$ pueblos_indigenas &lt;chr&gt; \"No pertenece\", \"No pertenece\", \"No pertenece\", \"No …\n$ lugar_nac         &lt;chr&gt; \"Nacido/a en Chile\", \"Nacido/a en Chile\", \"Nacido/a …\n$ pobreza           &lt;chr&gt; \"No pobre\", \"Pobreza por ingresos\", \"No pobre\", \"Pob…"
+  },
+  {
+    "objectID": "clases/01-intro-r/slides.html#primeras-preguntas-a-los-datos",
+    "href": "clases/01-intro-r/slides.html#primeras-preguntas-a-los-datos",
+    "title": "Introducción a R y RStudio",
+    "section": "Primeras preguntas a los datos",
+    "text": "Primeras preguntas a los datos\n\n\n\n# ¿Cuántas personas por sexo?\ncount(casen, sexo)\n\n# A tibble: 2 × 2\n  sexo       n\n  &lt;chr&gt;  &lt;int&gt;\n1 Hombre   506\n2 Mujer    494\n\n# ¿Y por condición de pobreza?\ncount(casen, pobreza)\n\n# A tibble: 5 × 2\n  pobreza                      n\n  &lt;chr&gt;                    &lt;int&gt;\n1 No pobre                   686\n2 Pobreza multidimensional   105\n3 Pobreza por ingresos       140\n4 Pobreza severa              46\n5 &lt;NA&gt;                        23\n\n\n\n\n# Promedio de edad\nmean(casen$edad, na.rm = TRUE)\n\n[1] 40.505\n\n# Pobreza según sexo\ncount(casen, sexo, pobreza)\n\n# A tibble: 10 × 3\n   sexo   pobreza                      n\n   &lt;chr&gt;  &lt;chr&gt;                    &lt;int&gt;\n 1 Hombre No pobre                   345\n 2 Hombre Pobreza multidimensional    56\n 3 Hombre Pobreza por ingresos        61\n 4 Hombre Pobreza severa              31\n 5 Hombre &lt;NA&gt;                        13\n 6 Mujer  No pobre                   341\n 7 Mujer  Pobreza multidimensional    49\n 8 Mujer  Pobreza por ingresos        79\n 9 Mujer  Pobreza severa              15\n10 Mujer  &lt;NA&gt;                        10\n\n\n\nna.rm = TRUE le dice a R que ignore los valores perdidos (NA) al calcular."
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "",
+    "text": "Sitio con las presentaciones, códigos y pautas de las sesiones prácticas de R del curso dictado por el profesor Carlos Budnevich."
+  },
+  {
+    "objectID": "index.html#sesiones",
+    "href": "index.html#sesiones",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "Sesiones",
+    "text": "Sesiones\n\n\n\nSesión\nTema\nMaterial\n\n\n\n\n01\nIntroducción a R y RStudio\nPresentación\n\n\n02\nProcesamiento de datos con tidyverse\nPresentación\n\n\n03\nAnálisis descriptivo, bivariado y gráficos\nPresentación\n\n\n04\nDocumentos dinámicos y Quarto\nDocumento\n\n\n05\nRepaso prueba de cátedra 1\nPresentación\n\n\n06\nInferencia, correlación y regresión simple\nPresentación · Pauta\n\n\n07\nModelos de regresión múltiple\nPresentación\n\n\n08\nEjercicios aplicados: regresión simple y múltiple\nPresentación · Pauta\n\n\n09\nRepaso: regresión logística, ACP y cuestionario\nPresentación"
+  },
+  {
+    "objectID": "index.html#cómo-usar-este-repositorio",
+    "href": "index.html#cómo-usar-este-repositorio",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "Cómo usar este repositorio",
+    "text": "Cómo usar este repositorio\n\nDescarga el repositorio (botón Code → Download ZIP en GitHub) y abre metodos-cuantitativos-fagob.Rproj en RStudio o Positron.\nTodas las bases están en la carpeta datos/.\nCada sesión está en clases/NN-tema/, con su presentación (slides.qmd) y, cuando corresponde, su pauta (pauta.qmd)."
+  },
+  {
+    "objectID": "index.html#bases-de-datos",
+    "href": "index.html#bases-de-datos",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "Bases de datos",
+    "text": "Bases de datos\n\n\n\n\n\n\n\n\nArchivo\nFuente\nSesiones\n\n\n\n\ncasen_ay1.csv\nCASEN 2024 (1.000 casos, 10 variables)\n01\n\n\ncasen_fagob.dta\nCASEN 2024 (5.000 casos, 16 variables)\n02\n\n\ncasen_proc.rds\nCASEN procesada en la sesión 02\n03, 09\n\n\nissp_2009_chile.RData\nISSP 2009, Chile\n04, 06, 09\n\n\ncep95.rds\nEncuesta CEP N° 95, octubre 2025 (generada con preparar_cep95.R)\n07"
+  },
+  {
+    "objectID": "guia-estilo.html",
+    "href": "guia-estilo.html",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "",
+    "text": "Convenciones comunes para que todas las sesiones se vean y se programen igual. Antes de crear una sesión nueva, copiar _plantilla/clase/ a clases/NN-tema/."
+  },
+  {
+    "objectID": "guia-estilo.html#estructura-del-repositorio",
+    "href": "guia-estilo.html#estructura-del-repositorio",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Estructura del repositorio",
+    "text": "Estructura del repositorio\n_quarto.yml              configuración del sitio\n_extensions/fagob/       tema de las presentaciones (formato fagob-revealjs)\n_plantilla/clase/        plantilla para una sesión nueva\nR/setup.R                opciones comunes (se carga oculto en cada sesión)\ndatos/                   todas las bases, una sola copia\nclases/NN-tema/\n  slides.qmd             presentación\n  pauta.qmd              resolución de ejercicios"
+  },
+  {
+    "objectID": "guia-estilo.html#presentaciones",
+    "href": "guia-estilo.html#presentaciones",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Presentaciones",
+    "text": "Presentaciones\n\nFormato único: format: fagob-revealjs. La portada se arma desde el YAML (title, subtitle, institute, author, date).\nLas secciones se escriben como # Parte 1: ...; el fondo institucional lo pone el tema automáticamente.\nNada de style=\"...\" en el texto. Usar las clases del tema:\n\n\n\n\nClase\nUso\n\n\n\n\n[texto]{.destacado}\nresaltar una idea clave\n\n\n::: chico / ::: muy-chico\nreducir el tamaño de un bloque\n\n\n::: ejercicio\ncaja con instrucciones de ejercicio\n\n\n[texto](url){.button}\nbotón de enlace\n\n\n::: {.columns} + .column\ndos columnas\n\n\n\n\nUn solo chunk por resultado. Si el código y el resultado no caben juntos, usar #| output-location: fragment o #| output-location: column en vez de duplicar el chunk con eval: false.\nLos valores interpretados en el texto se escriben con R en línea (`r round(b1, 2)`), para que no queden desactualizados."
+  },
+  {
+    "objectID": "guia-estilo.html#código",
+    "href": "guia-estilo.html#código",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Código",
+    "text": "Código\n\nPipe nativo |&gt;.\nPaquetes con pacman::p_load() al inicio de cada sesión, con un comentario por paquete.\nSin rm(list = ls()) ni setwd(): el proyecto .Rproj y here::here() resuelven las rutas.\nCasos perdidos con drop_na() sobre las variables seleccionadas.\nSemilla fija (set.seed(2026), ya incluida en R/setup.R).\nBases de Stata/SPSS: quitar etiquetas con haven::zap_labels, siempre con el prefijo haven::. sjlabelled tiene una función con el mismo nombre que convierte en NA los valores etiquetados.\nCódigos de no respuesta (-8, -9, -88, -99) a NA con sjlabelled::set_na() antes de cualquier análisis."
+  },
+  {
+    "objectID": "guia-estilo.html#paquetes-recomendados",
+    "href": "guia-estilo.html#paquetes-recomendados",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Paquetes recomendados",
+    "text": "Paquetes recomendados\n\n\n\n\n\n\n\n\nTarea\nAntes\nAhora\n\n\n\n\nRecodificar códigos a categorías\ncar::recode()\nfactor(x, levels = , labels = )\n\n\nCrear tramos\nifelse() anidados\nif_else(), case_when(..., .default = )\n\n\nValores especiales a NA\ncar::recode(\"-88 = NA\")\nsjlabelled::set_na(..., na = c(-88, -99))\n\n\nInvertir una escala\nsjmisc::rec(\"1=4; 2=3...\")\n5 - x dentro de across()\n\n\nCasos perdidos\nna.omit() sobre toda la base\ndrop_na() con las variables del análisis\n\n\nFrecuencias\ntable(), prop.table()\ncount(), sjmisc::frq()\n\n\nTablas cruzadas\ntable(x, y)\njanitor::tabyl() + adorn_*()\n\n\nDescriptivos\nsummary(), stargazer\nsjmisc::descr(), gtsummary::tbl_summary()\n\n\nTablas para informe\nkableExtra\ngt\n\n\nValores perdidos\ncolSums(is.na())\nnaniar::gg_miss_var()\n\n\nResultados de tests\nPublish, rempsyc::nice_table()\nparameters::model_parameters()\n\n\nTablas de regresión\nstargazer, texreg::screenreg()\nmodelsummary(), sjPlot::tab_model()\n\n\nCoeficientes en gráfico\nno había\nmodelsummary::modelplot()\n\n\nGráficos de dispersión\ncar::scatterplot()\nggplot2 + geom_smooth(method = \"lm\")\n\n\nSupuestos de regresión\ngráficos base\nperformance::check_model()\n\n\nProbabilidades / valores predichos\ncálculo manual\nggeffects::predict_response()"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#qué-veremos-hoy",
+    "href": "clases/02-tidyverse/slides.html#qué-veremos-hoy",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\n\n\nRepaso y carga de datos\nTipos de variables en R\nEl pipe |&gt;\nselect() y filter()\nmutate(): recodificar\nValores perdidos (NA)\nCrear categorías\nGuardar la base procesada\n\n\n\n\n\n\n\n\nAl final de la sesión\n\n\nTendrás una base limpia, procesada y guardada, lista para analizar en la próxima ayudantía."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#qué-hicimos-en-la-ay-1",
+    "href": "clases/02-tidyverse/slides.html#qué-hicimos-en-la-ay-1",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Qué hicimos en la AY-1?",
+    "text": "¿Qué hicimos en la AY-1?\n\nCreamos un proyecto en R con estructura IPO\nCargamos datos con read_csv()\nExploramos la CASEN con dim(), glimpse() y count()\n\nProblema: los datos aún no están listos para analizar. Las variables tienen códigos numéricos en vez de etiquetas, hay valores especiales (-88, -99) y los tipos de dato no son los correctos."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#paquetes-de-hoy",
+    "href": "clases/02-tidyverse/slides.html#paquetes-de-hoy",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Paquetes de hoy",
+    "text": "Paquetes de hoy\n\npacman::p_load(\n  tidyverse,     # manipulación de datos (dplyr, tidyr, readr...)\n  haven,         # leer bases de Stata/SPSS (.dta, .sav)\n  sjmisc,        # frecuencias y descriptivos (frq, descr)\n  sjlabelled,    # etiquetas y valores perdidos (set_na)\n  sjPlot,        # ver la base completa con etiquetas (view_df)\n  naniar         # visualizar valores perdidos\n)"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#cargar-la-base-de-datos",
+    "href": "clases/02-tidyverse/slides.html#cargar-la-base-de-datos",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Cargar la base de datos",
+    "text": "Cargar la base de datos\nLa cargamos directamente desde GitHub:\n\ncasen &lt;- read_dta(\"https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/casen_fagob.dta\")\n\nSon 5.000 casos y 16 variables de la CASEN 2024. Al venir de Stata (.dta), las variables llegan como haven_labelled: números con etiquetas pegadas."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#primera-mirada",
+    "href": "clases/02-tidyverse/slides.html#primera-mirada",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Primera mirada",
+    "text": "Primera mirada\n\nview_df(casen)   # abre en el Viewer: variables, etiquetas y valores\n\n\n\nfrq(casen$sexo)\n\n\nSexo (x) &lt;numeric&gt; \n# total N=5000 valid N=5000 mean=1.53 sd=0.50\n\nValue |  Label |    N | Raw % | Valid % | Cum. %\n------------------------------------------------\n    1 | Hombre | 2370 | 47.40 |   47.40 |  47.40\n    2 |  Mujer | 2630 | 52.60 |   52.60 | 100.00\n &lt;NA&gt; |   &lt;NA&gt; |    0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#por-qué-importa-el-tipo-de-variable",
+    "href": "clases/02-tidyverse/slides.html#por-qué-importa-el-tipo-de-variable",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Por qué importa el tipo de variable?",
+    "text": "¿Por qué importa el tipo de variable?\nR necesita saber qué tipo de dato es una variable para hacer las operaciones, funciones y gráficos correctos.\n\nclass(casen$sexo)\n\n[1] \"haven_labelled\" \"vctrs_vctr\"     \"double\"        \n\nclass(casen$edad)\n\n[1] \"numeric\"\n\n\n\n\n\n\n\n\n\n\nLo que ves en class()\nQué significa\nQué hacer\n\n\n\n\nnumeric / double\nNúmero\nListo si tiene sentido matemático\n\n\ncharacter\nTexto\nConvertir a factor si es categórica\n\n\nfactor\nCategorías con niveles\nListo\n\n\nhaven_labelled\nNúmero con etiqueta (Stata/SPSS)\nConvertir a factor o a número"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#qué-es-haven_labelled",
+    "href": "clases/02-tidyverse/slides.html#qué-es-haven_labelled",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Qué es haven_labelled?",
+    "text": "¿Qué es haven_labelled?\n\"haven_labelled\" \"vctrs_vctr\" \"double\" se lee de abajo hacia arriba:\n\ndouble: en el fondo es un número (1, 2, 3…)\nhaven_labelled: lleva las etiquetas “en la mochila”: el 1 sabe que significa “Hombre”\n\nDos caminos para trabajarlas:\n\n\n# Camino rápido: usar las etiquetas\n# que ya trae la base\nas_factor(casen$activ) |&gt;\n  head()\n\n\n[1] 3    3    2    &lt;NA&gt; 3    &lt;NA&gt;\nLevels: 1 2 3\n\n\nEl otro camino es quitar las etiquetas (zap_labels()) y recodificar con nuestras propias categorías. Es el que usaremos hoy."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#qué-es-el-pipe",
+    "href": "clases/02-tidyverse/slides.html#qué-es-el-pipe",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Qué es el pipe?",
+    "text": "¿Qué es el pipe?\n|&gt; significa: “toma esto y pásalo a la siguiente función”.\nx |&gt; f()          # equivale a f(x)\nx |&gt; f() |&gt; g()   # equivale a g(f(x))\n\n\nSin pipe\ndatos &lt;- select(casen, sexo, edad)\ndatos &lt;- filter(datos, edad &gt;= 18)\n\nCon pipe\ndatos &lt;- casen |&gt;\n  select(sexo, edad) |&gt;\n  filter(edad &gt;= 18)\n\nAtajo: Ctrl + Shift + M. Para que escriba |&gt; y no %&gt;%: Tools → Global Options → Code → Use native pipe operator."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#select-elegir-y-renombrar-columnas",
+    "href": "clases/02-tidyverse/slides.html#select-elegir-y-renombrar-columnas",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "select(): elegir y renombrar columnas",
+    "text": "select(): elegir y renombrar columnas\nLos nombres de la CASEN son crípticos (yoprcor, o10…). Con select() elegimos variables y las renombramos con nuevo = original:\n\ncasen_proc &lt;- casen |&gt;\n  select(\n    region, zona = area,                                  # identificación\n    sexo, edad, estado_civil = ecivil,                    # demografía\n    nivel_educ = educc, asiste_educ = e3,                 # educación\n    actividad = activ, categ_ocup = o15,                  # trabajo\n    horas_trab = o10, contrato = o19,\n    ingreso = yoprcor, ingreso_pc = ypchtotcor,           # ingresos\n    pobreza = pobreza_severa, pueblo_orig = pueblos_indigenas, lugar_nac\n  ) |&gt;\n  mutate(across(everything(), haven::zap_labels))         # quitar etiquetas: todo a número\n\nEscribimos haven::zap_labels porque sjlabelled tiene otra función con el mismo nombre que hace algo distinto. paquete::función le dice a R cuál usar."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#filter-elegir-filas",
+    "href": "clases/02-tidyverse/slides.html#filter-elegir-filas",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "filter(): elegir filas",
+    "text": "filter(): elegir filas\n\n\n\nOperador\nSignificado\nEjemplo\n\n\n\n\n== / !=\nigual / distinto\nsexo == 1\n\n\n&gt; &lt; &gt;= &lt;=\ncomparaciones\nedad &gt;= 60\n\n\n& / |\ny / o\nsexo == 2 & edad &gt; 18\n\n\n%in%\npertenece a un conjunto\nregion %in% c(13, 5)\n\n\n\n\n\nadultos &lt;- casen_proc |&gt;\n  filter(edad &gt; 18)\n\nrm_valpo &lt;- casen_proc |&gt;\n  filter(region %in% c(13, 5))\n\nnrow(casen_proc)\n\n\n[1] 5000\n\nnrow(adultos)\n\n[1] 3882"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#recodificar-de-códigos-a-categorías",
+    "href": "clases/02-tidyverse/slides.html#recodificar-de-códigos-a-categorías",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Recodificar: de códigos a categorías",
+    "text": "Recodificar: de códigos a categorías\nmutate() crea o modifica columnas. Con factor() asignamos a cada código su etiqueta y definimos el orden de las categorías:\n\ncasen_proc &lt;- casen_proc |&gt;\n  mutate(\n    sexo = factor(sexo,\n                  levels = c(1, 2),\n                  labels = c(\"Hombre\", \"Mujer\")),\n    actividad = factor(actividad,\n                       levels = c(1, 2, 3),\n                       labels = c(\"Ocupado/a\", \"Desocupado/a\", \"Inactivo/a\")),\n    pobreza = factor(pobreza,\n                     levels = c(1, 2, 3, 4),\n                     labels = c(\"Pobreza severa\", \"Pobreza por ingresos\",\n                                \"Pobreza multidimensional\", \"No pobre\"))\n  )\n\nEl orden de labels controla el orden en tablas y gráficos. El primer nivel será la categoría de referencia en regresiones."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#verificar-siempre",
+    "href": "clases/02-tidyverse/slides.html#verificar-siempre",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Verificar siempre",
+    "text": "Verificar siempre\n\n\n\nfrq(casen_proc$actividad)\n\nx &lt;categorical&gt; \n# total N=5000 valid N=4171 mean=1.92 sd=0.97\n\nValue        |    N | Raw % | Valid % | Cum. %\n----------------------------------------------\nOcupado/a    | 2138 | 42.76 |   51.26 |  51.26\nDesocupado/a |  249 |  4.98 |    5.97 |  57.23\nInactivo/a   | 1784 | 35.68 |   42.77 | 100.00\n&lt;NA&gt;         |  829 | 16.58 |    &lt;NA&gt; |   &lt;NA&gt;\n\n\n\n\nfrq(casen_proc$pobreza)\n\nx &lt;categorical&gt; \n# total N=5000 valid N=4861 mean=3.43 sd=0.94\n\nValue                    |    N | Raw % | Valid % | Cum. %\n----------------------------------------------------------\nPobreza severa           |  313 |  6.26 |    6.44 |   6.44\nPobreza por ingresos     |  633 | 12.66 |   13.02 |  19.46\nPobreza multidimensional |  544 | 10.88 |   11.19 |  30.65\nNo pobre                 | 3371 | 67.42 |   69.35 | 100.00\n&lt;NA&gt;                     |  139 |  2.78 |    &lt;NA&gt; |   &lt;NA&gt;"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#y-na-son-cosas-distintas",
+    "href": "clases/02-tidyverse/slides.html#y-na-son-cosas-distintas",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "-88, -99 y NA son cosas distintas",
+    "text": "-88, -99 y NA son cosas distintas\n\n\n\nValor\nSignificado en la encuesta\nEn R\n\n\n\n\n-88\nNo sabe / no aplica\nnúmero negativo, no es NA\n\n\n-99\nNo responde\nnúmero negativo, no es NA\n\n\nNA\ndato ausente\nvalor especial de R\n\n\n\nProblema: R trata -88 y -99 como números reales. Si calculamos el promedio de horas_trab sin corregirlo, el resultado será incorrecto."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#convertir--88-y--99-a-na",
+    "href": "clases/02-tidyverse/slides.html#convertir--88-y--99-a-na",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Convertir -88 y -99 a NA",
+    "text": "Convertir -88 y -99 a NA\n\ncasen_proc &lt;- casen_proc |&gt;\n  set_na(ingreso, ingreso_pc, horas_trab, contrato, categ_ocup,\n         na = c(-88, -99))\n\nset_na() reemplaza los valores indicados por NA, solo en las variables que elegimos."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#cuántos-na-tenemos",
+    "href": "clases/02-tidyverse/slides.html#cuántos-na-tenemos",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "¿Cuántos NA tenemos?",
+    "text": "¿Cuántos NA tenemos?\n\nnaniar::gg_miss_var(casen_proc, show_pct = TRUE)\n\n\nLas variables de trabajo tienen muchos NA porque no aplican a quienes no trabajan."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#na-en-operaciones-estadísticas",
+    "href": "clases/02-tidyverse/slides.html#na-en-operaciones-estadísticas",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "NA en operaciones estadísticas",
+    "text": "NA en operaciones estadísticas\n\nmean(casen_proc$ingreso)                  # NA: no da error, pero tampoco resultado\n\n[1] NA\n\nmean(casen_proc$ingreso, na.rm = TRUE)    # promedio correcto\n\n[1] 774848\n\n\nPara quedarnos solo con casos completos usamos drop_na():\n\ncasen_proc_na &lt;- casen_proc |&gt;\n  drop_na()\n\nnrow(casen_proc)\n\n[1] 5000\n\nnrow(casen_proc_na)\n\n[1] 1511\n\n\nOjo: drop_na() sin argumentos elimina un caso si tiene NA en cualquier variable. Con drop_na(ingreso) solo se eliminan los NA de ingreso."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#if_else-y-case_when",
+    "href": "clases/02-tidyverse/slides.html#if_else-y-case_when",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "if_else() y case_when()",
+    "text": "if_else() y case_when()\n\n\n\nFunción\nCuándo usarla\n\n\n\n\nif_else()\nCondición binaria (dos salidas)\n\n\ncase_when()\nMúltiples condiciones\n\n\n\n\ncasen_proc_na &lt;- casen_proc_na |&gt;\n  mutate(\n    adulto_mayor = if_else(edad &gt;= 60, \"Adulto mayor\", \"No adulto mayor\") |&gt;\n      factor(levels = c(\"No adulto mayor\", \"Adulto mayor\")),\n    tramo_edad = case_when(\n      edad &lt; 18 ~ \"Menor de edad\",\n      edad &lt; 40 ~ \"Adulto joven\",\n      edad &lt; 60 ~ \"Adulto\",\n      .default  = \"Adulto mayor\"\n    ) |&gt;\n      factor(levels = c(\"Menor de edad\", \"Adulto joven\", \"Adulto\", \"Adulto mayor\"))\n  )\n\ncase_when() evalúa las condiciones en orden: si edad &lt; 18 ya se cumplió, no revisa las siguientes. Por eso no hace falta escribir edad &gt;= 18 & edad &lt; 40."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#case_when-con-ingresos",
+    "href": "clases/02-tidyverse/slides.html#case_when-con-ingresos",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "case_when() con ingresos",
+    "text": "case_when() con ingresos\n\n\ncasen_proc_na &lt;- casen_proc_na |&gt;\n  mutate(\n    tramo_ingreso = case_when(\n      ingreso &lt; 300000 ~ \"Bajo\",\n      ingreso &lt; 700000 ~ \"Medio\",\n      .default         = \"Alto\"\n    ) |&gt;\n      factor(levels = c(\"Bajo\", \"Medio\", \"Alto\"),\n             ordered = TRUE)\n  )\n\nfrq(casen_proc_na$tramo_ingreso)\n\n\nx &lt;ordinal&gt; \n# total N=1511 valid N=1511 mean=2.33 sd=0.61\n\nValue |   N | Raw % | Valid % | Cum. %\n--------------------------------------\nBajo  | 110 |  7.28 |    7.28 |   7.28\nMedio | 785 | 51.95 |   51.95 |  59.23\nAlto  | 616 | 40.77 |   40.77 | 100.00\n&lt;NA&gt;  |   0 |  0.00 |    &lt;NA&gt; |   &lt;NA&gt;"
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#guardar-la-base-procesada",
+    "href": "clases/02-tidyverse/slides.html#guardar-la-base-procesada",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Guardar la base procesada",
+    "text": "Guardar la base procesada\n\nsaveRDS(casen_proc_na, \"output/casen_proc.rds\")\n\n# Para cargarla en la próxima ayudantía:\ncasen_proc &lt;- readRDS(\"output/casen_proc.rds\")\n\n\n\n\n\n\n\n¿Por qué .rds y no .csv?\n\n\n.rds guarda el objeto exactamente como está, incluidos los factor y su orden. Un .csv los convierte en texto y habría que rehacer el procesamiento."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#tu-turno-10-min",
+    "href": "clases/02-tidyverse/slides.html#tu-turno-10-min",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Tu turno (10 min)",
+    "text": "Tu turno (10 min)\nCon casen_proc (el objeto con NA), trabaja con zona, estado_civil y nivel_educ.\n\n\nExplora con frq() y class(): ¿qué tipo tienen? ¿qué valores?\nRecodifica zona (1 = Urbano, 2 = Rural) como factor\nRecodifica nivel_educ (0 = Sin educación … 6 = Superior completa) como factor ordenado de menor a mayor\nFiltra solo personas de zona urbana\nCalcula el promedio de ingreso_pc por zona con group_by() y summarise()\n\n\nConsulta view_df(casen) si no recuerdas qué significa cada código."
+  },
+  {
+    "objectID": "clases/02-tidyverse/slides.html#resumen-de-la-sesión",
+    "href": "clases/02-tidyverse/slides.html#resumen-de-la-sesión",
+    "title": "Procesamiento de datos con tidyverse",
+    "section": "Resumen de la sesión",
+    "text": "Resumen de la sesión\n\n\n\n\n\n\n\n\nPaso\nFunción(es)\n¿Para qué?\n\n\n\n\nExplorar\nview_df(), frq(), glimpse()\nVer la base antes de tocarla\n\n\nEncadenar\n|&gt;\nEscribir pasos en orden de lectura\n\n\nSeleccionar\nselect()\nElegir y renombrar variables\n\n\nFiltrar\nfilter()\nQuedarse con ciertos casos\n\n\nRecodificar\nmutate() + factor()\nConvertir códigos en categorías\n\n\nNA\nset_na(), drop_na(), na.rm\nTratar valores especiales y perdidos\n\n\nTransformar\nif_else(), case_when()\nCrear nuevas categorías\n\n\nGuardar\nsaveRDS()\nRetomar el trabajo en la AY-3"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#qué-veremos-hoy",
+    "href": "clases/05-repaso-1/slides.html#qué-veremos-hoy",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\nRepaso de las primeras unidades (30 minutos)\nRepaso de inferencia (40 minutos)\nAplicación (20 minutos)"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#investigación-cuantitativa",
+    "href": "clases/05-repaso-1/slides.html#investigación-cuantitativa",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Investigación cuantitativa",
+    "text": "Investigación cuantitativa\n\n¿Qué la diferencia?\n¿Cuáles son sus principales desafíos?\n\nLecturas: Raadschelders (2011), Ramos (2016). ¿Qué podemos rescatar de estos textos?"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#problema-y-diseño-de-investigación",
+    "href": "clases/05-repaso-1/slides.html#problema-y-diseño-de-investigación",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Problema y diseño de investigación",
+    "text": "Problema y diseño de investigación\n\n¿Cómo se formula un problema?\n¿Cuáles son los tipos de diseño y sus diferencias?\n\nLecturas: Cea (2001), Hernández (2014), Bellei (2013)."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#del-problema-a-los-objetivos",
+    "href": "clases/05-repaso-1/slides.html#del-problema-a-los-objetivos",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Del problema a los objetivos",
+    "text": "Del problema a los objetivos"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#medición",
+    "href": "clases/05-repaso-1/slides.html#medición",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Medición",
+    "text": "Medición\n\n¿Cómo se miden los números?\n¿Algunos ejemplos?\n¿Cómo se construyen los indicadores?"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#conceptos-clave",
+    "href": "clases/05-repaso-1/slides.html#conceptos-clave",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Conceptos clave",
+    "text": "Conceptos clave\n\n\n\nPoblación\nMuestra\nInferencia\nDistribución"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#curva-normal",
+    "href": "clases/05-repaso-1/slides.html#curva-normal",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Curva normal",
+    "text": "Curva normal"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#distribución-muestral-del-promedio",
+    "href": "clases/05-repaso-1/slides.html#distribución-muestral-del-promedio",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Distribución muestral del promedio",
+    "text": "Distribución muestral del promedio\n\n\n\n\n\\[SE = \\frac{s}{\\sqrt{n}}\\]\nEl error estándar se calcula para el promedio, la diferencia de promedios, la correlación, etc."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#intervalos-de-confianza",
+    "href": "clases/05-repaso-1/slides.html#intervalos-de-confianza",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Intervalos de confianza",
+    "text": "Intervalos de confianza\n\nRango de valores dentro del cual se espera que se encuentre un parámetro poblacional, con cierto nivel de confianza.\nRequiere fijar un nivel de confianza (en puntaje Z).\nSe construye sumando y restando errores estándar al estimador.\n\n\n\n\nConfianza\nError\nZ\n\n\n\n\n68%\n32%\n1\n\n\n95%\n5%\n1,96\n\n\n99%\n1%\n2,58\n\n\n\nMás confianza implica un intervalo más amplio (menos preciso)."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#de-dónde-salen-196-y-258",
+    "href": "clases/05-repaso-1/slides.html#de-dónde-salen-196-y-258",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "¿De dónde salen 1,96 y 2,58?",
+    "text": "¿De dónde salen 1,96 y 2,58?\nR calcula el puntaje Z que deja un área dada en las colas de la curva normal:\n\nqnorm(0.975)   # 95%: deja 2,5% en cada cola\n\n[1] 1.959964\n\nqnorm(0.995)   # 99%: deja 0,5% en cada cola\n\n[1] 2.575829"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#práctico-1-8-minutos",
+    "href": "clases/05-repaso-1/slides.html#práctico-1-8-minutos",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Práctico 1 (8 minutos)",
+    "text": "Práctico 1 (8 minutos)\n\nEn un Índice de Satisfacción Usuaria (0–100) de un servicio estatal, el promedio es 55 puntos con un error estándar de 8 puntos.\nConstruya un IC al 95% y otro al 99%, y compárelos."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#verificar-el-cálculo-con-r",
+    "href": "clases/05-repaso-1/slides.html#verificar-el-cálculo-con-r",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Verificar el cálculo con R",
+    "text": "Verificar el cálculo con R\n\npromedio &lt;- 55\nse &lt;- 8\n\nc(inferior = promedio - 1.96 * se, superior = promedio + 1.96 * se)   # 95%\n\n\n\ninferior superior \n   39.32    70.68 \n\nc(inferior = promedio - 2.58 * se, superior = promedio + 2.58 * se)   # 99%\n\ninferior superior \n   34.36    75.64"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#prueba-de-hipótesis-pasos",
+    "href": "clases/05-repaso-1/slides.html#prueba-de-hipótesis-pasos",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Prueba de hipótesis: pasos",
+    "text": "Prueba de hipótesis: pasos\n\nFormular hipótesis\nObtener el error estándar y el estadístico de prueba\nEstablecer la probabilidad de error\nCalcular el IC o contrastar el valor empírico con el crítico\nInterpretar"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#tipos-de-hipótesis",
+    "href": "clases/05-repaso-1/slides.html#tipos-de-hipótesis",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Tipos de hipótesis",
+    "text": "Tipos de hipótesis\n\n\n\n\n\n\n\n\n\nPregunta\n\\(H_0\\)\n\\(H_1\\)\nPrueba\n\n\n\n\n¿Existe el promedio en la población?\n\\(\\bar{x} = 0\\)\n\\(\\bar{x} \\neq 0\\)\nDos colas\n\n\n¿Hay diferencia de promedios en la población?\n\\(\\bar{x}_1 - \\bar{x}_2 = 0\\)\n\\(\\bar{x}_1 - \\bar{x}_2 \\neq 0\\)\nDos colas"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#prueba-t-empírico-vs.-crítico",
+    "href": "clases/05-repaso-1/slides.html#prueba-t-empírico-vs.-crítico",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Prueba t: empírico vs. crítico",
+    "text": "Prueba t: empírico vs. crítico\n\n\nt crítico depende del nivel de confianza:\n\n95%: 1,96\n99%: 2,58\n\nt empírico para diferencia de medias:\n\n\nSi el t empírico cae en la zona de rechazo (mayor que el t crítico), rechazamos \\(H_0\\) y tenemos evidencia a favor de \\(H_1\\)."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#aplicación-2-satisfacción-laboral",
+    "href": "clases/05-repaso-1/slides.html#aplicación-2-satisfacción-laboral",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Aplicación 2: satisfacción laboral",
+    "text": "Aplicación 2: satisfacción laboral\nSe compara el puntaje promedio de satisfacción laboral entre trabajadores/as con jornada completa y parcial:\n\n\n\nDato\nValor\n\n\n\n\nTamaño muestral\n500\n\n\nPromedio jornada completa\n74\n\n\nPromedio jornada parcial\n66\n\n\nError estándar de la diferencia\n4\n\n\nt crítico (α = 0,05 / 0,01)\n1,96 / 2,58\n\n\nt empírico\n2"
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#preguntas",
+    "href": "clases/05-repaso-1/slides.html#preguntas",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Preguntas",
+    "text": "Preguntas\n\n\nFormule la hipótesis nula y la alternativa para la diferencia de promedios entre jornada completa y parcial.\nContrastando el t crítico y el empírico: ¿es posible rechazar la hipótesis nula? ¿Con qué nivel de confianza?\nConstruya un intervalo al 95% para la diferencia de promedios e interprételo."
+  },
+  {
+    "objectID": "clases/05-repaso-1/slides.html#preparación-para-la-prueba",
+    "href": "clases/05-repaso-1/slides.html#preparación-para-la-prueba",
+    "title": "Repaso prueba de cátedra 1",
+    "section": "Preparación para la prueba",
+    "text": "Preparación para la prueba\n\nRepasar las principales lecturas\nEstudiar ejemplos aplicados a la administración pública"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#qué-veremos-hoy",
+    "href": "clases/07-regresion-multiple/slides.html#qué-veremos-hoy",
+    "title": "Modelos de regresión múltiple",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\nModelos de regresión múltiple\nCaso aplicado: CEP 2025\nVariables categóricas: factores y dummies\nModelos anidados y tablas\nEjercicios aplicados"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#no-es-lo-mismo-que-varias-regresiones-simples",
+    "href": "clases/07-regresion-multiple/slides.html#no-es-lo-mismo-que-varias-regresiones-simples",
+    "title": "Modelos de regresión múltiple",
+    "section": "No es lo mismo que varias regresiones simples",
+    "text": "No es lo mismo que varias regresiones simples\nEl modelo de regresión múltiple estima el efecto de cada predictor controlando por los demás. Así se obtiene la contribución propia de cada variable independiente a la variable dependiente.\n\\[Y = \\beta_0 + \\beta_1X_1 + \\beta_2X_2 + \\dots + \\beta_kX_k + \\epsilon\\]\n\n\\(\\beta_0\\): intercepto\n\\(\\beta_1 \\dots \\beta_k\\): coeficientes de cada variable independiente\n\\(\\epsilon\\): error"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#interpretación-de-los-coeficientes",
+    "href": "clases/07-regresion-multiple/slides.html#interpretación-de-los-coeficientes",
+    "title": "Modelos de regresión múltiple",
+    "section": "Interpretación de los coeficientes",
+    "text": "Interpretación de los coeficientes\n\nCoeficiente (\\(\\beta_i\\)): cambio esperado en \\(Y\\) por cada unidad de cambio en \\(X_i\\), manteniendo constantes las demás variables.\nSigno: dirección de la relación (positiva o negativa).\nMagnitud: fuerza de la relación, en las unidades de \\(Y\\)."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#supuestos",
+    "href": "clases/07-regresion-multiple/slides.html#supuestos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Supuestos",
+    "text": "Supuestos\n\nLinealidad: la relación entre las variables es lineal.\nIndependencia: los errores son independientes entre sí.\nHomocedasticidad: la varianza de los errores es constante.\nNormalidad: los errores se distribuyen normalmente.\n\nSe pueden revisar todos a la vez con performance::check_model()."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#paquetes-y-datos",
+    "href": "clases/07-regresion-multiple/slides.html#paquetes-y-datos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Paquetes y datos",
+    "text": "Paquetes y datos\n\npacman::p_load(\n  tidyverse,      # manipulación de datos\n  sjmisc,         # descriptivos (descr)\n  sjlabelled,     # etiquetas y valores perdidos (set_na)\n  modelsummary,   # tablas y gráficos de modelos\n  sjPlot          # tablas de regresión en HTML\n)\n\n\ncep &lt;- readRDS(gzcon(url(\"https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/cep95.rds\")))\n\nEncuesta CEP N° 95 (octubre 2025), 1217 casos. El procesamiento inicial está en datos/preparar_cep95.R."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#primero-los-valores-perdidos",
+    "href": "clases/07-regresion-multiple/slides.html#primero-los-valores-perdidos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Primero: los valores perdidos",
+    "text": "Primero: los valores perdidos\nEn la CEP, -8 = no sabe y -9 = no responde. Si no los convertimos, lm() los trata como valores reales de la escala.\n\ncep &lt;- cep |&gt;\n  mutate(across(everything(), haven::zap_labels)) |&gt;   # de haven_labelled a número\n  set_na(esc_delincuencia, esc_responsabilidad, esc_ingreso_merito,\n         democracia, lider_autoritario, aborto, eutanasia,\n         confianza_justicia, confianza_congreso, confianza_gobierno,\n         na = c(-8, -9))\n\npos_pol queda fuera a propósito: ahí -8 y -9 serán una categoría propia, “Sin posición”."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#descriptivos",
+    "href": "clases/07-regresion-multiple/slides.html#descriptivos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Descriptivos",
+    "text": "Descriptivos\n\n\ndescr(cep, show = c(\"label\", \"range\", \"mean\", \"sd\", \"NA.prc\", \"n\")) |&gt;\n  knitr::kable(digits = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nvar\nlabel\nn\nNA.prc\nmean\nsd\nrange\n\n\n\n\n7\nesc_delincuencia\nPreferencia: Garantizar libertades vs. Suprimir libertades para controlar delincuencia\n1167\n4.11\n6.49\n2.90\n10 (0-10)\n\n\n9\nesc_responsabilidad\nPreferencia: Estado vs. Individuos como responsables del sustento económico\n1196\n1.73\n6.06\n2.96\n9 (1-10)\n\n\n8\nesc_ingreso_merito\nPreferencia: Igualdad de ingresos vs. Premiar el esfuerzo individual\n1187\n2.47\n6.80\n2.77\n9 (1-10)\n\n\n12\npos_pol\nPosición política\n1217\n0.00\n2.54\n6.21\n19 (-9-10)\n\n\n13\nsexo\nSexo\n1217\n0.00\n1.58\n0.49\n1 (1-2)\n\n\n6\neducacion\nNivel de educación\n1204\n1.07\n4.60\n2.27\n10 (0-10)\n\n\n5\ndemocracia\nPreferencia de régimen político: Democracia vs. Autoritarismo vs. Indiferencia\n1160\n4.68\n1.80\n0.85\n2 (1-3)\n\n\n11\nlider_autoritario\nApoyo o rechazo a líder fuerte sin congreso ni elecciones\n1140\n6.33\n2.89\n1.10\n3 (1-4)\n\n\n1\naborto\nPreferencia sobre el aborto\n1201\n1.31\n2.15\n0.70\n2 (1-3)\n\n\n10\neutanasia\nPreferencia sobre la eutanasia\n1186\n2.55\n1.86\n0.63\n2 (1-3)\n\n\n4\nconfianza_justicia\nConfianza en Tribunales de justicia\n1189\n2.30\n3.18\n0.76\n3 (1-4)\n\n\n2\nconfianza_congreso\nConfianza en el Congreso\n1170\n3.86\n3.34\n0.68\n3 (1-4)\n\n\n3\nconfianza_gobierno\nConfianza en el Gobierno\n1197\n1.64\n3.14\n0.86\n3 (1-4)"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#opción-1-como-factor",
+    "href": "clases/07-regresion-multiple/slides.html#opción-1-como-factor",
+    "title": "Modelos de regresión múltiple",
+    "section": "Opción 1: como factor",
+    "text": "Opción 1: como factor\n\ncep &lt;- cep |&gt;\n  mutate(pos_pol_rec = case_when(\n    pos_pol %in% 1:4  ~ \"Izquierda\",\n    pos_pol %in% 5:6  ~ \"Centro\",\n    pos_pol %in% 7:10 ~ \"Derecha\",\n    pos_pol %in% c(-8, -9) ~ \"Sin posición\"\n  ) |&gt;\n    factor(levels = c(\"Izquierda\", \"Centro\", \"Derecha\", \"Sin posición\")))\n\nmodelo_factor &lt;- lm(esc_delincuencia ~ pos_pol_rec, data = cep)\n\nR crea las dummies automáticamente. La primera categoría de levels (Izquierda) queda como referencia."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#opción-2-dummies-a-mano",
+    "href": "clases/07-regresion-multiple/slides.html#opción-2-dummies-a-mano",
+    "title": "Modelos de regresión múltiple",
+    "section": "Opción 2: dummies a mano",
+    "text": "Opción 2: dummies a mano\n\ncep &lt;- cep |&gt;\n  mutate(\n    pol_centro       = if_else(pos_pol %in% 5:6, 1, 0),\n    pol_derecha      = if_else(pos_pol %in% 7:10, 1, 0),\n    pol_sin_posicion = if_else(pos_pol %in% c(-8, -9), 1, 0)\n  )\n\nmodelo_dummies &lt;- lm(esc_delincuencia ~ pol_centro + pol_derecha + pol_sin_posicion,\n                     data = cep)\n\nLa categoría que no incluimos (Izquierda) es la referencia. Si incluyéramos las cuatro, el modelo no podría estimarse."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#ambos-caminos-dan-lo-mismo",
+    "href": "clases/07-regresion-multiple/slides.html#ambos-caminos-dan-lo-mismo",
+    "title": "Modelos de regresión múltiple",
+    "section": "Ambos caminos dan lo mismo",
+    "text": "Ambos caminos dan lo mismo\n\n\n\nmodelsummary(\n  list(\"Factor\" = modelo_factor,\n       \"Dummies\" = modelo_dummies),\n  estimate  = \"{estimate}{stars} ({std.error})\",\n  statistic = NULL,\n  gof_map = c(\"nobs\", \"r.squared\")\n)\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                Factor\n                Dummies\n              \n        \n        \n        \n                \n                  (Intercept)\n                  5.162*** (0.188)\n                  5.162*** (0.188)\n                \n                \n                  pos_pol_recCentro\n                  1.147*** (0.231)\n                  \n                \n                \n                  pos_pol_recDerecha\n                  2.354*** (0.250)\n                  \n                \n                \n                  pos_pol_recSin posición\n                  1.675*** (0.262)\n                  \n                \n                \n                  pol_centro\n                  \n                  1.147*** (0.231)\n                \n                \n                  pol_derecha\n                  \n                  2.354*** (0.250)\n                \n                \n                  pol_sin_posicion\n                  \n                  1.675*** (0.262)\n                \n                \n                  Num.Obs.\n                  1167\n                  1167\n                \n                \n                  R2\n                  0.075\n                  0.075"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#cambiar-la-categoría-de-referencia",
+    "href": "clases/07-regresion-multiple/slides.html#cambiar-la-categoría-de-referencia",
+    "title": "Modelos de regresión múltiple",
+    "section": "Cambiar la categoría de referencia",
+    "text": "Cambiar la categoría de referencia\nCon un factor basta con fct_relevel():\n\n\ncep |&gt;\n  mutate(pos_pol_rec = fct_relevel(pos_pol_rec,\n                                   \"Centro\")) |&gt;\n  lm(esc_delincuencia ~ pos_pol_rec,\n     data = _) |&gt;\n  modelsummary(estimate  = \"{estimate}{stars} ({std.error})\",\n               statistic = NULL,\n               gof_map = c(\"nobs\", \"r.squared\"))\n\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                (1)\n              \n        \n        \n        \n                \n                  (Intercept)\n                  6.309*** (0.135)\n                \n                \n                  pos_pol_recIzquierda\n                  -1.147*** (0.231)\n                \n                \n                  pos_pol_recDerecha\n                  1.207*** (0.214)\n                \n                \n                  pos_pol_recSin posición\n                  0.528* (0.228)\n                \n                \n                  Num.Obs.\n                  1167\n                \n                \n                  R2\n                  0.075\n                \n        \n      \n    \n\n\n\ndata = _ indica dónde entra el resultado del pipe cuando no es el primer argumento."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#educación-régimen-y-líder-autoritario",
+    "href": "clases/07-regresion-multiple/slides.html#educación-régimen-y-líder-autoritario",
+    "title": "Modelos de regresión múltiple",
+    "section": "Educación, régimen y líder autoritario",
+    "text": "Educación, régimen y líder autoritario\n\ncep &lt;- cep |&gt;\n  mutate(\n    educ_rec = case_when(\n      educacion %in% 0:4  ~ \"Media completa o inferior\",\n      educacion %in% 5:7  ~ \"Universitaria incompleta o técnica\",\n      educacion %in% 8:10 ~ \"Universitaria completa o superior\"\n    ) |&gt;\n      factor(levels = c(\"Media completa o inferior\",\n                        \"Universitaria incompleta o técnica\",\n                        \"Universitaria completa o superior\")),\n    pref_dem_rec = factor(democracia, levels = 1:3,\n                          labels = c(\"Democracia\", \"Autoritarismo\", \"Indiferencia\")),\n    apoyo_lider_autoritario = if_else(lider_autoritario %in% 1:2, 1, 0)\n  )"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#aborto-eutanasia-y-confianza-en-el-estado",
+    "href": "clases/07-regresion-multiple/slides.html#aborto-eutanasia-y-confianza-en-el-estado",
+    "title": "Modelos de regresión múltiple",
+    "section": "Aborto, eutanasia y confianza en el Estado",
+    "text": "Aborto, eutanasia y confianza en el Estado\n\ncep &lt;- cep |&gt;\n  mutate(\n    aborto_rec = factor(aborto, levels = 1:3,\n                        labels = c(\"Siempre prohibido\", \"Casos especiales\", \"Opción libre\")),\n    eutanasia_rec = factor(eutanasia, levels = c(3, 1, 2),\n                           labels = c(\"Nunca permitida\", \"Siempre permitida\", \"Casos especiales\")),\n    # Confianza: original 1 = mucha ... 4 = nada. Invertimos para que más = más confianza\n    across(starts_with(\"confianza\"), \\(x) 5 - x, .names = \"{.col}_inv\"),\n    esc_confianza_estado = confianza_justicia_inv + confianza_congreso_inv +\n      confianza_gobierno_inv - 2   # escala de 1 a 10\n  )\n\n5 - x invierte una escala de 1 a 4 en una sola operación. across() la aplica a todas las variables que empiezan con “confianza”."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#estrategia",
+    "href": "clases/07-regresion-multiple/slides.html#estrategia",
+    "title": "Modelos de regresión múltiple",
+    "section": "Estrategia",
+    "text": "Estrategia\nSe parte de un modelo simple y se agregan predictores de forma progresiva. Así evaluamos:\n\nCómo cambian los coeficientes al agregar controles\nSi las nuevas variables mejoran la capacidad explicativa (\\(R^2\\) ajustado)\nSi el efecto de una variable es robusto o desaparece al controlar por otras\n\nVariable dependiente: esc_delincuencia (1 = garantizar libertades, 10 = suprimir libertades para controlar la delincuencia)."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#misma-muestra-para-todos-los-modelos",
+    "href": "clases/07-regresion-multiple/slides.html#misma-muestra-para-todos-los-modelos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Misma muestra para todos los modelos",
+    "text": "Misma muestra para todos los modelos\nPara comparar modelos anidados, todos deben usar los mismos casos:\n\ncep_m &lt;- cep |&gt;\n  drop_na(esc_delincuencia, pos_pol_rec, educ_rec,\n          apoyo_lider_autoritario, pref_dem_rec)\n\n\nm1 &lt;- lm(esc_delincuencia ~ pos_pol_rec, data = cep_m)\nm2 &lt;- lm(esc_delincuencia ~ pos_pol_rec + educ_rec, data = cep_m)\nm3 &lt;- lm(esc_delincuencia ~ pos_pol_rec + educ_rec +\n           apoyo_lider_autoritario + pref_dem_rec, data = cep_m)\n\ndrop_na() solo sobre las variables del modelo más completo. Con na.omit() sobre toda la base perderíamos casos por variables que no usamos."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#comparación-de-los-tres-modelos",
+    "href": "clases/07-regresion-multiple/slides.html#comparación-de-los-tres-modelos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Comparación de los tres modelos",
+    "text": "Comparación de los tres modelos\n\n\nmodelsummary(\n  list(\"M1: Pos. política\" = m1, \"M2: + Educación\" = m2, \"M3: + Actitudes\" = m3),\n  estimate    = \"{estimate}{stars} ({std.error})\",\n  statistic   = NULL,\n  gof_map     = c(\"nobs\", \"r.squared\", \"adj.r.squared\"),\n  coef_rename = \\(x) x |&gt;\n    str_remove(\"pos_pol_rec|educ_rec|pref_dem_rec\") |&gt;\n    str_replace(\"apoyo_lider_autoritario\", \"Apoyo líder autoritario\")\n)\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                M1: Pos. política\n                M2: + Educación\n                M3: + Actitudes\n              \n        \n        \n        \n                \n                  (Intercept)\n                  5.083*** (0.188)\n                  5.371*** (0.209)\n                  5.048*** (0.221)\n                \n                \n                  Centro\n                  1.195*** (0.232)\n                  1.071*** (0.234)\n                  0.867*** (0.237)\n                \n                \n                  Derecha\n                  2.412*** (0.251)\n                  2.292*** (0.252)\n                  2.099*** (0.256)\n                \n                \n                  Sin posición\n                  1.729*** (0.267)\n                  1.533*** (0.271)\n                  1.346*** (0.273)\n                \n                \n                  Universitaria incompleta o técnica\n                  \n                  -0.159 (0.203)\n                  -0.043 (0.205)\n                \n                \n                  Universitaria completa o superior\n                  \n                  -0.826*** (0.232)\n                  -0.613** (0.236)\n                \n                \n                  Apoyo líder autoritario\n                  \n                  \n                  0.178 (0.184)\n                \n                \n                  Autoritarismo\n                  \n                  \n                  0.596** (0.215)\n                \n                \n                  Indiferencia\n                  \n                  \n                  0.783*** (0.212)\n                \n                \n                  Num.Obs.\n                  1117\n                  1117\n                  1117\n                \n                \n                  R2\n                  0.081\n                  0.091\n                  0.108\n                \n                \n                  R2 Adj.\n                  0.078\n                  0.087\n                  0.101"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#los-coeficientes-en-un-gráfico",
+    "href": "clases/07-regresion-multiple/slides.html#los-coeficientes-en-un-gráfico",
+    "title": "Modelos de regresión múltiple",
+    "section": "Los coeficientes en un gráfico",
+    "text": "Los coeficientes en un gráfico\n\nmodelplot(list(\"M1\" = m1, \"M2\" = m2, \"M3\" = m3),\n          coef_omit = \"Intercept\") +\n  geom_vline(xintercept = 0, linetype = \"dashed\")\n\n\nSi el intervalo cruza la línea punteada (0), el coeficiente no es significativo al 95%."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#lectura-e-interpretación",
+    "href": "clases/07-regresion-multiple/slides.html#lectura-e-interpretación",
+    "title": "Modelos de regresión múltiple",
+    "section": "Lectura e interpretación",
+    "text": "Lectura e interpretación\n\n\nEn M1, ubicarse a la derecha se asocia positivamente con la preferencia por suprimir libertades, en relación con quienes se ubican a la izquierda.\nAl agregar educación (M2), el efecto de la posición política se mantiene, y un mayor nivel educativo tiende a asociarse negativamente con la supresión de libertades.\nEn M3, la preferencia por el autoritarismo y la indiferencia frente a la democracia tienen efectos positivos y significativos.\nEl \\(R^2\\) ajustado aumenta progresivamente: 0.078 (M1), 0.087 (M2) y 0.101 (M3)."
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#exportar-tablas",
+    "href": "clases/07-regresion-multiple/slides.html#exportar-tablas",
+    "title": "Modelos de regresión múltiple",
+    "section": "Exportar tablas",
+    "text": "Exportar tablas\n\n# A Word, para un informe\nmodelsummary(list(m1, m2, m3), stars = TRUE, output = \"output/modelos.docx\")\n\n# Tabla HTML con sjPlot\ntab_model(m1, m2, m3, show.ci = FALSE, dv.labels = c(\"M1\", \"M2\", \"M3\"))"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#ejercicio-1-conceptual",
+    "href": "clases/07-regresion-multiple/slides.html#ejercicio-1-conceptual",
+    "title": "Modelos de regresión múltiple",
+    "section": "Ejercicio 1: conceptual",
+    "text": "Ejercicio 1: conceptual\n\n\n¿Cuál es la diferencia entre estimar varias regresiones simples por separado y un modelo de regresión múltiple? ¿Por qué importa para interpretar los coeficientes?\n¿Qué significa que un coeficiente sea significativo pero pequeño? ¿Y al revés?\n¿Qué información adicional entrega el \\(R^2\\) ajustado respecto del \\(R^2\\)?\n¿Por qué hay que definir una categoría de referencia? ¿Qué ocurre si se incluyen todas las categorías como dummies?"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#ejercicio-2-responsabilidad-económica",
+    "href": "clases/07-regresion-multiple/slides.html#ejercicio-2-responsabilidad-económica",
+    "title": "Modelos de regresión múltiple",
+    "section": "Ejercicio 2: responsabilidad económica",
+    "text": "Ejercicio 2: responsabilidad económica\nVariable dependiente: esc_responsabilidad (1 = el Estado es responsable del sustento económico; 10 = las personas son responsables).\n\n\nEstima tres modelos anidados:\n\nM1: posición política (pos_pol_rec, ref. = Izquierda)\nM2: M1 + educación (educ_rec, ref. = Media completa o inferior)\nM3: M2 + aborto (aborto_rec, ref. = Siempre prohibido) + eutanasia (eutanasia_rec, ref. = Nunca permitida)\n\nCompáralos con modelsummary() y modelplot().\n¿Cómo se relacionan las actitudes sobre aborto y eutanasia con la preferencia por responsabilidad individual? ¿Se mantiene el efecto de la posición política?"
+  },
+  {
+    "objectID": "clases/07-regresion-multiple/slides.html#ejercicio-3-mérito-e-igualdad-de-ingresos",
+    "href": "clases/07-regresion-multiple/slides.html#ejercicio-3-mérito-e-igualdad-de-ingresos",
+    "title": "Modelos de regresión múltiple",
+    "section": "Ejercicio 3: mérito e igualdad de ingresos",
+    "text": "Ejercicio 3: mérito e igualdad de ingresos\nVariable dependiente: esc_ingreso_merito (1 = ingresos más iguales; 10 = premiar el esfuerzo individual).\n\n\nEstima tres modelos anidados:\n\nM1: posición política (ref. = Izquierda)\nM2: M1 + educación + preferencia de régimen (pref_dem_rec, ref. = Democracia)\nM3: M2 + aborto + eutanasia\n\nCompáralos con modelsummary().\n¿Es razonable esperar que las actitudes sobre aborto y eutanasia predigan preferencias redistributivas?"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#estructura-de-la-sesión",
+    "href": "clases/09-repaso-2/slides.html#estructura-de-la-sesión",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Estructura de la sesión",
+    "text": "Estructura de la sesión\nRepasamos los contenidos centrales de la última etapa del curso antes de la evaluación final.\n\nRegresión logística: fundamentos, interpretación y ajuste\nAnálisis de Componentes Principales (ACP): objetivos, criterios y resultados\nDiseño de cuestionario: estructura, tipos de preguntas y ética"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#cuándo-usar-regresión-logística",
+    "href": "clases/09-repaso-2/slides.html#cuándo-usar-regresión-logística",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "¿Cuándo usar regresión logística?",
+    "text": "¿Cuándo usar regresión logística?\nCuando la variable dependiente es dicotómica: toma solo dos valores (1 = participó / 0 = no participó; 1 = aprobó / 0 = reprobó).\n¿Por qué no usar regresión lineal (MCO)?\n\nPuede producir predicciones fuera del rango [0, 1], imposibles para una probabilidad.\nLa relación real entre la probabilidad y una variable independiente tiene forma sigmoidal, no lineal.\n\nLa regresión logística modela directamente la probabilidad del evento, manteniendo las predicciones entre 0 y 1."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#la-cadena-de-transformaciones",
+    "href": "clases/09-repaso-2/slides.html#la-cadena-de-transformaciones",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "La cadena de transformaciones",
+    "text": "La cadena de transformaciones\n\nProbabilidad (\\(p\\)): posibilidad de que ocurra el evento.\nOdds (chances): razón entre la probabilidad de que ocurra y la de que no ocurra: \\(\\text{Odds} = \\frac{p}{1 - p}\\)\nLogit: logaritmo natural de los odds, que el modelo estima en escala lineal:\n\n\\[\\text{logit}(p) = \\ln\\left(\\frac{p}{1-p}\\right) = \\beta_0 + \\beta_1 X_1 + \\cdots + \\beta_k X_k\\]\nPara volver a probabilidades: \\(p = \\frac{e^{\\text{logit}}}{1 + e^{\\text{logit}}}\\)"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#interpretación-de-coeficientes-tres-formas",
+    "href": "clases/09-repaso-2/slides.html#interpretación-de-coeficientes-tres-formas",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Interpretación de coeficientes: tres formas",
+    "text": "Interpretación de coeficientes: tres formas\n\n\n\n\n\n\n\n\n\nForma\nCómo se obtiene\nInterpretación\n\n\n\n\nLog-odds (\\(\\beta\\))\nDirectamente del modelo\nCambio en el logaritmo de los odds por unidad de \\(X\\). Difícil de interpretar.\n\n\nOdds ratio (OR)\n\\(e^{\\beta}\\)\nCuántas veces más (o menos) son las chances del evento por unidad de \\(X\\). OR &gt; 1 aumenta; OR &lt; 1 disminuye.\n\n\nProbabilidad predicha\nFunción logística aplicada al logit\nLa forma más intuitiva: se fijan valores de las variables y se convierte a probabilidad.\n\n\n\n\nEjemplo: si el OR de ser mujer es 11,78, las mujeres tienen 11,78 veces más chances de experimentar el evento que los hombres (referencia), manteniendo constantes las demás variables."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#evaluación-del-ajuste",
+    "href": "clases/09-repaso-2/slides.html#evaluación-del-ajuste",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Evaluación del ajuste",
+    "text": "Evaluación del ajuste\nEn regresión logística no se usa el \\(R^2\\) de MCO. Las medidas se basan en la log-verosimilitud (\\(\\ell\\)):\n\n\n\n\n\n\n\n\nMedida\nDescripción\n\n\n\n\nDevianza\nCuantifica los residuos del modelo. Menor devianza = mejor ajuste.\n\n\nTest LRT\nCompara modelos anidados: \\(G^2 = -2(\\ell_{\\text{restringido}} - \\ell_{\\text{completo}})\\), con distribución \\(\\chi^2\\) (gl = parámetros añadidos).\n\n\nAIC\nPenaliza por número de variables; permite comparar modelos no anidados. Menor AIC = mejor modelo.\n\n\nPseudo \\(R^2\\) de McFadden\nCompara con un modelo nulo. Entre 0,2 y 0,4 se considera aceptable; no se interpreta como el \\(R^2\\) lineal."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#en-r-glm-con-family-binomial",
+    "href": "clases/09-repaso-2/slides.html#en-r-glm-con-family-binomial",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "En R: glm() con family = binomial",
+    "text": "En R: glm() con family = binomial\nmodelo &lt;- glm(y ~ x1 + x2 + x3, data = datos, family = binomial)\n\n\n\n\n\n\n\nPara obtener…\nCódigo\n\n\n\n\nCoeficientes en log-odds\nsummary(modelo)\n\n\nOdds ratios con IC\nparameters::model_parameters(modelo, exponentiate = TRUE)\n\n\nProbabilidades predichas\nggeffects::predict_response(modelo, terms = \"x1\")\n\n\nPseudo \\(R^2\\), AIC\nperformance::model_performance(modelo)"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#ejemplo-probabilidad-de-pobreza-casen-2024",
+    "href": "clases/09-repaso-2/slides.html#ejemplo-probabilidad-de-pobreza-casen-2024",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Ejemplo: probabilidad de pobreza (CASEN 2024)",
+    "text": "Ejemplo: probabilidad de pobreza (CASEN 2024)\n\ncasen_logit &lt;- casen_proc |&gt;\n  mutate(pobre = if_else(pobreza == \"No pobre\", 0, 1))   # 1 = cualquier tipo de pobreza\n\nmodelo_pobreza &lt;- glm(pobre ~ sexo + edad + horas_trab,\n                      data = casen_logit, family = binomial)\n\nmodel_parameters(modelo_pobreza, exponentiate = TRUE) |&gt;\n  print_md()\n\n\n\n\nParameter\nOdds Ratio\nSE\n95% CI\nz\np\n\n\n\n\n(Intercept)\n1.15\n0.43\n(0.56, 2.39)\n0.39\n0.698\n\n\nsexo (Mujer)\n0.93\n0.13\n(0.70, 1.22)\n-0.55\n0.582\n\n\nedad\n0.99\n5.14e-03\n(0.98, 1.00)\n-2.18\n0.029\n\n\nhoras trab\n0.97\n6.33e-03\n(0.96, 0.98)\n-4.31\n&lt; .001"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#probabilidades-predichas",
+    "href": "clases/09-repaso-2/slides.html#probabilidades-predichas",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Probabilidades predichas",
+    "text": "Probabilidades predichas\n\npredict_response(modelo_pobreza, terms = c(\"horas_trab\", \"sexo\")) |&gt;\n  plot() +\n  labs(title = NULL, x = \"Horas trabajadas a la semana\", y = \"Probabilidad de pobreza\")"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#qué-es-el-acp",
+    "href": "clases/09-repaso-2/slides.html#qué-es-el-acp",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "¿Qué es el ACP?",
+    "text": "¿Qué es el ACP?\nMétodo multivariante, exploratorio y descriptivo. Busca explicar \\(p\\) variables observables mediante un número menor \\(k\\) de componentes principales, con la menor pérdida de información posible.\n¿Para qué sirve?\n\nReducir dimensiones: sintetizar muchas variables en pocos componentes interpretables.\nConstruir indicadores sintéticos: un puntaje que resume varias dimensiones (por ejemplo, capacidad institucional).\nResolver multicolinealidad: reemplazar variables muy correlacionadas por componentes independientes entre sí.\nRepresentar gráficamente datos complejos en dos o tres dimensiones.\n\nEl ACP no busca relaciones causales: agrupa variables, no establece dependencias."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#acp-vs.-análisis-factorial",
+    "href": "clases/09-repaso-2/slides.html#acp-vs.-análisis-factorial",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "ACP vs. análisis factorial",
+    "text": "ACP vs. análisis factorial\n\n\n\n\n\n\n\n\n\nCriterio\nACP\nAnálisis factorial (AFE)\n\n\n\n\nVarianza considerada\nTotal\nComún (comunalidad)\n\n\nNaturaleza\nCombinaciones lineales de las variables originales\nModelo con dimensiones latentes “ocultas”\n\n\nDirección\nLos componentes se explican por las variables\nLas variables dependen de los factores\n\n\nUso habitual\nReducción de datos, indicadores sintéticos\nValidación de escalas, psicometría\n\n\n\n\nPara reducir variables se prefiere el ACP; para identificar rasgos latentes no observables, el AFE."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#requisitos-para-aplicar-acp",
+    "href": "clases/09-repaso-2/slides.html#requisitos-para-aplicar-acp",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Requisitos para aplicar ACP",
+    "text": "Requisitos para aplicar ACP\n\nCorrelación entre variables: si son independientes no hay información común que reducir. Se verifica con la prueba de Bartlett o el índice KMO.\nNivel de medición: variables cuantitativas (intervalo o razón). En la práctica se aceptan ordinales con al menos 5 categorías.\nTamaño muestral: mínimo recomendado de 150 a 200 casos.\nEstandarización: si las escalas difieren, se analiza la matriz de correlaciones."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#criterios-para-retener-componentes",
+    "href": "clases/09-repaso-2/slides.html#criterios-para-retener-componentes",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Criterios para retener componentes",
+    "text": "Criterios para retener componentes\n\n\n\n\n\n\n\n\nCriterio\nDescripción\n\n\n\n\nRegla de Kaiser\nRetener componentes con valor propio &gt; 1: explican más varianza que una variable original.\n\n\nVarianza acumulada\nRetener los suficientes para cubrir entre el 70% y 90% de la varianza total.\n\n\nGráfico de sedimentación\nValores propios en orden descendente; se retienen los anteriores al “codo”.\n\n\nInterpretabilidad\nEl criterio más importante. Los componentes deben tener sentido teórico y poder nombrarse.\n\n\n\n\nSe usan varios criterios en conjunto; cuando hay conflicto, la interpretabilidad decide."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#cargas-e-interpretación",
+    "href": "clases/09-repaso-2/slides.html#cargas-e-interpretación",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Cargas e interpretación",
+    "text": "Cargas e interpretación\nLas cargas son las correlaciones entre cada variable original y cada componente. Para interpretar un componente:\n\nIdentificar las variables con cargas altas en valor absoluto (convención: |carga| ≥ 0,40 o 0,50).\nObservar el signo: cargas de signo opuesto indican que las variables se mueven en direcciones contrarias.\nProponer un nombre sustantivo para la dimensión que une a esas variables."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#puntuaciones-factoriales",
+    "href": "clases/09-repaso-2/slides.html#puntuaciones-factoriales",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Puntuaciones factoriales",
+    "text": "Puntuaciones factoriales\nCada observación recibe un puntaje en cada componente retenido: variables nuevas, continuas y no correlacionadas entre sí.\n\nIndicador sintético: un índice que resume las variables originales.\nInsumo para regresión: reemplaza variables correlacionadas y elimina la multicolinealidad.\nAgrupamiento (clustering): permite agrupar observaciones en menos dimensiones.\n\nPrecaución: la interpretación de los componentes depende del analista y debe respaldarse teóricamente."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#ejemplo-en-r-percepción-de-conflictos-issp-2009",
+    "href": "clases/09-repaso-2/slides.html#ejemplo-en-r-percepción-de-conflictos-issp-2009",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Ejemplo en R: percepción de conflictos (ISSP 2009)",
+    "text": "Ejemplo en R: percepción de conflictos (ISSP 2009)\n\n\nconflictos &lt;- issp |&gt;\n  select(conflict_rp, conflict_wcmc,\n         conflict_mw, conflict_tb) |&gt;\n  drop_na()\n\nacp &lt;- prcomp(conflictos, scale. = TRUE)\n\nsummary(acp)   # varianza por componente\n\n\nImportance of components:\n                          PC1    PC2    PC3     PC4\nStandard deviation     1.5971 0.7680 0.7291 0.57249\nProportion of Variance 0.6377 0.1475 0.1329 0.08194\nCumulative Proportion  0.6377 0.7852 0.9181 1.00000\n\nacp$rotation   # cargas\n\n                     PC1        PC2         PC3        PC4\nconflict_rp   -0.5313023  0.0859012  0.45813625 -0.7074249\nconflict_wcmc -0.4627141 -0.8621744 -0.08411266  0.1883510\nconflict_mw   -0.4804639  0.3092810 -0.81083073 -0.1267015\nconflict_tb   -0.5222720  0.3919459  0.35438645  0.6693434"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#gráfico-de-sedimentación",
+    "href": "clases/09-repaso-2/slides.html#gráfico-de-sedimentación",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Gráfico de sedimentación",
+    "text": "Gráfico de sedimentación\n\nfactoextra::fviz_eig(acp, addlabels = TRUE, choice = \"eigenvalue\") +\n  geom_hline(yintercept = 1, linetype = \"dashed\") +   # regla de Kaiser\n  labs(title = NULL, x = \"Componente\", y = \"Valor propio\")"
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#encuesta-vs.-cuestionario",
+    "href": "clases/09-repaso-2/slides.html#encuesta-vs.-cuestionario",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Encuesta vs. cuestionario",
+    "text": "Encuesta vs. cuestionario\n\nEncuesta social: el proceso de investigación completo: diseño, aplicación, recolección y análisis. Implica una interacción asimétrica entre quien investiga (conduce) y quien responde (su habla está delimitada por el instrumento).\nCuestionario: el instrumento: el conjunto de preguntas y respuestas predefinidas.\n\n¿Cuándo construir un cuestionario propio? Solo si no hay fuentes secundarias adecuadas (CASEN, CEP, Encuesta Mundial de Valores) o si se requiere medir constructos que esas fuentes no cubren. Construirlo tiene altos costos de tiempo y recursos."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#modos-de-aplicación",
+    "href": "clases/09-repaso-2/slides.html#modos-de-aplicación",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Modos de aplicación",
+    "text": "Modos de aplicación\n\n\n\n\n\n\n\n\n\nModo\nVentajas\nDesventajas\n\n\n\n\nCara a cara\nMayor control, menor rechazo, permite aclarar dudas\nMayor costo; sesgo del entrevistador en temas íntimos\n\n\nTelefónico\nMenor costo, amplia cobertura geográfica\nMayor rechazo; no permite material visual\n\n\nAutoaplicado (papel)\nIdeal para temas sensibles; reduce sesgo del entrevistador\nRequiere instrucciones muy claras; depende del nivel de lectura\n\n\nAutoaplicado (internet)\nBajo costo, rapidez\nSesgo de selección: solo quienes tienen acceso y habilidad digital\n\n\n\n\nEl modo afecta la redacción, la extensión del instrumento y los sesgos a controlar."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#estructura-del-cuestionario",
+    "href": "clases/09-repaso-2/slides.html#estructura-del-cuestionario",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Estructura del cuestionario",
+    "text": "Estructura del cuestionario\n\nUn orden lógico que construye confianza progresivamente:\n\nPresentación: propósito del estudio, garantía de anonimato. Breve y no intimidante.\nPreguntas filtro: verifican los criterios de inclusión (edad, cargo, territorio).\nIdentificación no intrusiva: sexo, edad, nivel educativo.\nCuerpo: los constructos centrales, de lo simple y general a lo complejo o privado.\nIdentificación intrusiva y cierre: preguntas sensibles (ingresos, bienes, situación laboral) al final, cuando ya hay confianza. Cerrar agradeciendo."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#tipos-de-preguntas",
+    "href": "clases/09-repaso-2/slides.html#tipos-de-preguntas",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Tipos de preguntas",
+    "text": "Tipos de preguntas\n\n\nPor contenido\n\nHechos: datos objetivos (fecha, cantidad, condición).\nConocimientos o aptitudes: lo que la persona sabe o puede hacer.\nOpiniones o actitudes: percepciones y valoraciones. Las más comunes en ciencias sociales.\n\n\nPor formato de respuesta\n\nCerradas simples: dicotómicas u opciones excluyentes.\nCerradas con escala: Likert u ordinales; capturan intensidad.\nCerradas múltiples: se puede elegir más de una opción.\nAbiertas: respuesta libre; ricas pero difíciles de procesar. Usar con mesura."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#redacción-de-preguntas",
+    "href": "clases/09-repaso-2/slides.html#redacción-de-preguntas",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Redacción de preguntas",
+    "text": "Redacción de preguntas\nUna buena pregunta es breve, neutra y unívoca:\n\nBrevedad: menos de 20 palabras cuando sea posible.\nUna sola idea por pregunta: evitar preguntas dobles (“¿Es rápida y amable la atención?”).\nSin palabras cargadas que induzcan una respuesta.\nSin doble negación.\nNo inducir la respuesta “correcta” o “esperada”.\nLenguaje accesible para el público objetivo.\nReutilizar preguntas validadas por otras encuestas."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#sesgos-de-medición",
+    "href": "clases/09-repaso-2/slides.html#sesgos-de-medición",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Sesgos de medición",
+    "text": "Sesgos de medición\n\nDeseabilidad social: responder lo socialmente aceptable en vez de lo real. Relevante en temas como corrupción, discriminación o consumo de sustancias. Se mitiga con autoaplicación y anonimato.\nPrimacía y recencia: elegir las primeras (primacía) o últimas (recencia) opciones de una lista. Se controla rotando el orden de las opciones.\nAquiescencia: tendencia a responder afirmativamente. Se controla incluyendo ítems en dirección contraria al constructo."
+  },
+  {
+    "objectID": "clases/09-repaso-2/slides.html#ética-en-la-investigación-con-encuestas",
+    "href": "clases/09-repaso-2/slides.html#ética-en-la-investigación-con-encuestas",
+    "title": "Repaso: regresión logística, ACP y diseño de cuestionario",
+    "section": "Ética en la investigación con encuestas",
+    "text": "Ética en la investigación con encuestas\n\n\nConsentimiento informado: informar el propósito, los riesgos y beneficios, y el derecho a no participar o retirarse. La participación es voluntaria.\nAnonimato y confidencialidad: las respuestas no deben ser identificables. Protege a quien responde y reduce la deseabilidad social.\nRevisión ética: los estudios con personas deben pasar por un comité de ética antes de aplicarse.\nTabla de especificaciones: antes de redactar, conectar cada constructo con sus dimensiones e indicadores, para asegurar la validez de contenido."
+  },
+  {
+    "objectID": "clases/08-ejercicios-regresion/pauta.html",
+    "href": "clases/08-ejercicios-regresion/pauta.html",
+    "title": "Pauta ayudantía 08",
+    "section": "",
+    "text": "Ejercicio 1 · Gasto municipal y satisfacción ciudadana\n\\[\\widehat{\\text{Satisfacción}} = 22{,}5 + 0{,}38 \\cdot \\text{GastoPC} \\qquad R^2 = 0{,}41\\]\na) Valores predichos\n\n\n\nGastoPC\nSustitución\nSatisfacción predicha\n\n\n\n\n50\n\\(22{,}5 + 0{,}38 \\times 50\\)\n41,5\n\n\n100\n\\(22{,}5 + 0{,}38 \\times 100\\)\n60,5\n\n\n150\n\\(22{,}5 + 0{,}38 \\times 150\\)\n79,5\n\n\n\nb) Interpretación del coeficiente 0,38\nPor cada aumento de 1.000 pesos en el gasto per cápita municipal en servicios locales, el índice de satisfacción ciudadana aumenta, en promedio, 0,38 puntos en la escala 0–100.\nc) Interpretación de la constante 22,5\nLa constante es el valor predicho de satisfacción cuando el gasto per cápita es cero. En este contexto no tiene interpretación sustantiva directa: ningún municipio opera con gasto nulo. Actúa como valor de anclaje del modelo.\nd) Variación no explicada\n\\[1 - R^2 = 1 - 0{,}41 = 0{,}59 \\Rightarrow \\textbf{59\\%}\\]\nEse 59% se debe a factores no incluidos en el modelo: calidad del personal municipal, participación ciudadana, condiciones socioeconómicas de la población, entre otros. Un \\(R^2\\) de 0,41 indica que el gasto per cápita es un predictor relevante pero insuficiente por sí solo.\ne) Residuo (GastoPC = 90, observado = 62)\n\\[\\widehat{Y} = 22{,}5 + 0{,}38 \\times 90 = 56{,}7 \\qquad e = 62 - 56{,}7 = +5{,}3\\]\nEl residuo positivo indica que el municipio tiene una satisfacción 5,3 puntos superior a la que predice el modelo para su nivel de gasto. Hay factores no capturados (calidad de atención, gestión participativa, transparencia) que explican ese desempeño mejor al esperado.\n\n\nEjercicio 2 · Ausentismo en salud primaria\n\\[\\widehat{\\text{Ausentismo}} = 4{,}2 + 0{,}18 \\cdot \\text{Carga} + 0{,}95 \\cdot \\text{Antigüedad}\\]\na) Valores predichos y residuos\n\n\n\n\n\n\n\n\n\n\n\nCESFAM\nCarga\nAntigüedad\nPredicho\nObservado\nResiduo\n\n\n\n\nA\n180\n3\n\\(4{,}2 + 32{,}4 + 2{,}85 = 39{,}45\\)\n40\n+0,55\n\n\nB\n220\n8\n\\(4{,}2 + 39{,}6 + 7{,}60 = 51{,}40\\)\n55\n+3,60\n\n\nC\n150\n1\n\\(4{,}2 + 27{,}0 + 0{,}95 = 32{,}15\\)\n33\n+0,85\n\n\nD\n200\n12\n\\(4{,}2 + 36{,}0 + 11{,}40 = 51{,}60\\)\n72\n+20,40\n\n\nE\n190\n5\n\\(4{,}2 + 34{,}2 + 4{,}75 = 43{,}15\\)\n28\n−15,15\n\n\n\nb) Mayor residuo absoluto\nEl CESFAM D (\\(|e| = 20{,}4\\)): el modelo subestima en 20,4 días su ausentismo. Hay factores no capturados (condiciones laborales específicas, clima organizacional, características del personal) que elevan el ausentismo muy por encima de lo predicho. Podría ser un caso atípico (outlier) que merece análisis adicional, cualitativo o de caso.\nc) Residuo negativo del CESFAM E\nUn residuo de −15,15 indica que el CESFAM E tiene 15,15 días de ausentismo menos de lo que predice el modelo para su carga de trabajo y antigüedad. Posibles explicaciones:\n\nClima organizacional positivo: alta motivación, liderazgo directivo sólido o buenas condiciones de trabajo que reducen el estrés y las licencias.\nCultura de baja tolerancia al ausentismo: normas informales o incentivos que desincentivan el uso de licencias, incluso justificadas.\nComposición del personal: más personal a honorarios, que no accede a licencias formales, lo que reduce el promedio registrado.\n\nd) ¿“El modelo falla”?\nNo del todo. Todo modelo de regresión tiene residuos y algunos casos se alejan más de la predicción. Antes de emitir un juicio, el inspector debería considerar:\n\nSi el CESFAM D es un caso atípico que afecta los coeficientes (análisis de influencia).\nSi hay variables omitidas que explican sistemáticamente el patrón de ese CESFAM.\nSi el dato observado (72 días) puede ser un error de registro.\n\nUn residuo alto es una señal para investigar más, no una falla del modelo en sí.\ne) Variables omitidas\n\nTipo de contrato: funcionarios a contrata u honorarios tienen acceso distinto a licencias, lo que afecta el ausentismo registrado.\nCasos complejos atendidos: más pacientes crónicos o paliativos generan mayor desgaste (burnout) y más licencias.\nInfraestructura: hacinamiento o mala ventilación pueden generar más enfermedades ocupacionales.\nGestión directiva: el liderazgo incide en el clima organizacional y en el control del ausentismo.\n\n\n\nEjercicio 3 · Postulaciones a becas\n\\[\\widehat{\\text{Postulaciones}} = -3{,}1 + 0{,}42 \\cdot \\text{Estudio} + 2{,}1 \\cdot \\text{Capacitación} - 0{,}08 \\cdot \\text{Edad}\\]\na) Interpretación de coeficientes\n\nEstudio (0,42): por cada año adicional en el promedio de estudios del personal, las postulaciones exitosas aumentan, en promedio, 0,42, manteniendo constantes la capacitación y la edad. Relación positiva.\nCapacitación (2,1): por cada hora adicional de capacitación anual promedio, las postulaciones exitosas aumentan, en promedio, 2,1, manteniendo constantes el estudio y la edad. Es el coeficiente de mayor magnitud.\nEdad (−0,08): por cada año adicional en la edad promedio, las postulaciones exitosas disminuyen, en promedio, 0,08, manteniendo constantes el estudio y la capacitación. Relación negativa.\n\nb) La constante −3,1\nEs el número predicho de postulaciones cuando las tres variables valen cero a la vez (cero años de estudio, cero horas de capacitación y edad promedio cero). No tiene interpretación sustantiva: ningún servicio cumple esas condiciones, y un número negativo de postulaciones no tiene sentido. Es solo el anclaje matemático del modelo.\nc) ¿Eliminar Edad?\nNo necesariamente. El tamaño del coeficiente no basta. Hay que considerar:\n\nSignificancia estadística: si es significativo (p &lt; 0,05), aporta información aunque su magnitud sea pequeña.\nRelevancia teórica: puede ser un control justificado; omitirlo podría sesgar los demás coeficientes.\nCambio en el \\(R^2\\) ajustado: si al eliminarla no cambia o mejora, se justifica excluirla por parsimonia.\n\nd) \\(R^2\\) vs. \\(R^2\\) ajustado\nEl \\(R^2\\) siempre aumenta o se mantiene al agregar variables, aporten o no información. El \\(R^2\\) ajustado penaliza los predictores que no mejoran el ajuste. La diferencia de 0,03 indica que los tres predictores son relevantes. Para comparar modelos con distinto número de predictores, el \\(R^2\\) ajustado es más apropiado.\ne) Predicción\n\\[\\widehat{Y} = -3{,}1 + 0{,}42 \\times 16 + 2{,}1 \\times 40 - 0{,}08 \\times 44 = -3{,}1 + 6{,}72 + 84{,}0 - 3{,}52 = \\textbf{84,1}\\]\n\n\nEjercicio 4 · Modelos anidados: transparencia municipal\na) El coeficiente del presupuesto a través de los modelos\nDisminuye progresivamente: 1,8 → 1,2 → 0,9 → 0,8. En M1, el presupuesto “cargaba” parte del efecto de variables correlacionadas que no estaban en el modelo. Al agregar el tamaño del concejo y la proporción de profesionales, estas absorben parte de la varianza atribuida antes al presupuesto. M1 sufría sesgo por variable omitida: los municipios con más presupuesto también tienden a tener concejos más grandes y personal más profesionalizado, factores que también elevan la transparencia.\nb) De M3 a M4\nEl \\(R^2\\) sube de 0,51 a 0,52, pero el \\(R^2\\) ajustado no cambia (0,50). Agregar el sistema informático no mejora la capacidad explicativa: el \\(R^2\\) crece por el efecto mecánico de añadir un predictor, pero el ajustado, que penaliza la complejidad, no aumenta.\nc) Modelo recomendado: M3\n\nSignificancia: todos sus coeficientes son significativos (al menos p &lt; 0,01), lo que no ocurre en M4.\nParsimonia: tiene un predictor menos que M4 con el mismo \\(R^2\\) ajustado.\nCapacidad explicativa ajustada: su \\(R^2\\) ajustado (0,50) es idéntico al de M4.\n\nd) Predicción con M3\n\\[\\widehat{Y} = 18{,}9 + 0{,}9 \\times 80 + 2{,}1 \\times 8 + 0{,}6 \\times 35 = 18{,}9 + 72{,}0 + 16{,}8 + 21{,}0 = \\textbf{128,7}\\]\nEl valor predicho excede la escala 0–100: el municipio hipotético tiene valores fuera del rango observado en la muestra, o el modelo lineal no es apropiado en los extremos.\ne) ¿Coeficiente más alto = predictor más importante?\nNo. Los coeficientes no son comparables entre variables con unidades distintas: el del presupuesto está en miles de pesos, el de profesionales en puntos porcentuales y el del concejo en número de personas. Para comparar la importancia relativa se usan coeficientes estandarizados, que expresan el efecto en desviaciones estándar.\n\n\nEjercicio 5 · Correlación espuria y diseño crítico\na) Error conceptual\nEl equipo cometió el error de inferir causalidad a partir de correlación. El modelo bivariado solo muestra que el número de computadores y la productividad están correlacionados positivamente, pero no establece que la tecnología cause mejoras. Al omitir variables relevantes, el estimador del efecto de los computadores estaba sesgado por sesgo de variable omitida. Este error se conoce también como post hoc ergo propter hoc: asumir que porque dos cosas covarían, una causa a la otra.\nb) Variable de confusión\nLa variable de confusión más probable es el grado de profesionalización del personal. Los servicios con personal más calificado tienden a contar con mayor presupuesto y mejores instalaciones, lo que incluye más computadores. Al mismo tiempo, ese mismo personal calificado es el que produce los resultados de productividad más altos. Tanto la presencia de computadores como la productividad son, en parte, consecuencias del nivel de profesionalización, lo que genera una correlación positiva entre ambas variables que no refleja un efecto causal directo de la tecnología.\nc) ¿Ningún efecto?\nNo es correcto concluir que los computadores no tienen ningún efecto. El coeficiente sigue siendo positivo (2,1), aunque no significativo; esto puede deberse a falta de potencia estadística, no a ausencia de efecto. Además, puede existir multicolinealidad entre computadores y las variables de control, lo que dificulta estimar con precisión el efecto parcial de la tecnología. También puede existir un efecto indirecto (mediado) de los computadores a través de variables que el modelo no captura. Los datos observacionales tampoco permiten inferencia causal robusta, ya que no hay asignación aleatoria.\nd) Variables adicionales\n\nAños de experiencia promedio del personal: la experiencia acumulada incide en la calidad del trabajo más allá del equipamiento disponible.\nTasa de rotación del personal: alta rotación genera pérdida de conocimiento institucional y puede afectar negativamente la productividad, independiente de los recursos tecnológicos.\nCapacitación en uso de tecnología: tener computadores no equivale a usarlos eficientemente; la capacitación digital es una variable mediadora clave.\nPresupuesto por funcionario: un mayor presupuesto permite contratar más personal, reducir la carga de trabajo individual y mejorar los resultados.\n\ne) Diseño más riguroso\n\nExperimento o cuasi-experimento: asignar aleatoriamente equipamiento tecnológico entre servicios similares (diseño experimental) o aprovechar una política de distribución por fases (diferencias en diferencias o regresión discontinua) para comparar servicios que recibieron equipamiento con los que aún no lo recibieron.\nEstudio de panel longitudinal: hacer seguimiento de los mismos servicios a lo largo del tiempo, antes y después de recibir equipamiento, permite controlar por características fijas no observables de cada institución."
   }
 ]

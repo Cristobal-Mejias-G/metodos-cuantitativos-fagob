@@ -7,3 +7,5 @@
 
 /.quarto/
 **/*.quarto_ipynb
+Rplots.pdf
+clases/*/mathjax-config.js

@@ -213,6 +213,8 @@ clases/NN-tema/
 <li>Sin <code>rm(list = ls())</code> ni <code>setwd()</code>: el proyecto <code>.Rproj</code> y <code>here::here()</code> resuelven las rutas.</li>
 <li>Casos perdidos con <code>drop_na()</code> sobre las variables seleccionadas.</li>
 <li>Semilla fija (<code>set.seed(2026)</code>, ya incluida en <code>R/setup.R</code>).</li>
+<li>Bases de Stata/SPSS: quitar etiquetas con <code>haven::zap_labels</code>, <strong>siempre con el prefijo <code>haven::</code></strong>. <code>sjlabelled</code> tiene una función con el mismo nombre que convierte en NA los valores etiquetados.</li>
+<li>Códigos de no respuesta (-8, -9, -88, -99) a <code>NA</code> con <code>sjlabelled::set_na()</code> antes de cualquier análisis.</li>
 </ul>
 </section>
 <section id="paquetes-recomendados" class="level2">
@@ -232,24 +234,54 @@ clases/NN-tema/
 </thead>
 <tbody>
 <tr class="odd">
-<td style="text-align: left;">Recodificar</td>
+<td style="text-align: left;">Recodificar códigos a categorías</td>
 <td style="text-align: left;"><code>car::recode()</code></td>
-<td style="text-align: left;"><code>dplyr::case_when()</code>, <code>sjmisc::rec()</code></td>
+<td style="text-align: left;"><code>factor(x, levels = , labels = )</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Crear tramos</td>
+<td style="text-align: left;"><code>ifelse()</code> anidados</td>
+<td style="text-align: left;"><code>if_else()</code>, <code>case_when(..., .default = )</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Valores especiales a NA</td>
+<td style="text-align: left;"><code>car::recode("-88 = NA")</code></td>
+<td style="text-align: left;"><code>sjlabelled::set_na(..., na = c(-88, -99))</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Invertir una escala</td>
+<td style="text-align: left;"><code>sjmisc::rec("1=4; 2=3...")</code></td>
+<td style="text-align: left;"><code>5 - x</code> dentro de <code>across()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Casos perdidos</td>
+<td style="text-align: left;"><code>na.omit()</code> sobre toda la base</td>
+<td style="text-align: left;"><code>drop_na()</code> con las variables del análisis</td>
 </tr>
 <tr class="even">
 <td style="text-align: left;">Frecuencias</td>
 <td style="text-align: left;"><code>table()</code>, <code>prop.table()</code></td>
-<td style="text-align: left;"><code>sjmisc::frq()</code>, <code>janitor::tabyl()</code></td>
+<td style="text-align: left;"><code>count()</code>, <code>sjmisc::frq()</code></td>
 </tr>
 <tr class="odd">
-<td style="text-align: left;">Descriptivos</td>
-<td style="text-align: left;"><code>summary()</code></td>
-<td style="text-align: left;"><code>sjmisc::descr()</code></td>
+<td style="text-align: left;">Tablas cruzadas</td>
+<td style="text-align: left;"><code>table(x, y)</code></td>
+<td style="text-align: left;"><code>janitor::tabyl()</code> + <code>adorn_*()</code></td>
 </tr>
 <tr class="even">
-<td style="text-align: left;">Etiquetas</td>
-<td style="text-align: left;"><code>haven</code></td>
-<td style="text-align: left;"><code>sjlabelled</code></td>
+<td style="text-align: left;">Descriptivos</td>
+<td style="text-align: left;"><code>summary()</code>, <code>stargazer</code></td>
+<td style="text-align: left;"><code>sjmisc::descr()</code>, <code>gtsummary::tbl_summary()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">Tablas para informe</td>
+<td style="text-align: left;"><code>kableExtra</code></td>
+<td style="text-align: left;"><code>gt</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">Valores perdidos</td>
+<td style="text-align: left;"><code>colSums(is.na())</code></td>
+<td style="text-align: left;"><code>naniar::gg_miss_var()</code></td>
 </tr>
 <tr class="odd">
 <td style="text-align: left;">Resultados de tests</td>
@@ -258,21 +290,26 @@ clases/NN-tema/
 </tr>
 <tr class="even">
 <td style="text-align: left;">Tablas de regresión</td>
-<td style="text-align: left;"><code>stargazer</code></td>
-<td style="text-align: left;"><code>modelsummary</code>, <code>sjPlot::tab_model()</code></td>
+<td style="text-align: left;"><code>stargazer</code>, <code>texreg::screenreg()</code></td>
+<td style="text-align: left;"><code>modelsummary()</code>, <code>sjPlot::tab_model()</code></td>
 </tr>
 <tr class="odd">
+<td style="text-align: left;">Coeficientes en gráfico</td>
+<td style="text-align: left;">no había</td>
+<td style="text-align: left;"><code>modelsummary::modelplot()</code></td>
+</tr>
+<tr class="even">
 <td style="text-align: left;">Gráficos de dispersión</td>
 <td style="text-align: left;"><code>car::scatterplot()</code></td>
 <td style="text-align: left;"><code>ggplot2</code> + <code>geom_smooth(method = "lm")</code></td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td style="text-align: left;">Supuestos de regresión</td>
 <td style="text-align: left;">gráficos base</td>
 <td style="text-align: left;"><code>performance::check_model()</code></td>
 </tr>
-<tr class="odd">
-<td style="text-align: left;">Valores predichos</td>
+<tr class="even">
+<td style="text-align: left;">Probabilidades / valores predichos</td>
 <td style="text-align: left;">cálculo manual</td>
 <td style="text-align: left;"><code>ggeffects::predict_response()</code></td>
 </tr>

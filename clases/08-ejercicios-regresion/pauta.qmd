@@ -1,0 +1,161 @@
+---
+title: "Pauta ayudantía 08"
+subtitle: "Ejercicios aplicados: regresión lineal simple y múltiple"
+---
+
+# Ejercicio 1 · Gasto municipal y satisfacción ciudadana
+
+$$\widehat{\text{Satisfacción}} = 22{,}5 + 0{,}38 \cdot \text{GastoPC} \qquad R^2 = 0{,}41$$
+
+**a) Valores predichos**
+
+| GastoPC | Sustitución | Satisfacción predicha |
+|:--:|:--|:--:|
+| 50 | $22{,}5 + 0{,}38 \times 50$ | **41,5** |
+| 100 | $22{,}5 + 0{,}38 \times 100$ | **60,5** |
+| 150 | $22{,}5 + 0{,}38 \times 150$ | **79,5** |
+
+**b) Interpretación del coeficiente 0,38**
+
+Por cada aumento de 1.000 pesos en el gasto per cápita municipal en servicios locales, el índice de satisfacción ciudadana aumenta, **en promedio**, 0,38 puntos en la escala 0–100.
+
+**c) Interpretación de la constante 22,5**
+
+La constante es el valor predicho de satisfacción cuando el gasto per cápita es cero. En este contexto **no tiene interpretación sustantiva directa**: ningún municipio opera con gasto nulo. Actúa como valor de anclaje del modelo.
+
+**d) Variación no explicada**
+
+$$1 - R^2 = 1 - 0{,}41 = 0{,}59 \Rightarrow \textbf{59\%}$$
+
+Ese 59% se debe a factores no incluidos en el modelo: calidad del personal municipal, participación ciudadana, condiciones socioeconómicas de la población, entre otros. Un $R^2$ de 0,41 indica que el gasto per cápita es un predictor relevante pero insuficiente por sí solo.
+
+**e) Residuo (GastoPC = 90, observado = 62)**
+
+$$\widehat{Y} = 22{,}5 + 0{,}38 \times 90 = 56{,}7 \qquad e = 62 - 56{,}7 = +5{,}3$$
+
+El residuo positivo indica que el municipio tiene una satisfacción **5,3 puntos superior** a la que predice el modelo para su nivel de gasto. Hay factores no capturados (calidad de atención, gestión participativa, transparencia) que explican ese desempeño mejor al esperado.
+
+# Ejercicio 2 · Ausentismo en salud primaria
+
+$$\widehat{\text{Ausentismo}} = 4{,}2 + 0{,}18 \cdot \text{Carga} + 0{,}95 \cdot \text{Antigüedad}$$
+
+**a) Valores predichos y residuos**
+
+| CESFAM | Carga | Antigüedad | Predicho | Observado | Residuo |
+|:--:|:--:|:--:|:--|:--:|:--:|
+| A | 180 | 3 | $4{,}2 + 32{,}4 + 2{,}85 = 39{,}45$ | 40 | **+0,55** |
+| B | 220 | 8 | $4{,}2 + 39{,}6 + 7{,}60 = 51{,}40$ | 55 | **+3,60** |
+| C | 150 | 1 | $4{,}2 + 27{,}0 + 0{,}95 = 32{,}15$ | 33 | **+0,85** |
+| D | 200 | 12 | $4{,}2 + 36{,}0 + 11{,}40 = 51{,}60$ | 72 | **+20,40** |
+| E | 190 | 5 | $4{,}2 + 34{,}2 + 4{,}75 = 43{,}15$ | 28 | **−15,15** |
+
+**b) Mayor residuo absoluto**
+
+El **CESFAM D** ($|e| = 20{,}4$): el modelo subestima en 20,4 días su ausentismo. Hay factores no capturados (condiciones laborales específicas, clima organizacional, características del personal) que elevan el ausentismo muy por encima de lo predicho. Podría ser un caso atípico (*outlier*) que merece análisis adicional, cualitativo o de caso.
+
+**c) Residuo negativo del CESFAM E**
+
+Un residuo de −15,15 indica que el CESFAM E tiene **15,15 días de ausentismo menos** de lo que predice el modelo para su carga de trabajo y antigüedad. Posibles explicaciones:
+
+1.  **Clima organizacional positivo:** alta motivación, liderazgo directivo sólido o buenas condiciones de trabajo que reducen el estrés y las licencias.
+2.  **Cultura de baja tolerancia al ausentismo:** normas informales o incentivos que desincentivan el uso de licencias, incluso justificadas.
+3.  **Composición del personal:** más personal a honorarios, que no accede a licencias formales, lo que reduce el promedio registrado.
+
+**d) ¿"El modelo falla"?**
+
+No del todo. Todo modelo de regresión tiene residuos y algunos casos se alejan más de la predicción. Antes de emitir un juicio, el inspector debería considerar:
+
+-   Si el CESFAM D es un caso atípico que afecta los coeficientes (análisis de influencia).
+-   Si hay variables omitidas que explican sistemáticamente el patrón de ese CESFAM.
+-   Si el dato observado (72 días) puede ser un error de registro.
+
+Un residuo alto es una señal para investigar más, no una falla del modelo en sí.
+
+**e) Variables omitidas**
+
+1.  **Tipo de contrato:** funcionarios a contrata u honorarios tienen acceso distinto a licencias, lo que afecta el ausentismo registrado.
+2.  **Casos complejos atendidos:** más pacientes crónicos o paliativos generan mayor desgaste (*burnout*) y más licencias.
+3.  **Infraestructura:** hacinamiento o mala ventilación pueden generar más enfermedades ocupacionales.
+4.  **Gestión directiva:** el liderazgo incide en el clima organizacional y en el control del ausentismo.
+
+# Ejercicio 3 · Postulaciones a becas
+
+$$\widehat{\text{Postulaciones}} = -3{,}1 + 0{,}42 \cdot \text{Estudio} + 2{,}1 \cdot \text{Capacitación} - 0{,}08 \cdot \text{Edad}$$
+
+**a) Interpretación de coeficientes**
+
+-   **Estudio (0,42):** por cada año adicional en el promedio de estudios del personal, las postulaciones exitosas aumentan, **en promedio**, 0,42, manteniendo constantes la capacitación y la edad. Relación positiva.
+-   **Capacitación (2,1):** por cada hora adicional de capacitación anual promedio, las postulaciones exitosas aumentan, **en promedio**, 2,1, manteniendo constantes el estudio y la edad. Es el coeficiente de mayor magnitud.
+-   **Edad (−0,08):** por cada año adicional en la edad promedio, las postulaciones exitosas disminuyen, **en promedio**, 0,08, manteniendo constantes el estudio y la capacitación. Relación negativa.
+
+**b) La constante −3,1**
+
+Es el número predicho de postulaciones cuando las tres variables valen cero a la vez (cero años de estudio, cero horas de capacitación y edad promedio cero). **No tiene interpretación sustantiva**: ningún servicio cumple esas condiciones, y un número negativo de postulaciones no tiene sentido. Es solo el anclaje matemático del modelo.
+
+**c) ¿Eliminar `Edad`?**
+
+No necesariamente. El tamaño del coeficiente no basta. Hay que considerar:
+
+-   **Significancia estadística:** si es significativo (p \< 0,05), aporta información aunque su magnitud sea pequeña.
+-   **Relevancia teórica:** puede ser un control justificado; omitirlo podría sesgar los demás coeficientes.
+-   **Cambio en el $R^2$ ajustado:** si al eliminarla no cambia o mejora, se justifica excluirla por parsimonia.
+
+**d) $R^2$ vs. $R^2$ ajustado**
+
+El $R^2$ siempre aumenta o se mantiene al agregar variables, aporten o no información. El $R^2$ ajustado penaliza los predictores que no mejoran el ajuste. La diferencia de 0,03 indica que los tres predictores son relevantes. Para comparar modelos con distinto número de predictores, **el $R^2$ ajustado es más apropiado**.
+
+**e) Predicción**
+
+$$\widehat{Y} = -3{,}1 + 0{,}42 \times 16 + 2{,}1 \times 40 - 0{,}08 \times 44 = -3{,}1 + 6{,}72 + 84{,}0 - 3{,}52 = \textbf{84,1}$$
+
+# Ejercicio 4 · Modelos anidados: transparencia municipal
+
+**a) El coeficiente del presupuesto a través de los modelos**
+
+Disminuye progresivamente: 1,8 → 1,2 → 0,9 → 0,8. En M1, el presupuesto "cargaba" parte del efecto de variables correlacionadas que no estaban en el modelo. Al agregar el tamaño del concejo y la proporción de profesionales, estas absorben parte de la varianza atribuida antes al presupuesto. M1 sufría **sesgo por variable omitida**: los municipios con más presupuesto también tienden a tener concejos más grandes y personal más profesionalizado, factores que también elevan la transparencia.
+
+**b) De M3 a M4**
+
+El $R^2$ sube de 0,51 a 0,52, pero el $R^2$ ajustado **no cambia** (0,50). Agregar el sistema informático no mejora la capacidad explicativa: el $R^2$ crece por el efecto mecánico de añadir un predictor, pero el ajustado, que penaliza la complejidad, no aumenta.
+
+**c) Modelo recomendado: M3**
+
+1.  **Significancia:** todos sus coeficientes son significativos (al menos p \< 0,01), lo que no ocurre en M4.
+2.  **Parsimonia:** tiene un predictor menos que M4 con el mismo $R^2$ ajustado.
+3.  **Capacidad explicativa ajustada:** su $R^2$ ajustado (0,50) es idéntico al de M4.
+
+**d) Predicción con M3**
+
+$$\widehat{Y} = 18{,}9 + 0{,}9 \times 80 + 2{,}1 \times 8 + 0{,}6 \times 35 = 18{,}9 + 72{,}0 + 16{,}8 + 21{,}0 = \textbf{128,7}$$
+
+El valor predicho excede la escala 0–100: el municipio hipotético tiene valores fuera del rango observado en la muestra, o el modelo lineal no es apropiado en los extremos.
+
+**e) ¿Coeficiente más alto = predictor más importante?**
+
+**No.** Los coeficientes no son comparables entre variables con unidades distintas: el del presupuesto está en miles de pesos, el de profesionales en puntos porcentuales y el del concejo en número de personas. Para comparar la importancia relativa se usan **coeficientes estandarizados**, que expresan el efecto en desviaciones estándar.
+
+# Ejercicio 5 · Correlación espuria y diseño crítico
+
+**a) Error conceptual**
+
+El equipo cometió el error de **inferir causalidad a partir de correlación**. El modelo bivariado solo muestra que el número de computadores y la productividad están correlacionados positivamente, pero no establece que la tecnología *cause* mejoras. Al omitir variables relevantes, el estimador del efecto de los computadores estaba sesgado por **sesgo de variable omitida**. Este error se conoce también como *post hoc ergo propter hoc*: asumir que porque dos cosas covarían, una causa a la otra.
+
+**b) Variable de confusión**
+
+La variable de confusión más probable es el **grado de profesionalización del personal**. Los servicios con personal más calificado tienden a contar con mayor presupuesto y mejores instalaciones, lo que incluye más computadores. Al mismo tiempo, ese mismo personal calificado es el que produce los resultados de productividad más altos. Tanto la presencia de computadores como la productividad son, en parte, consecuencias del nivel de profesionalización, lo que genera una correlación positiva entre ambas variables que no refleja un efecto causal directo de la tecnología.
+
+**c) ¿Ningún efecto?**
+
+No es correcto concluir que los computadores no tienen ningún efecto. El coeficiente sigue siendo positivo (2,1), aunque no significativo; esto puede deberse a falta de potencia estadística, no a ausencia de efecto. Además, puede existir **multicolinealidad** entre computadores y las variables de control, lo que dificulta estimar con precisión el efecto parcial de la tecnología. También puede existir un efecto indirecto (*mediado*) de los computadores a través de variables que el modelo no captura. Los datos observacionales tampoco permiten inferencia causal robusta, ya que no hay asignación aleatoria.
+
+**d) Variables adicionales**
+
+1.  **Años de experiencia promedio del personal:** la experiencia acumulada incide en la calidad del trabajo más allá del equipamiento disponible.
+2.  **Tasa de rotación del personal:** alta rotación genera pérdida de conocimiento institucional y puede afectar negativamente la productividad, independiente de los recursos tecnológicos.
+3.  **Capacitación en uso de tecnología:** tener computadores no equivale a usarlos eficientemente; la capacitación digital es una variable mediadora clave.
+4.  **Presupuesto por funcionario:** un mayor presupuesto permite contratar más personal, reducir la carga de trabajo individual y mejorar los resultados.
+
+**e) Diseño más riguroso**
+
+-   **Experimento o cuasi-experimento:** asignar aleatoriamente equipamiento tecnológico entre servicios similares (*diseño experimental*) o aprovechar una política de distribución por fases (*diferencias en diferencias* o *regresión discontinua*) para comparar servicios que recibieron equipamiento con los que aún no lo recibieron.
+-   **Estudio de panel longitudinal:** hacer seguimiento de los mismos servicios a lo largo del tiempo, antes y después de recibir equipamiento, permite controlar por características fijas no observables de cada institución.

@@ -1,19 +1,55 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/04-quarto/documento.html</loc>
+    <lastmod>2026-10-20T01:02:02.785Z</lastmod>
+  </url>
+  <url>
     <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/06-inferencia-regresion/pauta.html</loc>
     <lastmod>2026-10-20T00:41:36.688Z</lastmod>
   </url>
   <url>
-    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/guia-estilo.html</loc>
-    <lastmod>2026-10-20T00:38:36.690Z</lastmod>
-  </url>
-  <url>
-    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/index.html</loc>
-    <lastmod>2026-10-20T00:38:36.588Z</lastmod>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/08-ejercicios-regresion/slides.html</loc>
+    <lastmod>2026-10-20T01:12:13.248Z</lastmod>
   </url>
   <url>
     <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/06-inferencia-regresion/slides.html</loc>
     <lastmod>2026-10-20T00:41:36.519Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/03-descriptivos-graficos/slides.html</loc>
+    <lastmod>2026-10-20T01:12:13.181Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/01-intro-r/slides.html</loc>
+    <lastmod>2026-10-20T00:57:45.622Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/index.html</loc>
+    <lastmod>2026-10-20T01:08:36.034Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/guia-estilo.html</loc>
+    <lastmod>2026-10-20T01:08:59.722Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/02-tidyverse/slides.html</loc>
+    <lastmod>2026-10-20T01:00:26.177Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/05-repaso-1/slides.html</loc>
+    <lastmod>2026-10-20T01:14:24.525Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/07-regresion-multiple/slides.html</loc>
+    <lastmod>2026-10-20T01:14:24.516Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/09-repaso-2/slides.html</loc>
+    <lastmod>2026-10-20T01:12:13.248Z</lastmod>
+  </url>
+  <url>
+    <loc>https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/clases/08-ejercicios-regresion/pauta.html</loc>
+    <lastmod>2026-10-20T01:07:17.683Z</lastmod>
   </url>
 </urlset>

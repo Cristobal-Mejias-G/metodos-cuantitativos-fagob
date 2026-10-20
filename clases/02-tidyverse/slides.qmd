@@ -1,0 +1,390 @@
+---
+title: "Procesamiento de datos con tidyverse"
+subtitle: "Ayudantía 02 · FAGOB 2026"
+institute: "Métodos Cuantitativos para la Administración Pública"
+author: "Cristóbal Mejías · Facultad de Gobierno"
+date: 2026-03-27
+format: fagob-revealjs
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+source(here::here("R", "setup.R"))
+```
+
+## ¿Qué veremos hoy?
+
+:::: columns
+::: {.column width="55%"}
+1.  Repaso y carga de datos
+2.  Tipos de variables en R
+3.  El pipe `|>`
+4.  `select()` y `filter()`
+5.  `mutate()`: recodificar
+6.  Valores perdidos (NA)
+7.  Crear categorías
+8.  Guardar la base procesada
+:::
+
+::: {.column width="45%"}
+::: callout-tip
+## Al final de la sesión
+
+Tendrás una base limpia, procesada y guardada, lista para analizar en la próxima ayudantía.
+:::
+:::
+::::
+
+# Punto de partida
+
+## ¿Qué hicimos en la AY-1?
+
+-   Creamos un **proyecto en R** con estructura IPO
+-   Cargamos datos con `read_csv()`
+-   Exploramos la CASEN con `dim()`, `glimpse()` y `count()`
+
+[Problema:]{.destacado} los datos aún no están listos para analizar. Las variables tienen **códigos numéricos** en vez de etiquetas, hay **valores especiales** (-88, -99) y los tipos de dato no son los correctos.
+
+## Paquetes de hoy
+
+```{r paquetes}
+pacman::p_load(
+  tidyverse,     # manipulación de datos (dplyr, tidyr, readr...)
+  haven,         # leer bases de Stata/SPSS (.dta, .sav)
+  sjmisc,        # frecuencias y descriptivos (frq, descr)
+  sjlabelled,    # etiquetas y valores perdidos (set_na)
+  sjPlot,        # ver la base completa con etiquetas (view_df)
+  naniar         # visualizar valores perdidos
+)
+```
+
+## Cargar la base de datos
+
+La cargamos directamente **desde GitHub**:
+
+```{r cargar}
+#| eval: false
+casen <- read_dta("https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/casen_fagob.dta")
+```
+
+```{r cargar-local}
+#| include: false
+casen <- read_dta(ruta_datos("casen_fagob.dta"))
+```
+
+Son **5.000 casos** y **16 variables** de la CASEN 2024. Al venir de Stata (`.dta`), las variables llegan como **`haven_labelled`**: números con etiquetas pegadas.
+
+## Primera mirada
+
+```{r primera-mirada}
+#| eval: false
+view_df(casen)   # abre en el Viewer: variables, etiquetas y valores
+```
+
+```{r frq-region}
+#| output-location: column
+frq(casen$sexo)
+```
+
+# Tipos de variables en R
+
+## ¿Por qué importa el tipo de variable?
+
+R necesita saber qué tipo de dato es una variable para hacer las operaciones, funciones y gráficos correctos.
+
+```{r class}
+class(casen$sexo)
+class(casen$edad)
+```
+
+| Lo que ves en `class()` | Qué significa | Qué hacer |
+|:--|:--|:--|
+| `numeric` / `double` | Número | Listo si tiene sentido matemático |
+| `character` | Texto | Convertir a `factor` si es categórica |
+| `factor` | Categorías con niveles | Listo |
+| `haven_labelled` | Número con etiqueta (Stata/SPSS) | **Convertir a `factor` o a número** |
+
+## ¿Qué es `haven_labelled`?
+
+`"haven_labelled" "vctrs_vctr" "double"` se lee de abajo hacia arriba:
+
+-   **`double`**: en el fondo es un número (1, 2, 3...)
+-   **`haven_labelled`**: lleva las etiquetas "en la mochila": el `1` sabe que significa "Hombre"
+
+Dos caminos para trabajarlas:
+
+```{r as-factor}
+#| output-location: column
+# Camino rápido: usar las etiquetas
+# que ya trae la base
+as_factor(casen$activ) |>
+  head()
+```
+
+[El otro camino es quitar las etiquetas (`zap_labels()`) y recodificar con nuestras propias categorías. Es el que usaremos hoy.]{.chico}
+
+# El pipe `|>`
+
+## ¿Qué es el pipe?
+
+`|>` significa: **"toma esto y pásalo a la siguiente función"**.
+
+``` r
+x |> f()          # equivale a f(x)
+x |> f() |> g()   # equivale a g(f(x))
+```
+
+:::: columns
+::: {.column width="50%"}
+**Sin pipe**
+
+``` r
+datos <- select(casen, sexo, edad)
+datos <- filter(datos, edad >= 18)
+```
+:::
+
+::: {.column width="50%"}
+**Con pipe**
+
+``` r
+datos <- casen |>
+  select(sexo, edad) |>
+  filter(edad >= 18)
+```
+:::
+::::
+
+[Atajo: `Ctrl + Shift + M`. Para que escriba `|>` y no `%>%`: *Tools → Global Options → Code → Use native pipe operator*.]{.chico}
+
+# `select()` y `filter()`
+
+## `select()`: elegir y renombrar columnas
+
+Los nombres de la CASEN son crípticos (`yoprcor`, `o10`...). Con `select()` elegimos variables y las renombramos con `nuevo = original`:
+
+```{r select}
+casen_proc <- casen |>
+  select(
+    region, zona = area,                                  # identificación
+    sexo, edad, estado_civil = ecivil,                    # demografía
+    nivel_educ = educc, asiste_educ = e3,                 # educación
+    actividad = activ, categ_ocup = o15,                  # trabajo
+    horas_trab = o10, contrato = o19,
+    ingreso = yoprcor, ingreso_pc = ypchtotcor,           # ingresos
+    pobreza = pobreza_severa, pueblo_orig = pueblos_indigenas, lugar_nac
+  ) |>
+  mutate(across(everything(), haven::zap_labels))         # quitar etiquetas: todo a número
+```
+
+[Escribimos `haven::zap_labels` porque `sjlabelled` tiene otra función con el mismo nombre que hace algo distinto. `paquete::función` le dice a R cuál usar.]{.chico}
+
+## `filter()`: elegir filas
+
+| Operador | Significado | Ejemplo |
+|:--|:--|:--|
+| `==` / `!=` | igual / distinto | `sexo == 1` |
+| `>` `<` `>=` `<=` | comparaciones | `edad >= 60` |
+| `&` / `|` | y / o | `sexo == 2 & edad > 18` |
+| `%in%` | pertenece a un conjunto | `region %in% c(13, 5)` |
+
+```{r filter}
+#| output-location: column
+adultos <- casen_proc |>
+  filter(edad > 18)
+
+rm_valpo <- casen_proc |>
+  filter(region %in% c(13, 5))
+
+nrow(casen_proc)
+nrow(adultos)
+```
+
+# `mutate()`: recodificar
+
+## Recodificar: de códigos a categorías
+
+`mutate()` crea o modifica columnas. Con `factor()` asignamos a cada código su etiqueta y definimos el orden de las categorías:
+
+```{r recode}
+casen_proc <- casen_proc |>
+  mutate(
+    sexo = factor(sexo,
+                  levels = c(1, 2),
+                  labels = c("Hombre", "Mujer")),
+    actividad = factor(actividad,
+                       levels = c(1, 2, 3),
+                       labels = c("Ocupado/a", "Desocupado/a", "Inactivo/a")),
+    pobreza = factor(pobreza,
+                     levels = c(1, 2, 3, 4),
+                     labels = c("Pobreza severa", "Pobreza por ingresos",
+                                "Pobreza multidimensional", "No pobre"))
+  )
+```
+
+[El orden de `labels` controla el orden en tablas y gráficos. El primer nivel será la categoría de referencia en regresiones.]{.chico}
+
+## Verificar siempre
+
+:::: columns
+::: {.column width="50%"}
+```{r verificar-1}
+frq(casen_proc$actividad)
+```
+:::
+
+::: {.column width="50%"}
+```{r verificar-2}
+frq(casen_proc$pobreza)
+```
+:::
+::::
+
+# Valores perdidos (NA)
+
+## -88, -99 y NA son cosas distintas
+
+| Valor | Significado en la encuesta | En R |
+|:--|:--|:--|
+| `-88` | No sabe / no aplica | número negativo, **no es NA** |
+| `-99` | No responde | número negativo, **no es NA** |
+| `NA` | dato ausente | valor especial de R |
+
+[Problema:]{.destacado} R trata -88 y -99 como números reales. Si calculamos el promedio de `horas_trab` sin corregirlo, el resultado será incorrecto.
+
+## Convertir -88 y -99 a NA
+
+```{r set-na}
+casen_proc <- casen_proc |>
+  set_na(ingreso, ingreso_pc, horas_trab, contrato, categ_ocup,
+         na = c(-88, -99))
+```
+
+`set_na()` reemplaza los valores indicados por `NA`, solo en las variables que elegimos.
+
+## ¿Cuántos NA tenemos?
+
+```{r gg-miss}
+#| fig-width: 8
+#| fig-height: 4
+#| fig-align: center
+naniar::gg_miss_var(casen_proc, show_pct = TRUE)
+```
+
+[Las variables de trabajo tienen muchos NA porque no aplican a quienes no trabajan.]{.chico}
+
+## NA en operaciones estadísticas
+
+```{r na-problema}
+mean(casen_proc$ingreso)                  # NA: no da error, pero tampoco resultado
+mean(casen_proc$ingreso, na.rm = TRUE)    # promedio correcto
+```
+
+Para quedarnos solo con casos completos usamos `drop_na()`:
+
+```{r drop-na}
+casen_proc_na <- casen_proc |>
+  drop_na()
+
+nrow(casen_proc)
+nrow(casen_proc_na)
+```
+
+[Ojo: `drop_na()` sin argumentos elimina un caso si tiene NA en **cualquier** variable. Con `drop_na(ingreso)` solo se eliminan los NA de `ingreso`.]{.chico}
+
+# Crear categorías
+
+## `if_else()` y `case_when()`
+
+| Función | Cuándo usarla |
+|:--|:--|
+| `if_else()` | Condición binaria (dos salidas) |
+| `case_when()` | Múltiples condiciones |
+
+```{r case-when}
+casen_proc_na <- casen_proc_na |>
+  mutate(
+    adulto_mayor = if_else(edad >= 60, "Adulto mayor", "No adulto mayor") |>
+      factor(levels = c("No adulto mayor", "Adulto mayor")),
+    tramo_edad = case_when(
+      edad < 18 ~ "Menor de edad",
+      edad < 40 ~ "Adulto joven",
+      edad < 60 ~ "Adulto",
+      .default  = "Adulto mayor"
+    ) |>
+      factor(levels = c("Menor de edad", "Adulto joven", "Adulto", "Adulto mayor"))
+  )
+```
+
+[`case_when()` evalúa las condiciones en orden: si `edad < 18` ya se cumplió, no revisa las siguientes. Por eso no hace falta escribir `edad >= 18 & edad < 40`.]{.chico}
+
+## `case_when()` con ingresos
+
+```{r case-when-ingreso}
+#| output-location: column
+casen_proc_na <- casen_proc_na |>
+  mutate(
+    tramo_ingreso = case_when(
+      ingreso < 300000 ~ "Bajo",
+      ingreso < 700000 ~ "Medio",
+      .default         = "Alto"
+    ) |>
+      factor(levels = c("Bajo", "Medio", "Alto"),
+             ordered = TRUE)
+  )
+
+frq(casen_proc_na$tramo_ingreso)
+```
+
+# Guardar
+
+## Guardar la base procesada
+
+```{r guardar}
+#| eval: false
+saveRDS(casen_proc_na, "output/casen_proc.rds")
+
+# Para cargarla en la próxima ayudantía:
+casen_proc <- readRDS("output/casen_proc.rds")
+```
+
+::: callout-tip
+## ¿Por qué `.rds` y no `.csv`?
+
+`.rds` guarda el objeto exactamente como está, incluidos los `factor` y su orden. Un `.csv` los convierte en texto y habría que rehacer el procesamiento.
+:::
+
+# Práctica autónoma
+
+## Tu turno (10 min)
+
+Con `casen_proc` (el objeto **con NA**), trabaja con **`zona`**, **`estado_civil`** y **`nivel_educ`**.
+
+::: ejercicio
+1.  Explora con `frq()` y `class()`: ¿qué tipo tienen? ¿qué valores?
+2.  Recodifica `zona` (1 = Urbano, 2 = Rural) como `factor`
+3.  Recodifica `nivel_educ` (0 = Sin educación ... 6 = Superior completa) como `factor` ordenado de menor a mayor
+4.  Filtra solo personas de zona urbana
+5.  Calcula el promedio de `ingreso_pc` por zona con `group_by()` y `summarise()`
+:::
+
+[Consulta `view_df(casen)` si no recuerdas qué significa cada código.]{.chico}
+
+## Resumen de la sesión
+
+| Paso | Función(es) | ¿Para qué? |
+|:--|:--|:--|
+| Explorar | `view_df()`, `frq()`, `glimpse()` | Ver la base antes de tocarla |
+| Encadenar | `|>` | Escribir pasos en orden de lectura |
+| Seleccionar | `select()` | Elegir y renombrar variables |
+| Filtrar | `filter()` | Quedarse con ciertos casos |
+| Recodificar | `mutate()` + `factor()` | Convertir códigos en categorías |
+| NA | `set_na()`, `drop_na()`, `na.rm` | Tratar valores especiales y perdidos |
+| Transformar | `if_else()`, `case_when()` | Crear nuevas categorías |
+| Guardar | `saveRDS()` | Retomar el trabajo en la AY-3 |
+
+# ¡Nos vemos en la siguiente sesión!

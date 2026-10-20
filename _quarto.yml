@@ -6,6 +6,7 @@ project:
     - guia-estilo.qmd
     - clases/*/slides.qmd
     - clases/*/pauta.qmd
+    - clases/*/documento.qmd
 
 execute:
   freeze: auto

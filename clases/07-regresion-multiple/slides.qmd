@@ -1,0 +1,333 @@
+---
+title: "Modelos de regresión múltiple"
+subtitle: "Ayudantía 07 · FAGOB 2026"
+institute: "Métodos Cuantitativos para la Administración Pública"
+author: "Cristóbal Mejías · Facultad de Gobierno"
+date: 2026-06-12
+format: fagob-revealjs
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+source(here::here("R", "setup.R"))
+```
+
+## ¿Qué veremos hoy?
+
+1.  Modelos de regresión múltiple
+2.  Caso aplicado: CEP 2025
+3.  Variables categóricas: factores y *dummies*
+4.  Modelos anidados y tablas
+5.  Ejercicios aplicados
+
+# Regresión múltiple
+
+## No es lo mismo que varias regresiones simples
+
+El modelo de regresión múltiple estima el efecto de cada predictor **controlando** por los demás. Así se obtiene la contribución propia de cada variable independiente a la variable dependiente.
+
+$$Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + \dots + \beta_kX_k + \epsilon$$
+
+-   $\beta_0$: intercepto
+-   $\beta_1 \dots \beta_k$: coeficientes de cada variable independiente
+-   $\epsilon$: error
+
+## Interpretación de los coeficientes
+
+-   **Coeficiente ($\beta_i$):** cambio esperado en $Y$ por cada unidad de cambio en $X_i$, [manteniendo constantes las demás variables]{.destacado}.
+-   **Signo:** dirección de la relación (positiva o negativa).
+-   **Magnitud:** fuerza de la relación, en las unidades de $Y$.
+
+## Supuestos
+
+1.  **Linealidad:** la relación entre las variables es lineal.
+2.  **Independencia:** los errores son independientes entre sí.
+3.  **Homocedasticidad:** la varianza de los errores es constante.
+4.  **Normalidad:** los errores se distribuyen normalmente.
+
+[Se pueden revisar todos a la vez con `performance::check_model()`.]{.chico}
+
+# Caso aplicado: CEP 2025
+
+## Paquetes y datos
+
+```{r paquetes}
+pacman::p_load(
+  tidyverse,      # manipulación de datos
+  sjmisc,         # descriptivos (descr)
+  sjlabelled,     # etiquetas y valores perdidos (set_na)
+  modelsummary,   # tablas y gráficos de modelos
+  sjPlot          # tablas de regresión en HTML
+)
+```
+
+```{r datos-url}
+#| eval: false
+cep <- readRDS(gzcon(url("https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/cep95.rds")))
+```
+
+```{r datos-local}
+#| include: false
+cep <- readRDS(ruta_datos("cep95.rds"))
+```
+
+Encuesta CEP N° 95 (octubre 2025), `r nrow(cep)` casos. [El procesamiento inicial está en `datos/preparar_cep95.R`.]{.chico}
+
+## Primero: los valores perdidos
+
+En la CEP, **-8 = no sabe** y **-9 = no responde**. Si no los convertimos, `lm()` los trata como valores reales de la escala.
+
+```{r set-na}
+cep <- cep |>
+  mutate(across(everything(), haven::zap_labels)) |>   # de haven_labelled a número
+  set_na(esc_delincuencia, esc_responsabilidad, esc_ingreso_merito,
+         democracia, lider_autoritario, aborto, eutanasia,
+         confianza_justicia, confianza_congreso, confianza_gobierno,
+         na = c(-8, -9))
+```
+
+[`pos_pol` queda fuera a propósito: ahí -8 y -9 serán una categoría propia, "Sin posición".]{.chico}
+
+## Descriptivos
+
+::: muy-chico
+```{r descr}
+descr(cep, show = c("label", "range", "mean", "sd", "NA.prc", "n")) |>
+  knitr::kable(digits = 2)
+```
+:::
+
+# Variables categóricas: ¿factor o *dummies*?
+
+## Opción 1: como factor
+
+```{r pos-pol-factor}
+cep <- cep |>
+  mutate(pos_pol_rec = case_when(
+    pos_pol %in% 1:4  ~ "Izquierda",
+    pos_pol %in% 5:6  ~ "Centro",
+    pos_pol %in% 7:10 ~ "Derecha",
+    pos_pol %in% c(-8, -9) ~ "Sin posición"
+  ) |>
+    factor(levels = c("Izquierda", "Centro", "Derecha", "Sin posición")))
+
+modelo_factor <- lm(esc_delincuencia ~ pos_pol_rec, data = cep)
+```
+
+[R crea las *dummies* automáticamente. La **primera categoría** de `levels` (Izquierda) queda como referencia.]{.chico}
+
+## Opción 2: *dummies* a mano
+
+```{r pos-pol-dummies}
+cep <- cep |>
+  mutate(
+    pol_centro       = if_else(pos_pol %in% 5:6, 1, 0),
+    pol_derecha      = if_else(pos_pol %in% 7:10, 1, 0),
+    pol_sin_posicion = if_else(pos_pol %in% c(-8, -9), 1, 0)
+  )
+
+modelo_dummies <- lm(esc_delincuencia ~ pol_centro + pol_derecha + pol_sin_posicion,
+                     data = cep)
+```
+
+[La categoría que **no** incluimos (Izquierda) es la referencia. Si incluyéramos las cuatro, el modelo no podría estimarse.]{.chico}
+
+## Ambos caminos dan lo mismo
+
+::: chico
+```{r comparar-factor-dummies}
+#| output-location: column-fragment
+modelsummary(
+  list("Factor" = modelo_factor,
+       "Dummies" = modelo_dummies),
+  estimate  = "{estimate}{stars} ({std.error})",
+  statistic = NULL,
+  gof_map = c("nobs", "r.squared")
+)
+```
+:::
+
+## Cambiar la categoría de referencia
+
+Con un factor basta con `fct_relevel()`:
+
+```{r relevel}
+#| output-location: column
+cep |>
+  mutate(pos_pol_rec = fct_relevel(pos_pol_rec,
+                                   "Centro")) |>
+  lm(esc_delincuencia ~ pos_pol_rec,
+     data = _) |>
+  modelsummary(estimate  = "{estimate}{stars} ({std.error})",
+               statistic = NULL,
+               gof_map = c("nobs", "r.squared"))
+```
+
+[`data = _` indica dónde entra el resultado del pipe cuando no es el primer argumento.]{.chico}
+
+# Recodificación del resto de variables
+
+## Educación, régimen y líder autoritario
+
+```{r recod-1}
+cep <- cep |>
+  mutate(
+    educ_rec = case_when(
+      educacion %in% 0:4  ~ "Media completa o inferior",
+      educacion %in% 5:7  ~ "Universitaria incompleta o técnica",
+      educacion %in% 8:10 ~ "Universitaria completa o superior"
+    ) |>
+      factor(levels = c("Media completa o inferior",
+                        "Universitaria incompleta o técnica",
+                        "Universitaria completa o superior")),
+    pref_dem_rec = factor(democracia, levels = 1:3,
+                          labels = c("Democracia", "Autoritarismo", "Indiferencia")),
+    apoyo_lider_autoritario = if_else(lider_autoritario %in% 1:2, 1, 0)
+  )
+```
+
+## Aborto, eutanasia y confianza en el Estado
+
+```{r recod-2}
+cep <- cep |>
+  mutate(
+    aborto_rec = factor(aborto, levels = 1:3,
+                        labels = c("Siempre prohibido", "Casos especiales", "Opción libre")),
+    eutanasia_rec = factor(eutanasia, levels = c(3, 1, 2),
+                           labels = c("Nunca permitida", "Siempre permitida", "Casos especiales")),
+    # Confianza: original 1 = mucha ... 4 = nada. Invertimos para que más = más confianza
+    across(starts_with("confianza"), \(x) 5 - x, .names = "{.col}_inv"),
+    esc_confianza_estado = confianza_justicia_inv + confianza_congreso_inv +
+      confianza_gobierno_inv - 2   # escala de 1 a 10
+  )
+```
+
+[`5 - x` invierte una escala de 1 a 4 en una sola operación. `across()` la aplica a todas las variables que empiezan con "confianza".]{.chico}
+
+# Modelos anidados
+
+## Estrategia
+
+Se parte de un modelo simple y se agregan predictores de forma progresiva. Así evaluamos:
+
+-   Cómo cambian los coeficientes al agregar controles
+-   Si las nuevas variables mejoran la capacidad explicativa ($R^2$ ajustado)
+-   Si el efecto de una variable es robusto o desaparece al controlar por otras
+
+**Variable dependiente:** `esc_delincuencia` (1 = garantizar libertades, 10 = suprimir libertades para controlar la delincuencia).
+
+## Misma muestra para todos los modelos
+
+Para comparar modelos anidados, todos deben usar **los mismos casos**:
+
+```{r base-modelos}
+cep_m <- cep |>
+  drop_na(esc_delincuencia, pos_pol_rec, educ_rec,
+          apoyo_lider_autoritario, pref_dem_rec)
+```
+
+```{r modelos}
+m1 <- lm(esc_delincuencia ~ pos_pol_rec, data = cep_m)
+m2 <- lm(esc_delincuencia ~ pos_pol_rec + educ_rec, data = cep_m)
+m3 <- lm(esc_delincuencia ~ pos_pol_rec + educ_rec +
+           apoyo_lider_autoritario + pref_dem_rec, data = cep_m)
+```
+
+[`drop_na()` solo sobre las variables del modelo más completo. Con `na.omit()` sobre toda la base perderíamos casos por variables que no usamos.]{.chico}
+
+## Comparación de los tres modelos
+
+::: muy-chico
+```{r tabla-modelos}
+modelsummary(
+  list("M1: Pos. política" = m1, "M2: + Educación" = m2, "M3: + Actitudes" = m3),
+  estimate    = "{estimate}{stars} ({std.error})",
+  statistic   = NULL,
+  gof_map     = c("nobs", "r.squared", "adj.r.squared"),
+  coef_rename = \(x) x |>
+    str_remove("pos_pol_rec|educ_rec|pref_dem_rec") |>
+    str_replace("apoyo_lider_autoritario", "Apoyo líder autoritario")
+)
+```
+:::
+
+## Los coeficientes en un gráfico
+
+```{r modelplot}
+#| fig-width: 10
+#| fig-height: 4.5
+#| fig-align: center
+modelplot(list("M1" = m1, "M2" = m2, "M3" = m3),
+          coef_omit = "Intercept") +
+  geom_vline(xintercept = 0, linetype = "dashed")
+```
+
+[Si el intervalo cruza la línea punteada (0), el coeficiente no es significativo al 95%.]{.chico}
+
+## Lectura e interpretación
+
+```{r valores-m3}
+#| include: false
+r2a <- map_dbl(list(m1, m2, m3), \(m) summary(m)$adj.r.squared)
+```
+
+::: chico
+-   En M1, ubicarse a la derecha se asocia positivamente con la preferencia por suprimir libertades, en relación con quienes se ubican a la izquierda.
+-   Al agregar educación (M2), el efecto de la posición política se mantiene, y un mayor nivel educativo tiende a asociarse negativamente con la supresión de libertades.
+-   En M3, la preferencia por el autoritarismo y la indiferencia frente a la democracia tienen efectos positivos y significativos.
+-   El $R^2$ ajustado aumenta progresivamente: `r round(r2a[1], 3)` (M1), `r round(r2a[2], 3)` (M2) y `r round(r2a[3], 3)` (M3).
+:::
+
+## Exportar tablas
+
+```{r exportar}
+#| eval: false
+# A Word, para un informe
+modelsummary(list(m1, m2, m3), stars = TRUE, output = "output/modelos.docx")
+
+# Tabla HTML con sjPlot
+tab_model(m1, m2, m3, show.ci = FALSE, dv.labels = c("M1", "M2", "M3"))
+```
+
+# Ejercicios aplicados
+
+## Ejercicio 1: conceptual
+
+::: ejercicio
+1.  ¿Cuál es la diferencia entre estimar varias regresiones simples por separado y un modelo de regresión múltiple? ¿Por qué importa para interpretar los coeficientes?
+2.  ¿Qué significa que un coeficiente sea significativo pero pequeño? ¿Y al revés?
+3.  ¿Qué información adicional entrega el $R^2$ ajustado respecto del $R^2$?
+4.  ¿Por qué hay que definir una categoría de referencia? ¿Qué ocurre si se incluyen todas las categorías como *dummies*?
+:::
+
+## Ejercicio 2: responsabilidad económica
+
+**Variable dependiente:** `esc_responsabilidad` (1 = el Estado es responsable del sustento económico; 10 = las personas son responsables).
+
+::: ejercicio
+1.  Estima tres modelos anidados:
+    -   **M1:** posición política (`pos_pol_rec`, ref. = Izquierda)
+    -   **M2:** M1 + educación (`educ_rec`, ref. = Media completa o inferior)
+    -   **M3:** M2 + aborto (`aborto_rec`, ref. = Siempre prohibido) + eutanasia (`eutanasia_rec`, ref. = Nunca permitida)
+2.  Compáralos con `modelsummary()` y `modelplot()`.
+3.  ¿Cómo se relacionan las actitudes sobre aborto y eutanasia con la preferencia por responsabilidad individual? ¿Se mantiene el efecto de la posición política?
+:::
+
+## Ejercicio 3: mérito e igualdad de ingresos
+
+**Variable dependiente:** `esc_ingreso_merito` (1 = ingresos más iguales; 10 = premiar el esfuerzo individual).
+
+::: ejercicio
+1.  Estima tres modelos anidados:
+    -   **M1:** posición política (ref. = Izquierda)
+    -   **M2:** M1 + educación + preferencia de régimen (`pref_dem_rec`, ref. = Democracia)
+    -   **M3:** M2 + aborto + eutanasia
+2.  Compáralos con `modelsummary()`.
+3.  ¿Es razonable esperar que las actitudes sobre aborto y eutanasia predigan preferencias redistributivas?
+:::
+
+# Nos vemos en la próxima ayudantía. ¡Gracias por su atención!
