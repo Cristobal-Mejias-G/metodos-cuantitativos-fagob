@@ -1,0 +1,261 @@
+[
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html",
+    "href": "clases/06-inferencia-regresion/pauta.html",
+    "title": "Pauta ayudantía 06",
+    "section": "",
+    "text": "H0: no hay diferencias en los años de educación entre hombres y mujeres\nH1: hay diferencias en los años de educación entre hombres y mujeres\n\n\n\n\n\nissp_ej1 &lt;- issp |&gt;\n  select(sex, educyrs) |&gt;\n  drop_na()\n\ntest_ej1 &lt;- t.test(educyrs ~ sex,\n                   data        = issp_ej1,\n                   alternative = \"two.sided\",\n                   conf.level  = 0.95)\ntest_ej1\n\n\n    Welch Two Sample t-test\n\ndata:  educyrs by sex\nt = 2.3652, df = 1258.1, p-value = 0.01817\nalternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0\n95 percent confidence interval:\n 0.09538338 1.02321205\nsample estimates:\nmean in group Hombre  mean in group Mujer \n            11.08940             10.53011 \n\n\n\nparameters::model_parameters(test_ej1) |&gt;\n  print_md()\n\n\nWelch Two Sample t-test\n\n\n\n\n\n\n\n\n\n\n\n\nParameter\nGroup\nsex = Hombre\nsex = Mujer\nDifference\n95% CI\nt(1258.13)\np\n\n\n\n\neducyrs\nsex\n11.09\n10.53\n0.56\n(0.10, 1.02)\n2.37\n0.018\n\n\n\nAlternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0\n\n\n\n# ggttest() necesita el test escrito como base$variable\ngginference::ggttest(t.test(issp_ej1$educyrs ~ issp_ej1$sex))\n\n\n\n\n\n\n\n\n\n\n\nLa prueba t evalúa la diferencia de medias en años de educación según sexo. La diferencia observada es de 0.56 años (t = 2.37, p = 0.018).\nEl valor p indica que la probabilidad de observar esta diferencia bajo H0 es menor al 5%. Con un 95% de confianza, rechazamos H0: existe evidencia de que el nivel educacional difiere entre hombres y mujeres, siendo el promedio de los hombres levemente superior."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html#ejercicio-1-test-t",
+    "href": "clases/06-inferencia-regresion/pauta.html#ejercicio-1-test-t",
+    "title": "Pauta ayudantía 06",
+    "section": "",
+    "text": "H0: no hay diferencias en los años de educación entre hombres y mujeres\nH1: hay diferencias en los años de educación entre hombres y mujeres\n\n\n\n\n\nissp_ej1 &lt;- issp |&gt;\n  select(sex, educyrs) |&gt;\n  drop_na()\n\ntest_ej1 &lt;- t.test(educyrs ~ sex,\n                   data        = issp_ej1,\n                   alternative = \"two.sided\",\n                   conf.level  = 0.95)\ntest_ej1\n\n\n    Welch Two Sample t-test\n\ndata:  educyrs by sex\nt = 2.3652, df = 1258.1, p-value = 0.01817\nalternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0\n95 percent confidence interval:\n 0.09538338 1.02321205\nsample estimates:\nmean in group Hombre  mean in group Mujer \n            11.08940             10.53011 \n\n\n\nparameters::model_parameters(test_ej1) |&gt;\n  print_md()\n\n\nWelch Two Sample t-test\n\n\n\n\n\n\n\n\n\n\n\n\nParameter\nGroup\nsex = Hombre\nsex = Mujer\nDifference\n95% CI\nt(1258.13)\np\n\n\n\n\neducyrs\nsex\n11.09\n10.53\n0.56\n(0.10, 1.02)\n2.37\n0.018\n\n\n\nAlternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0\n\n\n\n# ggttest() necesita el test escrito como base$variable\ngginference::ggttest(t.test(issp_ej1$educyrs ~ issp_ej1$sex))\n\n\n\n\n\n\n\n\n\n\n\nLa prueba t evalúa la diferencia de medias en años de educación según sexo. La diferencia observada es de 0.56 años (t = 2.37, p = 0.018).\nEl valor p indica que la probabilidad de observar esta diferencia bajo H0 es menor al 5%. Con un 95% de confianza, rechazamos H0: existe evidencia de que el nivel educacional difiere entre hombres y mujeres, siendo el promedio de los hombres levemente superior."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html#ejercicio-2-correlación",
+    "href": "clases/06-inferencia-regresion/pauta.html#ejercicio-2-correlación",
+    "title": "Pauta ayudantía 06",
+    "section": "Ejercicio 2: correlación",
+    "text": "Ejercicio 2: correlación\n\nissp_ej2 &lt;- issp |&gt;\n  select(income, perc_conflict) |&gt;\n  drop_na()\n\ncor_ej2 &lt;- cor.test(~ income + perc_conflict,\n                    data   = issp_ej2,\n                    method = \"pearson\")\n\nparameters::model_parameters(cor_ej2) |&gt;\n  print_md()\n\n\nPearson’s product-moment correlation\n\n\n\n\n\n\n\n\n\n\nParameter1\nParameter2\nr\n95% CI\nt(1060)\np\n\n\n\n\nincome\nperc_conflict\n-0.06\n(-0.12, -3.54e-03)\n-2.08\n0.038\n\n\n\nAlternative hypothesis: true correlation is not equal to 0\n\n\n\n\n\n\n\n\nNota\n\n\n\nPendiente: gráfico de dispersión e interpretación."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html#ejercicio-3-regresión",
+    "href": "clases/06-inferencia-regresion/pauta.html#ejercicio-3-regresión",
+    "title": "Pauta ayudantía 06",
+    "section": "Ejercicio 3: regresión",
+    "text": "Ejercicio 3: regresión\n\n\n\n\n\n\nNota\n\n\n\nPendiente."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html#ejercicio-4-regresión-2",
+    "href": "clases/06-inferencia-regresion/pauta.html#ejercicio-4-regresión-2",
+    "title": "Pauta ayudantía 06",
+    "section": "Ejercicio 4: regresión 2",
+    "text": "Ejercicio 4: regresión 2\n\n\n\n\n\n\nNota\n\n\n\nPendiente."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/pauta.html#ejercicio-5-regresión-3",
+    "href": "clases/06-inferencia-regresion/pauta.html#ejercicio-5-regresión-3",
+    "title": "Pauta ayudantía 06",
+    "section": "Ejercicio 5: regresión 3",
+    "text": "Ejercicio 5: regresión 3\n\n\n\n\n\n\nNota\n\n\n\nPendiente."
+  },
+  {
+    "objectID": "guia-estilo.html",
+    "href": "guia-estilo.html",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "",
+    "text": "Convenciones comunes para que todas las sesiones se vean y se programen igual. Antes de crear una sesión nueva, copiar _plantilla/clase/ a clases/NN-tema/."
+  },
+  {
+    "objectID": "guia-estilo.html#estructura-del-repositorio",
+    "href": "guia-estilo.html#estructura-del-repositorio",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Estructura del repositorio",
+    "text": "Estructura del repositorio\n_quarto.yml              configuración del sitio\n_extensions/fagob/       tema de las presentaciones (formato fagob-revealjs)\n_plantilla/clase/        plantilla para una sesión nueva\nR/setup.R                opciones comunes (se carga oculto en cada sesión)\ndatos/                   todas las bases, una sola copia\nclases/NN-tema/\n  slides.qmd             presentación\n  pauta.qmd              resolución de ejercicios"
+  },
+  {
+    "objectID": "guia-estilo.html#presentaciones",
+    "href": "guia-estilo.html#presentaciones",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Presentaciones",
+    "text": "Presentaciones\n\nFormato único: format: fagob-revealjs. La portada se arma desde el YAML (title, subtitle, institute, author, date).\nLas secciones se escriben como # Parte 1: ...; el fondo institucional lo pone el tema automáticamente.\nNada de style=\"...\" en el texto. Usar las clases del tema:\n\n\n\n\nClase\nUso\n\n\n\n\n[texto]{.destacado}\nresaltar una idea clave\n\n\n::: chico / ::: muy-chico\nreducir el tamaño de un bloque\n\n\n::: ejercicio\ncaja con instrucciones de ejercicio\n\n\n[texto](url){.button}\nbotón de enlace\n\n\n::: {.columns} + .column\ndos columnas\n\n\n\n\nUn solo chunk por resultado. Si el código y el resultado no caben juntos, usar #| output-location: fragment o #| output-location: column en vez de duplicar el chunk con eval: false.\nLos valores interpretados en el texto se escriben con R en línea (`r round(b1, 2)`), para que no queden desactualizados."
+  },
+  {
+    "objectID": "guia-estilo.html#código",
+    "href": "guia-estilo.html#código",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Código",
+    "text": "Código\n\nPipe nativo |&gt;.\nPaquetes con pacman::p_load() al inicio de cada sesión, con un comentario por paquete.\nSin rm(list = ls()) ni setwd(): el proyecto .Rproj y here::here() resuelven las rutas.\nCasos perdidos con drop_na() sobre las variables seleccionadas.\nSemilla fija (set.seed(2026), ya incluida en R/setup.R)."
+  },
+  {
+    "objectID": "guia-estilo.html#paquetes-recomendados",
+    "href": "guia-estilo.html#paquetes-recomendados",
+    "title": "Guía de estilo de las ayudantías",
+    "section": "Paquetes recomendados",
+    "text": "Paquetes recomendados\n\n\n\n\n\n\n\n\nTarea\nAntes\nAhora\n\n\n\n\nRecodificar\ncar::recode()\ndplyr::case_when(), sjmisc::rec()\n\n\nFrecuencias\ntable(), prop.table()\nsjmisc::frq(), janitor::tabyl()\n\n\nDescriptivos\nsummary()\nsjmisc::descr()\n\n\nEtiquetas\nhaven\nsjlabelled\n\n\nResultados de tests\nPublish, rempsyc::nice_table()\nparameters::model_parameters()\n\n\nTablas de regresión\nstargazer\nmodelsummary, sjPlot::tab_model()\n\n\nGráficos de dispersión\ncar::scatterplot()\nggplot2 + geom_smooth(method = \"lm\")\n\n\nSupuestos de regresión\ngráficos base\nperformance::check_model()\n\n\nValores predichos\ncálculo manual\nggeffects::predict_response()"
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "",
+    "text": "Sitio con las presentaciones, códigos y pautas de las sesiones prácticas de R del curso dictado por el profesor Carlos Budnevich."
+  },
+  {
+    "objectID": "index.html#sesiones",
+    "href": "index.html#sesiones",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "Sesiones",
+    "text": "Sesiones\n\n\n\nSesión\nTema\nPresentación\nPauta\n\n\n\n\n01\nIntroducción a R y RStudio\nSlides 2026\n\n\n\n02\nProcesamiento de datos con tidyverse\nSlides 2026\n\n\n\n03\nAnálisis descriptivo, bivariado y gráficos\nSlides 2026\n\n\n\n04\nDocumentos dinámicos y Quarto\nDocumento 2026\n\n\n\n05\nRepaso prueba de cátedra 1\nSlides 2026\n\n\n\n06\nInferencia, correlación y regresión simple\nSlides\nPauta\n\n\n07\nModelos de regresión múltiple\nSlides 2026\n\n\n\n08\nEjercicios aplicados: regresión simple y múltiple\nSlides 2026\n\n\n\n09\nRepaso prueba de cátedra 2\nSlides 2026\n\n\n\n\n\n\n\n\n\n\nNota\n\n\n\nSesiones en migración: las que dicen “Slides 2026” enlazan todavía a su repositorio original. La sesión 06 es la primera migrada al formato unificado."
+  },
+  {
+    "objectID": "index.html#cómo-usar-este-repositorio",
+    "href": "index.html#cómo-usar-este-repositorio",
+    "title": "Métodos Cuantitativos para la Administración Pública",
+    "section": "Cómo usar este repositorio",
+    "text": "Cómo usar este repositorio\n\nDescarga el repositorio (botón Code → Download ZIP en GitHub) y abre metodos-cuantitativos-fagob.Rproj en RStudio o Positron.\nTodas las bases están en la carpeta datos/.\nCada sesión está en clases/NN-tema/, con su presentación (slides.qmd) y su pauta (pauta.qmd)."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#qué-veremos-hoy",
+    "href": "clases/06-inferencia-regresion/slides.html#qué-veremos-hoy",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "¿Qué veremos hoy?",
+    "text": "¿Qué veremos hoy?\n\nInferencia estadística e intervalos de confianza\nCorrelación de Pearson\nRegresión lineal simple\nEjercicios aplicados con ISSP Chile 2009\n\n\nRepositorio de ayudantías"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#paquetes-y-datos",
+    "href": "clases/06-inferencia-regresion/slides.html#paquetes-y-datos",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Paquetes y datos",
+    "text": "Paquetes y datos\n\npacman::p_load(\n  tidyverse,     # manipulación de datos y gráficos (dplyr, ggplot2)\n  sjmisc,        # descriptivos rápidos (descr, frq)\n  parameters,    # resultados de tests y modelos como tabla legible\n  gginference,   # visualización de pruebas de hipótesis\n  modelsummary   # tablas de regresión\n)\n\n\n# Base ISSP 2009 Chile (la misma de la ayudantía 4)\nload(url(\"https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/issp_2009_chile.RData\"))\n\n\n# sex viene codificada como 1 y 2: le ponemos nombres a las categorías\nissp &lt;- issp |&gt;\n  mutate(sex = factor(sex, levels = c(\"1\", \"2\"), labels = c(\"Hombre\", \"Mujer\")))"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#por-qué-inferencia",
+    "href": "clases/06-inferencia-regresion/slides.html#por-qué-inferencia",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "¿Por qué inferencia?",
+    "text": "¿Por qué inferencia?\nTrabajamos con muestras, no con poblaciones completas.\nLa inferencia estadística nos permite responder:\n\n¿Qué tan probable es que el valor observado en la muestra (estadístico) refleje el valor real en la población (parámetro)?\n¿Cuál es el rango plausible para ese valor poblacional?\n¿La diferencia que veo entre dos grupos existe en la población o es producto del azar?"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#intervalo-de-confianza-ic",
+    "href": "clases/06-inferencia-regresion/slides.html#intervalo-de-confianza-ic",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Intervalo de confianza (IC)",
+    "text": "Intervalo de confianza (IC)\nUn IC al 95% nos dice: si repitiéramos el muestreo 100 veces, en 95 de ellas los intervalos construidos contendrían el parámetro poblacional verdadero.\nFórmula\n\\[IC = \\bar{x} \\pm Z \\cdot \\frac{s}{\\sqrt{n}}\\]"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ic-paso-a-paso-cada-término-de-la-fórmula",
+    "href": "clases/06-inferencia-regresion/slides.html#ic-paso-a-paso-cada-término-de-la-fórmula",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "IC paso a paso: cada término de la fórmula",
+    "text": "IC paso a paso: cada término de la fórmula\n\nic_edad &lt;- issp |&gt;\n  summarise(\n    media     = mean(age, na.rm = TRUE),     # x barra\n    de        = sd(age, na.rm = TRUE),       # s\n    n         = sum(!is.na(age)),            # n\n    error_est = de / sqrt(n),                # s / raíz de n\n    li        = media - 1.96 * error_est,    # límite inferior\n    ls        = media + 1.96 * error_est     # límite superior\n  )\n\nic_edad\n\n\n\n# A tibble: 1 × 6\n  media    de     n error_est    li    ls\n  &lt;dbl&gt; &lt;dbl&gt; &lt;int&gt;     &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;\n1  46.6  17.6  1505     0.455  45.7  47.5"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ic-con-una-función",
+    "href": "clases/06-inferencia-regresion/slides.html#ic-con-una-función",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "IC con una función",
+    "text": "IC con una función\nt.test() calcula el mismo intervalo (usa la distribución t en vez de Z, por eso la diferencia es mínima):\n\nt.test(issp$age, conf.level = 0.95)$conf.int\n\n[1] 45.66977 47.45315\nattr(,\"conf.level\")\n[1] 0.95\n\n\n\nInterpretación: con un 95% de confianza, la edad promedio de la población chilena se encuentra entre 45.67 y 47.45 años."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#test-t-diferencia-de-medias",
+    "href": "clases/06-inferencia-regresion/slides.html#test-t-diferencia-de-medias",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Test t: diferencia de medias",
+    "text": "Test t: diferencia de medias\n¿Existen diferencias en el estatus social subjetivo (topbot) entre hombres y mujeres?\n\n\nH0: no hay diferencias\n\\[H_0: \\mu_1 - \\mu_2 = 0\\]\nH1: hay diferencias\n\\[H_a: \\mu_1 - \\mu_2 \\neq 0\\]\n\n\nt_estatus &lt;- t.test(topbot ~ sex,\n                    data        = issp,\n                    alternative = \"two.sided\",\n                    conf.level  = 0.95)\nt_estatus\n\n\n    Welch Two Sample t-test\n\ndata:  topbot by sex\nt = 0.28718, df = 1322.9, p-value = 0.774\nalternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0\n95 percent confidence interval:\n -0.1465582  0.1968265\nsample estimates:\nmean in group Hombre  mean in group Mujer \n            4.040128             4.014994"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#test-t-resultado-como-tabla",
+    "href": "clases/06-inferencia-regresion/slides.html#test-t-resultado-como-tabla",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Test t: resultado como tabla",
+    "text": "Test t: resultado como tabla\nparameters::model_parameters() ordena el resultado de cualquier test en una tabla con nombres claros:\n\nparameters::model_parameters(t_estatus) |&gt;\n  print_md()\n\n\nWelch Two Sample t-test\n\n\n\n\n\n\n\n\n\n\n\n\nParameter\nGroup\nsex = Hombre\nsex = Mujer\nDifference\n95% CI\nt(1322.86)\np\n\n\n\n\ntopbot\nsex\n4.04\n4.01\n0.03\n(-0.15, 0.20)\n0.29\n0.774\n\n\n\nAlternative hypothesis: true difference in means between group Hombre and group Mujer is not equal to 0"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#test-t-visualización",
+    "href": "clases/06-inferencia-regresion/slides.html#test-t-visualización",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Test t: visualización",
+    "text": "Test t: visualización\n\n# ggttest() necesita el test escrito como base$variable\ngginference::ggttest(t.test(issp$topbot ~ issp$sex))\n\n\nEl área sombreada corresponde a la zona de rechazo de H₀ (α/2 en cada cola)."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#correlación-de-pearson",
+    "href": "clases/06-inferencia-regresion/slides.html#correlación-de-pearson",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Correlación de Pearson",
+    "text": "Correlación de Pearson\nLa correlación de Pearson (r) mide la fuerza y dirección de la asociación lineal entre dos variables continuas.\n\\[r = \\frac{\\sum (x_i - \\bar{x})(y_i - \\bar{y})}{(n-1) \\cdot s_x \\cdot s_y}\\]\n\nVa de −1 a 1\nEl signo indica la dirección; el valor absoluto, la fuerza"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#primero-mirar-los-datos",
+    "href": "clases/06-inferencia-regresion/slides.html#primero-mirar-los-datos",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Primero, mirar los datos",
+    "text": "Primero, mirar los datos\n¿Se relacionan los años de educación (educyrs) con el decil de ingreso (income)?\n\n\nggplot(issp, aes(x = educyrs, y = income)) +\n  geom_jitter(alpha = 0.3,\n              width = 0.3,\n              height = 0.3) +\n  labs(x = \"Años de educación\",\n       y = \"Decil de ingreso\")\n\n\n\n\n\n\n\n\n\ngeom_jitter() mueve levemente cada punto para que no se superpongan los casos con valores iguales."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#test-de-correlación",
+    "href": "clases/06-inferencia-regresion/slides.html#test-de-correlación",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Test de correlación",
+    "text": "Test de correlación\n\n# H0: r = 0 (no hay relación lineal)\n# H1: r != 0 (existe relación lineal)\ncor_edu &lt;- cor.test(~ educyrs + income,\n                    data   = issp,\n                    method = \"pearson\")\n\nparameters::model_parameters(cor_edu) |&gt;\n  print_md()\n\n\nPearson’s product-moment correlation\n\n\nParameter1\nParameter2\nr\n95% CI\nt(1103)\np\n\n\n\n\neducyrs\nincome\n0.43\n(0.38, 0.48)\n15.77\n&lt; .001\n\n\n\nAlternative hypothesis: true correlation is not equal to 0"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#modelo-de-regresión",
+    "href": "clases/06-inferencia-regresion/slides.html#modelo-de-regresión",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Modelo de regresión",
+    "text": "Modelo de regresión\nLa recta de regresión representa los valores predichos de Y para los distintos valores de X:\n\\[\\widehat{Y} = b_{0} + b_{1}X\\]\n\n\\(\\widehat{Y}\\): valor estimado/predicho de \\(Y\\)\n\\(b_{0}\\): intercepto (el valor de Y cuando X es 0)\n\\(b_{1}\\): pendiente, cuánto cambia Y por cada unidad que aumenta X"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#estimación-en-r",
+    "href": "clases/06-inferencia-regresion/slides.html#estimación-en-r",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Estimación en R",
+    "text": "Estimación en R\nLa función para estimar regresiones en R es lm() (linear model):\nobjeto &lt;- lm(dependiente ~ independiente, data = datos)\nEjemplo: ¿la educación predice el estatus social subjetivo?\n\nreg1 &lt;- lm(topbot ~ educyrs, data = issp)\nreg1\n\n\nCall:\nlm(formula = topbot ~ educyrs, data = issp)\n\nCoefficients:\n(Intercept)      educyrs  \n     2.4469       0.1504"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#tabla-de-regresión",
+    "href": "clases/06-inferencia-regresion/slides.html#tabla-de-regresión",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Tabla de regresión",
+    "text": "Tabla de regresión\n\n\n\nmodelsummary(\n  list(\"Estatus subjetivo\" = reg1),\n  stars    = TRUE,\n  gof_map  = c(\"nobs\", \"r.squared\"),\n  coef_rename = c(\"(Intercept)\" = \"Intercepto\",\n                  \"educyrs\" = \"Años de educación\")\n)\n\n\n\n    \n\n    \n\n    \n    \n    \n      \n        \n        \n              \n                 \n                Estatus subjetivo\n              \n        \n        + p &lt; 0.1, * p &lt; 0.05, ** p &lt; 0.01, *** p &lt; 0.001\n        \n                \n                  Intercepto\n                  2.447***\n                \n                \n                  \n                  (0.105)\n                \n                \n                  Años de educación\n                  0.150***\n                \n                \n                  \n                  (0.009)\n                \n                \n                  Num.Obs.\n                  1440\n                \n                \n                  R2\n                  0.162\n                \n        \n      \n    \n\n\n\n\nPor cada año adicional de escolaridad, el estatus social subjetivo aumenta en promedio 0.15 puntos en la escala de 1 a 10.\nEl intercepto (2.45) es el estatus predicho para alguien con cero años de educación.\nEl R² indica que los años de educación explican cerca del 16% de la variabilidad del estatus social subjetivo."
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#la-recta-de-regresión-sobre-los-datos",
+    "href": "clases/06-inferencia-regresion/slides.html#la-recta-de-regresión-sobre-los-datos",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "La recta de regresión sobre los datos",
+    "text": "La recta de regresión sobre los datos\n\nggplot(issp, aes(x = educyrs, y = topbot)) +\n  geom_jitter(alpha = 0.3, width = 0.3, height = 0.3) +\n  geom_smooth(method = \"lm\", se = TRUE, color = \"#D49A3B\") +\n  labs(x = \"Años de educación\", y = \"Estatus social subjetivo\")"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#datos-a-utilizar",
+    "href": "clases/06-inferencia-regresion/slides.html#datos-a-utilizar",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Datos a utilizar",
+    "text": "Datos a utilizar\n\n\nsjmisc::descr(issp,\n              show = c(\"label\", \"range\", \"mean\", \"sd\", \"NA.prc\", \"n\")) |&gt;\n  knitr::kable(digits = 2)\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\nvar\nlabel\nn\nNA.prc\nmean\nsd\nrange\n\n\n\n\n11\nsex\nsex\n1505\n0.00\n1.58\n0.49\n1 (1-2)\n\n\n1\nage\nEdad\n1505\n0.00\n46.56\n17.64\n73 (18-91)\n\n\n6\neducyrs\nNivel educativo\n1451\n3.59\n10.76\n4.41\n24 (1-25)\n\n\n7\nincome\nDecil ingreso\n1146\n23.85\n5.49\n2.87\n9 (1-10)\n\n\n12\ntopbot\nEstatus social subjetivo\n1490\n1.00\n4.03\n1.66\n9 (1-10)\n\n\n10\npref_redis\nPreferencia por redistribución\n1477\n1.86\n3.83\n0.88\n4 (1-5)\n\n\n9\nperc_ineq\nPercepción desigualdad\n1492\n0.86\n4.19\n0.83\n4 (1-5)\n\n\n3\nconflict_rp\nConflictos: ricos - pobres\n1438\n4.45\n2.61\n0.87\n3 (1-4)\n\n\n5\nconflict_wcmc\nConflictos: clase trabajadora - clase media\n1426\n5.25\n2.29\n0.90\n3 (1-4)\n\n\n2\nconflict_mw\nConflictos: directivos - trabajadores\n1427\n5.18\n2.71\n0.83\n3 (1-4)\n\n\n4\nconflict_tb\nConflictos: gente de arriba - gente de abajo\n1425\n5.32\n2.66\n0.90\n3 (1-4)\n\n\n8\nperc_conflict\nPercepción conflictos\n1390\n7.64\n6.30\n2.79\n12 (0-12)"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ejercicio-1-test-t",
+    "href": "clases/06-inferencia-regresion/slides.html#ejercicio-1-test-t",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Ejercicio 1: test t",
+    "text": "Ejercicio 1: test t\n¿Existen diferencias en los años de escolaridad (educyrs) según sexo (sex)?\n\n\n\nissp_ej1 &lt;- issp |&gt;\n  select(sex, educyrs) |&gt;\n  drop_na()\n\nissp_ej1 |&gt;\n  group_by(sex) |&gt;\n  summarise(n = n(),\n            promedio = mean(educyrs),\n            de = sd(educyrs)) |&gt;\n  knitr::kable(digits = 2)\n\n\n\n\n\nsex\nn\npromedio\nde\n\n\n\n\nHombre\n604\n11.09\n4.53\n\n\nMujer\n847\n10.53\n4.31\n\n\n\n\n\n\n\n\nFormula H0 y H1 en función de la pregunta\nEjecuta el test t con 95% de confianza\nPresenta los resultados con model_parameters() y visualiza con ggttest()\nInterpreta: ¿es posible rechazar H0?"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ejercicio-2-correlación",
+    "href": "clases/06-inferencia-regresion/slides.html#ejercicio-2-correlación",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Ejercicio 2: correlación",
+    "text": "Ejercicio 2: correlación\n¿Qué relación existe entre el decil de ingreso (income) y la percepción de conflicto (perc_conflict)?\n\n\nPrepara una base con las variables de interés y sin casos perdidos (drop_na())\nGenera un gráfico de dispersión con ggplot()\nFormula H0 y H1 en función de la pregunta\nEjecuta cor.test()\nPresenta los resultados con model_parameters()\nInterpreta: ¿es posible rechazar H0?"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ejercicio-3-regresión",
+    "href": "clases/06-inferencia-regresion/slides.html#ejercicio-3-regresión",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Ejercicio 3: regresión",
+    "text": "Ejercicio 3: regresión\n¿En qué medida los años de educación (educyrs) predicen el decil de ingreso (income)?\n\n\nPrepara una base con ambas variables y sin casos perdidos\nGenera un gráfico de dispersión con la recta de regresión (geom_smooth(method = \"lm\"))\nEstima el modelo con lm()\nPresenta los resultados con modelsummary()\nInterpreta intercepto, pendiente y R², con sus niveles de significancia"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ejercicio-4-regresión-2",
+    "href": "clases/06-inferencia-regresion/slides.html#ejercicio-4-regresión-2",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Ejercicio 4: regresión 2",
+    "text": "Ejercicio 4: regresión 2\n¿En qué medida el estatus social subjetivo (topbot) predice la percepción de conflicto (perc_conflict)?\n\n\nPrepara la base con ambas variables\nEstima el modelo con lm()\nPresenta los resultados con modelsummary()\nInterpreta los coeficientes e indica si el modelo es estadísticamente significativo"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#ejercicio-5-regresión-3",
+    "href": "clases/06-inferencia-regresion/slides.html#ejercicio-5-regresión-3",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Ejercicio 5: regresión 3",
+    "text": "Ejercicio 5: regresión 3\nA partir de los resultados del ejercicio 4:\n\n\n¿Qué valor de percepción de conflicto predice el modelo para alguien con topbot = 9? Calcúlalo usando los coeficientes.\n¿Cuál es la relación entre la correlación y el R²?\n\nPista: usa cor(base$variable1, base$variable2, use = \"complete.obs\")"
+  },
+  {
+    "objectID": "clases/06-inferencia-regresion/slides.html#lo-que-vimos-hoy",
+    "href": "clases/06-inferencia-regresion/slides.html#lo-que-vimos-hoy",
+    "title": "Inferencia, correlación y regresión simple",
+    "section": "Lo que vimos hoy",
+    "text": "Lo que vimos hoy\n\nIntervalo de confianza: rango plausible para el parámetro poblacional, calculado paso a paso y con t.test()\nTest t: contraste de medias entre dos grupos independientes\nCorrelación de Pearson: asociación lineal entre dos variables continuas\nRegresión lineal simple: coeficientes e interpretación\n\n\nRepositorio de ayudantías"
+  }
+]

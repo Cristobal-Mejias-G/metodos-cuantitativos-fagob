@@ -1,0 +1,69 @@
+/*-- scss:defaults --*/
+
+// Paleta FAGOB (tomada de las presentaciones 2026)
+$fagob-teal: #40666e;
+$fagob-ocre: #D49A3B;
+$fagob-claro: #D1DCE2;
+$fagob-link: #cbdffa;
+$fagob-destacado: #eb2762;
+
+/*-- scss:rules --*/
+
+// Portada: se arma desde el YAML (title, subtitle, author, date, institute),
+// sin estilos en línea.
+#title-slide {
+  .title {
+    color: $fagob-ocre;
+    font-size: 2.2em;
+    font-weight: 600;
+    line-height: 1.1;
+  }
+  .subtitle {
+    color: #ffffff;
+    font-style: normal;
+    font-size: 1.1em;
+    letter-spacing: 0.5px;
+  }
+  .institute,
+  .quarto-title-affiliation {
+    color: #ffffff;
+    font-style: normal;
+  }
+  .author,
+  .quarto-title-author-name,
+  .date {
+    color: $fagob-claro;
+  }
+  a {
+    color: $fagob-link;
+  }
+}
+
+// Diapositivas de sección (fondo puesto por secciones.lua)
+.reveal .has-dark-background h1 {
+  color: #ffffff;
+  font-weight: 600;
+}
+
+// Utilidades de texto: reemplazan los style="font-size: ..." en línea
+.reveal .chico { font-size: 0.8em; }
+.reveal .muy-chico { font-size: 0.6em; }
+
+.reveal .destacado {
+  color: $fagob-destacado;
+  font-weight: 600;
+}
+
+// Caja de ejercicio para la práctica en clases
+.reveal .ejercicio {
+  border-left: 6px solid $fagob-ocre;
+  background-color: lighten($fagob-ocre, 40%);
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+  font-size: 0.85em;
+}
+
+// Código algo más compacto para que quepa en la diapositiva
+.reveal pre code {
+  font-size: 0.85em;
+}

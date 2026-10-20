@@ -1,0 +1,77 @@
+---
+title: "Título de la sesión"
+subtitle: "Ayudantía NN · FAGOB 2026"
+institute: "Métodos Cuantitativos para la Administración Pública"
+author: "Cristóbal Mejías · Facultad de Gobierno"
+date: "Mes, 2026"
+format: fagob-revealjs
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+source(here::here("R", "setup.R"))
+```
+
+## ¿Qué veremos hoy?
+
+1.  Tema 1
+2.  Tema 2
+3.  Ejercicios aplicados
+
+## Paquetes y datos
+
+```{r paquetes}
+pacman::p_load(
+  tidyverse,   # manipulación de datos y gráficos
+  sjmisc       # descriptivos rápidos
+)
+```
+
+```{r datos-url}
+#| eval: false
+load(url("https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/BASE.RData"))
+```
+
+```{r datos-local}
+#| include: false
+load(ruta_datos("BASE.RData"))
+```
+
+# Parte 1: Tema
+
+## Concepto
+
+[Idea clave:]{.destacado} explicación breve.
+
+## En R
+
+```{r ejemplo}
+#| output-location: fragment
+# código
+```
+
+# Ejercicios aplicados
+
+## Ejercicio 1
+
+### Pregunta de investigación
+
+::: ejercicio
+1.  Paso 1
+2.  Paso 2
+:::
+
+# Resumen
+
+## Lo que vimos hoy
+
+-   Punto 1
+-   Punto 2
+
+[Repositorio de ayudantías](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob){.button}
+
+# Nos vemos en la próxima ayudantía. ¡Gracias por su atención!

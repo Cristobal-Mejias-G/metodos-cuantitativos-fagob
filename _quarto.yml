@@ -1,0 +1,32 @@
+project:
+  type: website
+  output-dir: docs
+  render:
+    - index.qmd
+    - guia-estilo.qmd
+    - clases/*/slides.qmd
+    - clases/*/pauta.qmd
+
+execute:
+  freeze: auto
+
+lang: es
+
+website:
+  title: "Métodos Cuantitativos FAGOB"
+  site-url: https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/
+  repo-url: https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob
+  navbar:
+    left:
+      - href: index.qmd
+        text: Sesiones
+      - href: guia-estilo.qmd
+        text: Guía de estilo
+    right:
+      - icon: github
+        href: https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob
+
+format:
+  html:
+    theme: [flatly, _extensions/fagob/fagob-html.scss]
+    toc: true

@@ -1,0 +1,17 @@
+/*-- scss:defaults --*/
+
+$primary: #40666e;
+$link-color: #40666e;
+
+/*-- scss:rules --*/
+
+h1, h2 {
+  color: #40666e;
+}
+
+.ejercicio {
+  border-left: 6px solid #D49A3B;
+  background-color: #faf3e7;
+  padding: 0.4em 0.8em;
+  border-radius: 4px;
+}

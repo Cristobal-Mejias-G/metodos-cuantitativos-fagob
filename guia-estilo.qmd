@@ -1,0 +1,57 @@
+---
+title: "Guía de estilo de las ayudantías"
+---
+
+Convenciones comunes para que todas las sesiones se vean y se programen igual. Antes de crear una sesión nueva, copiar `_plantilla/clase/` a `clases/NN-tema/`.
+
+## Estructura del repositorio
+
+```
+_quarto.yml              configuración del sitio
+_extensions/fagob/       tema de las presentaciones (formato fagob-revealjs)
+_plantilla/clase/        plantilla para una sesión nueva
+R/setup.R                opciones comunes (se carga oculto en cada sesión)
+datos/                   todas las bases, una sola copia
+clases/NN-tema/
+  slides.qmd             presentación
+  pauta.qmd              resolución de ejercicios
+```
+
+## Presentaciones
+
+-   Formato único: `format: fagob-revealjs`. La portada se arma desde el YAML (`title`, `subtitle`, `institute`, `author`, `date`).
+-   Las secciones se escriben como `# Parte 1: ...`; el fondo institucional lo pone el tema automáticamente.
+-   Nada de `style="..."` en el texto. Usar las clases del tema:
+
+| Clase | Uso |
+|:--|:--|
+| `[texto]{.destacado}` | resaltar una idea clave |
+| `::: chico` / `::: muy-chico` | reducir el tamaño de un bloque |
+| `::: ejercicio` | caja con instrucciones de ejercicio |
+| `[texto](url){.button}` | botón de enlace |
+| `::: {.columns}` + `.column` | dos columnas |
+
+-   Un solo chunk por resultado. Si el código y el resultado no caben juntos, usar `#| output-location: fragment` o `#| output-location: column` en vez de duplicar el chunk con `eval: false`.
+-   Los valores interpretados en el texto se escriben con R en línea (`` `r round(b1, 2)` ``), para que no queden desactualizados.
+
+## Código
+
+-   Pipe nativo `|>`.
+-   Paquetes con `pacman::p_load()` al inicio de cada sesión, con un comentario por paquete.
+-   Sin `rm(list = ls())` ni `setwd()`: el proyecto `.Rproj` y `here::here()` resuelven las rutas.
+-   Casos perdidos con `drop_na()` sobre las variables seleccionadas.
+-   Semilla fija (`set.seed(2026)`, ya incluida en `R/setup.R`).
+
+## Paquetes recomendados
+
+| Tarea | Antes | Ahora |
+|:--|:--|:--|
+| Recodificar | `car::recode()` | `dplyr::case_when()`, `sjmisc::rec()` |
+| Frecuencias | `table()`, `prop.table()` | `sjmisc::frq()`, `janitor::tabyl()` |
+| Descriptivos | `summary()` | `sjmisc::descr()` |
+| Etiquetas | `haven` | `sjlabelled` |
+| Resultados de tests | `Publish`, `rempsyc::nice_table()` | `parameters::model_parameters()` |
+| Tablas de regresión | `stargazer` | `modelsummary`, `sjPlot::tab_model()` |
+| Gráficos de dispersión | `car::scatterplot()` | `ggplot2` + `geom_smooth(method = "lm")` |
+| Supuestos de regresión | gráficos base | `performance::check_model()` |
+| Valores predichos | cálculo manual | `ggeffects::predict_response()` |

@@ -1,0 +1,366 @@
+---
+title: "Inferencia, correlación y regresión simple"
+subtitle: "Ayudantía 06 · FAGOB 2026"
+institute: "Métodos Cuantitativos para la Administración Pública"
+author: "Cristóbal Mejías · Facultad de Gobierno"
+date: "Mayo, 2026"
+format: fagob-revealjs
+execute:
+  echo: true
+  message: false
+  warning: false
+---
+
+```{r setup}
+#| include: false
+source(here::here("R", "setup.R"))
+```
+
+## ¿Qué veremos hoy?
+
+1.  Inferencia estadística e intervalos de confianza
+2.  Correlación de Pearson
+3.  Regresión lineal simple
+4.  Ejercicios aplicados con ISSP Chile 2009
+
+<br>
+
+[Repositorio de ayudantías](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob){.button}
+
+## Paquetes y datos
+
+```{r paquetes}
+pacman::p_load(
+  tidyverse,     # manipulación de datos y gráficos (dplyr, ggplot2)
+  sjmisc,        # descriptivos rápidos (descr, frq)
+  parameters,    # resultados de tests y modelos como tabla legible
+  gginference,   # visualización de pruebas de hipótesis
+  modelsummary   # tablas de regresión
+)
+```
+
+```{r datos-url}
+#| eval: false
+# Base ISSP 2009 Chile (la misma de la ayudantía 4)
+load(url("https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/raw/main/datos/issp_2009_chile.RData"))
+```
+
+```{r datos-local}
+#| include: false
+load(ruta_datos("issp_2009_chile.RData"))
+```
+
+```{r datos-sexo}
+# sex viene codificada como 1 y 2: le ponemos nombres a las categorías
+issp <- issp |>
+  mutate(sex = factor(sex, levels = c("1", "2"), labels = c("Hombre", "Mujer")))
+```
+
+# Parte 1: Inferencia estadística
+
+## ¿Por qué inferencia?
+
+### Trabajamos con muestras, no con poblaciones completas.
+
+La inferencia estadística nos permite responder:
+
+-   ¿Qué tan probable es que el valor observado en la muestra (estadístico) refleje el valor real en la población (parámetro)?
+-   ¿Cuál es el rango plausible para ese valor poblacional?
+-   ¿La diferencia que veo entre dos grupos existe en la población o es producto del azar?
+
+## Intervalo de confianza (IC)
+
+[Un IC al 95% nos dice:]{.destacado} si repitiéramos el muestreo 100 veces, en 95 de ellas los intervalos construidos contendrían el parámetro poblacional verdadero.
+
+### Fórmula
+
+$$IC = \bar{x} \pm Z \cdot \frac{s}{\sqrt{n}}$$
+
+## IC paso a paso: cada término de la fórmula
+
+```{r ic-manual}
+#| output-location: fragment
+ic_edad <- issp |>
+  summarise(
+    media     = mean(age, na.rm = TRUE),     # x barra
+    de        = sd(age, na.rm = TRUE),       # s
+    n         = sum(!is.na(age)),            # n
+    error_est = de / sqrt(n),                # s / raíz de n
+    li        = media - 1.96 * error_est,    # límite inferior
+    ls        = media + 1.96 * error_est     # límite superior
+  )
+
+ic_edad
+```
+
+## IC con una función
+
+`t.test()` calcula el mismo intervalo (usa la distribución *t* en vez de *Z*, por eso la diferencia es mínima):
+
+```{r ic-funcion}
+t.test(issp$age, conf.level = 0.95)$conf.int
+```
+
+<br>
+
+[Interpretación:]{.destacado} con un 95% de confianza, la edad promedio de la población chilena se encuentra entre `r round(ic_edad$li, 2)` y `r round(ic_edad$ls, 2)` años.
+
+## Test t: diferencia de medias
+
+### ¿Existen diferencias en el estatus social subjetivo (`topbot`) entre hombres y mujeres?
+
+:::: columns
+::: {.column width="45%"}
+[H0: no hay diferencias]{.destacado}
+
+$$H_0: \mu_1 - \mu_2 = 0$$
+
+[H1: hay diferencias]{.destacado}
+
+$$H_a: \mu_1 - \mu_2 \neq 0$$
+:::
+
+::: {.column width="55%"}
+```{r test-t-estatus}
+t_estatus <- t.test(topbot ~ sex,
+                    data        = issp,
+                    alternative = "two.sided",
+                    conf.level  = 0.95)
+t_estatus
+```
+:::
+::::
+
+## Test t: resultado como tabla
+
+`parameters::model_parameters()` ordena el resultado de cualquier test en una tabla con nombres claros:
+
+```{r test-t-tabla}
+parameters::model_parameters(t_estatus) |>
+  print_md()
+```
+
+## Test t: visualización
+
+```{r ggttest}
+#| fig-width: 8
+#| fig-height: 4
+#| fig-align: center
+# ggttest() necesita el test escrito como base$variable
+gginference::ggttest(t.test(issp$topbot ~ issp$sex))
+```
+
+El área sombreada corresponde a la zona de rechazo de H₀ (α/2 en cada cola).
+
+# Parte 2: Correlación de Pearson
+
+## Correlación de Pearson
+
+La correlación de Pearson (*r*) mide la fuerza y dirección de la asociación **lineal** entre dos variables continuas.
+
+$$r = \frac{\sum (x_i - \bar{x})(y_i - \bar{y})}{(n-1) \cdot s_x \cdot s_y}$$
+
+-   Va de −1 a 1
+-   El signo indica la dirección; el valor absoluto, la fuerza
+
+## Primero, mirar los datos
+
+### ¿Se relacionan los años de educación (`educyrs`) con el decil de ingreso (`income`)?
+
+```{r scatter-edu}
+#| output-location: column
+#| fig-width: 6
+#| fig-height: 5
+ggplot(issp, aes(x = educyrs, y = income)) +
+  geom_jitter(alpha = 0.3,
+              width = 0.3,
+              height = 0.3) +
+  labs(x = "Años de educación",
+       y = "Decil de ingreso")
+```
+
+[`geom_jitter()` mueve levemente cada punto para que no se superpongan los casos con valores iguales.]{.chico}
+
+## Test de correlación
+
+```{r cor-test}
+# H0: r = 0 (no hay relación lineal)
+# H1: r != 0 (existe relación lineal)
+cor_edu <- cor.test(~ educyrs + income,
+                    data   = issp,
+                    method = "pearson")
+
+parameters::model_parameters(cor_edu) |>
+  print_md()
+```
+
+# Parte 3: Regresión lineal simple
+
+## Modelo de regresión
+
+La recta de regresión representa los valores predichos de Y para los distintos valores de X:
+
+$$\widehat{Y} = b_{0} + b_{1}X$$
+
+-   $\widehat{Y}$: valor estimado/predicho de $Y$
+-   $b_{0}$: **intercepto** (el valor de Y cuando X es 0)
+-   $b_{1}$: **pendiente**, cuánto cambia Y por cada unidad que aumenta X
+
+## Estimación en R
+
+La función para estimar regresiones en R es `lm()` (*linear model*):
+
+``` r
+objeto <- lm(dependiente ~ independiente, data = datos)
+```
+
+### Ejemplo: ¿la educación predice el estatus social subjetivo?
+
+```{r reg1}
+reg1 <- lm(topbot ~ educyrs, data = issp)
+reg1
+```
+
+## Tabla de regresión
+
+:::: columns
+::: {.column width="58%"}
+```{r reg1-tabla}
+modelsummary(
+  list("Estatus subjetivo" = reg1),
+  stars    = TRUE,
+  gof_map  = c("nobs", "r.squared"),
+  coef_rename = c("(Intercept)" = "Intercepto",
+                  "educyrs" = "Años de educación")
+)
+```
+:::
+
+::: {.column width="42%" .chico}
+```{r reg1-valores}
+#| include: false
+b0 <- coef(reg1)[1]
+b1 <- coef(reg1)[2]
+r2 <- summary(reg1)$r.squared
+```
+
+Por cada año adicional de escolaridad, el estatus social subjetivo aumenta en promedio **`r round(b1, 2)` puntos** en la escala de 1 a 10.
+
+El intercepto (`r round(b0, 2)`) es el estatus predicho para alguien con cero años de educación.
+
+El R² indica que los años de educación explican cerca del **`r round(r2 * 100)`% de la variabilidad** del estatus social subjetivo.
+:::
+::::
+
+## La recta de regresión sobre los datos
+
+```{r reg1-grafico}
+#| fig-width: 8
+#| fig-height: 4.5
+#| fig-align: center
+ggplot(issp, aes(x = educyrs, y = topbot)) +
+  geom_jitter(alpha = 0.3, width = 0.3, height = 0.3) +
+  geom_smooth(method = "lm", se = TRUE, color = "#D49A3B") +
+  labs(x = "Años de educación", y = "Estatus social subjetivo")
+```
+
+# Parte 4: Ejercicios aplicados
+
+## Datos a utilizar
+
+::: muy-chico
+```{r descriptivos}
+sjmisc::descr(issp,
+              show = c("label", "range", "mean", "sd", "NA.prc", "n")) |>
+  knitr::kable(digits = 2)
+```
+:::
+
+## Ejercicio 1: test t
+
+### ¿Existen diferencias en los años de escolaridad (`educyrs`) según sexo (`sex`)?
+
+::: chico
+```{r ej1-prep}
+#| output-location: column
+issp_ej1 <- issp |>
+  select(sex, educyrs) |>
+  drop_na()
+
+issp_ej1 |>
+  group_by(sex) |>
+  summarise(n = n(),
+            promedio = mean(educyrs),
+            de = sd(educyrs)) |>
+  knitr::kable(digits = 2)
+```
+:::
+
+::: ejercicio
+1.  Formula H0 y H1 en función de la pregunta
+2.  Ejecuta el test t con 95% de confianza
+3.  Presenta los resultados con `model_parameters()` y visualiza con `ggttest()`
+4.  Interpreta: ¿es posible rechazar H0?
+:::
+
+## Ejercicio 2: correlación
+
+### ¿Qué relación existe entre el decil de ingreso (`income`) y la percepción de conflicto (`perc_conflict`)?
+
+::: ejercicio
+1.  Prepara una base con las variables de interés y sin casos perdidos (`drop_na()`)
+2.  Genera un gráfico de dispersión con `ggplot()`
+3.  Formula H0 y H1 en función de la pregunta
+4.  Ejecuta `cor.test()`
+5.  Presenta los resultados con `model_parameters()`
+6.  Interpreta: ¿es posible rechazar H0?
+:::
+
+## Ejercicio 3: regresión
+
+### ¿En qué medida los años de educación (`educyrs`) predicen el decil de ingreso (`income`)?
+
+::: ejercicio
+1.  Prepara una base con ambas variables y sin casos perdidos
+2.  Genera un gráfico de dispersión con la recta de regresión (`geom_smooth(method = "lm")`)
+3.  Estima el modelo con `lm()`
+4.  Presenta los resultados con `modelsummary()`
+5.  Interpreta intercepto, pendiente y R², con sus niveles de significancia
+:::
+
+## Ejercicio 4: regresión 2
+
+### ¿En qué medida el estatus social subjetivo (`topbot`) predice la percepción de conflicto (`perc_conflict`)?
+
+::: ejercicio
+1.  Prepara la base con ambas variables
+2.  Estima el modelo con `lm()`
+3.  Presenta los resultados con `modelsummary()`
+4.  Interpreta los coeficientes e indica si el modelo es estadísticamente significativo
+:::
+
+## Ejercicio 5: regresión 3
+
+### A partir de los resultados del ejercicio 4:
+
+::: ejercicio
+1.  ¿Qué valor de percepción de conflicto predice el modelo para alguien con `topbot = 9`? Calcúlalo usando los coeficientes.
+2.  ¿Cuál es la relación entre la correlación y el R²?
+
+[Pista: usa `cor(base$variable1, base$variable2, use = "complete.obs")`]{.chico}
+:::
+
+# Resumen
+
+## Lo que vimos hoy
+
+-   **Intervalo de confianza:** rango plausible para el parámetro poblacional, calculado paso a paso y con `t.test()`
+-   **Test t:** contraste de medias entre dos grupos independientes
+-   **Correlación de Pearson:** asociación lineal entre dos variables continuas
+-   **Regresión lineal simple:** coeficientes e interpretación
+
+<br>
+
+[Repositorio de ayudantías](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob){.button}
+
+# Nos vemos en la próxima ayudantía. ¡Gracias por su atención!

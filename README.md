@@ -3,6 +3,8 @@
 
 Este repositorio centraliza los recursos, códigos y presentaciones diseñados para las sesiones prácticas de **R** en el curso dictado por el profesor Carlos Budnevich.
 
+> **En migración:** las sesiones se están unificando en un sitio Quarto dentro de este repositorio (`clases/`, `datos/`, `_extensions/fagob/`). La sesión 06 ya está migrada; las convenciones están en `guia-estilo.qmd`. Para renderizar: abrir `metodos-cuantitativos-fagob.Rproj` y ejecutar `quarto render`.
+
 ## 🚀 Programa de Sesiones (2026)
 
 | Sesión | Tema Principal | Repositorio | Presentación |
