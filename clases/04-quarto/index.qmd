@@ -1,0 +1,47 @@
+---
+title: "Documentos dinámicos y Quarto"
+subtitle: "Sesión 04 · Fundamentos de R"
+description: "Documentos reproducibles: Markdown, chunks, referencias cruzadas y presentaciones."
+sesion: "04"
+seccion: "Fundamentos de R"
+toc: false
+---
+
+```{=html}
+<div class="visor visor-documento">
+  <iframe src="documento.html" title="Documento" loading="lazy"></iframe>
+</div>
+<div class="visor-acciones">
+  <a class="btn btn-outline-secondary btn-sm" href="documento.html" target="_blank">
+    <i class="bi bi-box-arrow-up-right"></i> Abrir en otra pestaña
+  </a>
+</div>
+```
+
+:::: ficha-sesion
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+### En esta sesión
+
+-   Por qué documentos dinámicos y reproducibilidad
+-   Escritura en Markdown
+-   Chunks y sus opciones
+-   Referencias cruzadas a tablas y gráficos
+-   Del documento a la presentación
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Paquetes
+
+`tidyverse`, `sjmisc`, `sjPlot`, `knitr`
+
+### Datos
+
+-   [`issp_2009_chile.RData`](../../datos/issp_2009_chile.RData){download="issp_2009_chile.RData"}
+
+### Código fuente
+
+[Ver `documento.qmd` en GitHub](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/blob/main/clases/04-quarto/documento.qmd)
+:::
+:::
+::::

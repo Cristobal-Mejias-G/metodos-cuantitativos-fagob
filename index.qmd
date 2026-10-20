@@ -1,37 +1,48 @@
 ---
-title: "Métodos Cuantitativos para la Administración Pública"
-subtitle: "Ayudantías de R · Facultad de Gobierno, Universidad de Chile · 2026"
+pagetitle: "Inicio"
+page-layout: full
+sidebar: false
 toc: false
+listing:
+  id: sesiones
+  contents: clases/*/index.qmd
+  sort: "sesion"
+  template: _plantilla/sesiones.ejs
+  fields: [title, description, sesion, seccion]
 ---
 
-Sitio con las presentaciones, códigos y pautas de las sesiones prácticas de **R** del curso dictado por el profesor Carlos Budnevich.
+::: hero
+# Métodos Cuantitativos para la Administración Pública
 
-## Sesiones
+Ayudantías de R del curso dictado por el profesor Carlos Budnevich · Facultad de Gobierno, Universidad de Chile · 2026.
 
-| Sesión | Tema | Material |
-|:--|:--|:--|
-| 01 | Introducción a R y RStudio | [Presentación](clases/01-intro-r/slides.qmd) |
-| 02 | Procesamiento de datos con tidyverse | [Presentación](clases/02-tidyverse/slides.qmd) |
-| 03 | Análisis descriptivo, bivariado y gráficos | [Presentación](clases/03-descriptivos-graficos/slides.qmd) |
-| 04 | Documentos dinámicos y Quarto | [Documento](clases/04-quarto/documento.qmd) |
-| 05 | Repaso prueba de cátedra 1 | [Presentación](clases/05-repaso-1/slides.qmd) |
-| 06 | Inferencia, correlación y regresión simple | [Presentación](clases/06-inferencia-regresion/slides.qmd) · [Pauta](clases/06-inferencia-regresion/pauta.qmd) |
-| 07 | Modelos de regresión múltiple | [Presentación](clases/07-regresion-multiple/slides.qmd) |
-| 08 | Ejercicios aplicados: regresión simple y múltiple | [Presentación](clases/08-ejercicios-regresion/slides.qmd) · [Pauta](clases/08-ejercicios-regresion/pauta.qmd) |
-| 09 | Repaso: regresión logística, ACP y cuestionario | [Presentación](clases/09-repaso-2/slides.qmd) |
+Cada sesión tiene su presentación, que puedes ver aquí mismo, junto con los paquetes, las bases de datos y el código.
 
-## Cómo usar este repositorio
+[Empezar por la sesión 01](clases/01-intro-r/index.qmd){.btn .btn-warning}
+[Bases de datos](datos.qmd){.btn .btn-outline-light}
+:::
 
-1.  Descarga el repositorio (botón **Code → Download ZIP** en GitHub) y abre `metodos-cuantitativos-fagob.Rproj` en RStudio o Positron.
-2.  Todas las bases están en la carpeta `datos/`.
-3.  Cada sesión está en `clases/NN-tema/`, con su presentación (`slides.qmd`) y, cuando corresponde, su pauta (`pauta.qmd`).
+::: {#sesiones}
+:::
 
-## Bases de datos
+## Cómo trabajar con este material
 
-| Archivo | Fuente | Sesiones |
-|:--|:--|:--|
-| `casen_ay1.csv` | CASEN 2024 (1.000 casos, 10 variables) | 01 |
-| `casen_fagob.dta` | CASEN 2024 (5.000 casos, 16 variables) | 02 |
-| `casen_proc.rds` | CASEN procesada en la sesión 02 | 03, 09 |
-| `issp_2009_chile.RData` | ISSP 2009, Chile | 04, 06, 09 |
-| `cep95.rds` | Encuesta CEP N° 95, octubre 2025 (generada con `preparar_cep95.R`) | 07 |
+::: {.grid}
+::: {.g-col-12 .g-col-md-4}
+**1. Descarga el repositorio**
+
+En [GitHub](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob), botón **Code → Download ZIP**.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+**2. Abre el proyecto**
+
+Abre `metodos-cuantitativos-fagob.Rproj` en RStudio o Positron. Las rutas funcionan solas.
+:::
+
+::: {.g-col-12 .g-col-md-4}
+**3. Sigue cada sesión**
+
+Cada sesión vive en `clases/NN-tema/`. Las bases están en `datos/`.
+:::
+:::

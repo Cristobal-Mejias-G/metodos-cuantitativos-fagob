@@ -3,10 +3,19 @@ project:
   output-dir: docs
   render:
     - index.qmd
+    - datos.qmd
     - guia-estilo.qmd
+    - clases/*/index.qmd
     - clases/*/slides.qmd
     - clases/*/pauta.qmd
     - clases/*/documento.qmd
+  resources:
+    - datos/*.csv
+    - datos/*.dta
+    - datos/*.rds
+    - datos/*.RData
+    - datos/*.sav
+    - datos/*.R
 
 execute:
   freeze: auto
@@ -17,17 +26,70 @@ website:
   title: "Métodos Cuantitativos FAGOB"
   site-url: https://cristobal-mejias-g.github.io/metodos-cuantitativos-fagob/
   repo-url: https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob
+  page-navigation: true
+  back-to-top-navigation: true
+  search:
+    location: navbar
+    type: overlay
   navbar:
+    background: "#40666e"
     left:
       - href: index.qmd
-        text: Sesiones
+        text: Inicio
+      - text: Sesiones
+        menu:
+          - text: "Fundamentos de R"
+          - href: clases/01-intro-r/index.qmd
+          - href: clases/02-tidyverse/index.qmd
+          - href: clases/03-descriptivos-graficos/index.qmd
+          - href: clases/04-quarto/index.qmd
+          - text: "---"
+          - text: "Inferencia y regresión"
+          - href: clases/06-inferencia-regresion/index.qmd
+          - href: clases/07-regresion-multiple/index.qmd
+          - href: clases/08-ejercicios-regresion/index.qmd
+          - text: "---"
+          - text: "Repasos"
+          - href: clases/05-repaso-1/index.qmd
+          - href: clases/09-repaso-2/index.qmd
+      - href: datos.qmd
+        text: Datos
       - href: guia-estilo.qmd
         text: Guía de estilo
     right:
       - icon: github
         href: https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob
+        aria-label: Repositorio en GitHub
+  sidebar:
+    style: docked
+    collapse-level: 1
+    contents:
+      - section: "Fundamentos de R"
+        contents:
+          - clases/01-intro-r/index.qmd
+          - clases/02-tidyverse/index.qmd
+          - clases/03-descriptivos-graficos/index.qmd
+          - clases/04-quarto/index.qmd
+      - section: "Inferencia y regresión"
+        contents:
+          - clases/06-inferencia-regresion/index.qmd
+          - clases/07-regresion-multiple/index.qmd
+          - clases/08-ejercicios-regresion/index.qmd
+      - section: "Repasos"
+        contents:
+          - clases/05-repaso-1/index.qmd
+          - clases/09-repaso-2/index.qmd
+  page-footer:
+    left: "Cristóbal Mejías · Facultad de Gobierno, Universidad de Chile"
+    right: "Hecho con [Quarto](https://quarto.org/)"
 
 format:
   html:
     theme: [flatly, _extensions/fagob/fagob-html.scss]
     toc: true
+    include-in-header:
+      - text: |
+          <script>
+          // Si la página se abre dentro de un recuadro (iframe), se oculta el menú del sitio
+          if (window.self !== window.top) document.documentElement.classList.add("embebido");
+          </script>

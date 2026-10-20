@@ -1,0 +1,19 @@
+```{=html}
+<%
+// Tarjetas de sesiones agrupadas por sección (campo "seccion" de cada clases/*/index.qmd)
+const secciones = ["Fundamentos de R", "Inferencia y regresión", "Repasos"];
+for (const seccion of secciones) {
+  const grupo = items.filter(item => item.seccion === seccion);
+  if (grupo.length === 0) continue;
+%>
+<h2 class="seccion-titulo"><%= seccion %></h2>
+<div class="grilla-sesiones">
+<% for (const item of grupo) { %>
+<a class="tarjeta-sesion" href="<%- item.path %>" <%= metadataAttrs(item) %>>
+<div class="tarjeta-cabecera"><span class="tarjeta-numero"><%= item.sesion %></span><span class="tarjeta-titulo"><%= item.title %></span></div>
+<div class="tarjeta-cuerpo"><%= item.description %></div>
+</a>
+<% } %>
+</div>
+<% } %>
+```

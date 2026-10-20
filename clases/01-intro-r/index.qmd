@@ -1,0 +1,55 @@
+---
+title: "Introducción a R y RStudio"
+subtitle: "Sesión 01 · Fundamentos de R"
+description: "Qué es R, cómo se organiza un proyecto y primer contacto con la CASEN 2024."
+sesion: "01"
+seccion: "Fundamentos de R"
+toc: false
+---
+
+```{=html}
+<div class="visor">
+  <iframe id="visor-slides" src="slides.html" title="Presentación" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="visor-acciones">
+  <button class="btn btn-primary btn-sm" onclick="document.getElementById('visor-slides').requestFullscreen()">
+    <i class="bi bi-arrows-fullscreen"></i> Pantalla completa
+  </button>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html" target="_blank">
+    <i class="bi bi-box-arrow-up-right"></i> Abrir en otra pestaña
+  </a>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html?print-pdf" target="_blank">
+    <i class="bi bi-printer"></i> Imprimir o guardar en PDF
+  </a>
+</div>
+```
+
+[Haz clic en la presentación y usa las flechas del teclado para avanzar. Con la tecla `F` se abre en pantalla completa.]{.small .text-muted}
+
+:::: ficha-sesion
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+### En esta sesión
+
+-   El ecosistema de software: R, RStudio, Python y VS Code
+-   Proyectos de R y sistema de carpetas IPO
+-   Los cuatro paneles de RStudio
+-   Primeros comandos: R como calculadora y objetos
+-   Cargar y explorar una base con `read_csv()`, `glimpse()` y `count()`
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Paquetes
+
+`tidyverse`
+
+### Datos
+
+-   [`casen_ay1.csv`](../../datos/casen_ay1.csv){download="casen_ay1.csv"}
+
+### Código fuente
+
+[Ver `slides.qmd` en GitHub](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/blob/main/clases/01-intro-r/slides.qmd)
+:::
+:::
+::::

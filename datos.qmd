@@ -1,0 +1,37 @@
+---
+title: "Bases de datos"
+description: "Todas las bases usadas en las ayudantías, listas para descargar."
+toc: false
+---
+
+Todas las bases están en la carpeta `datos/` del repositorio. También puedes descargarlas desde aquí o cargarlas directamente desde GitHub con la URL que aparece en cada presentación.
+
+| Base | Descripción | Sesiones | Descarga |
+|:--|:--|:--:|:--:|
+| CASEN 2024 (muestra) | 1.000 casos, 10 variables, ya etiquetada | 01 | [`casen_ay1.csv`](datos/casen_ay1.csv){download="casen_ay1.csv"} |
+| CASEN 2024 (muestra) | 5.000 casos, 16 variables, formato Stata | 02 | [`casen_fagob.dta`](datos/casen_fagob.dta){download="casen_fagob.dta"} |
+| CASEN procesada | Resultado del procesamiento de la sesión 02 | 03, 09 | [`casen_proc.rds`](datos/casen_proc.rds){download="casen_proc.rds"} |
+| ISSP 2009, Chile | Desigualdad, estatus subjetivo y conflictos | 04, 06, 09 | [`issp_2009_chile.RData`](datos/issp_2009_chile.RData){download="issp_2009_chile.RData"} |
+| CEP N° 95 (octubre 2025) | Variables seleccionadas para el caso de regresión múltiple | 07 | [`cep95.rds`](datos/cep95.rds){download="cep95.rds"} |
+| CEP N° 95 (original) | Base original en formato SPSS | 07 | [`cep95.sav`](datos/cep95.sav){download="cep95.sav"} |
+
+## Cómo cargarlas en R
+
+``` r
+# .csv
+casen <- readr::read_csv("datos/casen_ay1.csv")
+
+# .dta (Stata) y .sav (SPSS)
+casen <- haven::read_dta("datos/casen_fagob.dta")
+cep   <- haven::read_sav("datos/cep95.sav")
+
+# .rds (un objeto de R)
+casen_proc <- readRDS("datos/casen_proc.rds")
+
+# .RData (puede contener varios objetos; aquí crea "issp")
+load("datos/issp_2009_chile.RData")
+```
+
+::: callout-note
+La base `cep95.rds` se genera desde `cep95.sav` con el script [`preparar_cep95.R`](datos/preparar_cep95.R).
+:::

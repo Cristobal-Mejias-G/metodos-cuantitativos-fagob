@@ -2,20 +2,29 @@
 title: "Guía de estilo de las ayudantías"
 ---
 
-Convenciones comunes para que todas las sesiones se vean y se programen igual. Antes de crear una sesión nueva, copiar `_plantilla/clase/` a `clases/NN-tema/`.
+Convenciones comunes para que todas las sesiones se vean y se programen igual.
 
 ## Estructura del repositorio
 
 ```
-_quarto.yml              configuración del sitio
-_extensions/fagob/       tema de las presentaciones (formato fagob-revealjs)
+_quarto.yml              configuración del sitio: menú, barra lateral y secciones
+_extensions/fagob/       tema de las presentaciones (fagob-revealjs) y del sitio (fagob-html.scss)
 _plantilla/clase/        plantilla para una sesión nueva
+_plantilla/sesiones.ejs  tarjetas de la portada
 R/setup.R                opciones comunes (se carga oculto en cada sesión)
 datos/                   todas las bases, una sola copia
 clases/NN-tema/
+  index.qmd              página de la sesión: visor de la presentación y ficha
   slides.qmd             presentación
-  pauta.qmd              resolución de ejercicios
+  pauta.qmd              resolución de ejercicios (opcional)
 ```
+
+## Agregar una sesión nueva
+
+1.  Copiar `_plantilla/clase/` a `clases/NN-tema/` y escribir `slides.qmd`.
+2.  Copiar el `index.qmd` de otra sesión y cambiar `title`, `description`, `sesion`, `seccion`, temas, paquetes y datos. El campo `seccion` decide en qué grupo aparece la tarjeta de la portada.
+3.  Agregar `clases/NN-tema/index.qmd` en `_quarto.yml`, en el menú "Sesiones" y en la barra lateral, dentro de su sección.
+4.  Ejecutar `quarto render`.
 
 ## Presentaciones
 

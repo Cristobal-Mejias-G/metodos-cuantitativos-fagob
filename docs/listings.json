@@ -1,0 +1,16 @@
+[
+  {
+    "listing": "/index.html",
+    "items": [
+      "/clases/01-intro-r/index.html",
+      "/clases/02-tidyverse/index.html",
+      "/clases/03-descriptivos-graficos/index.html",
+      "/clases/04-quarto/index.html",
+      "/clases/05-repaso-1/index.html",
+      "/clases/06-inferencia-regresion/index.html",
+      "/clases/07-regresion-multiple/index.html",
+      "/clases/08-ejercicios-regresion/index.html",
+      "/clases/09-repaso-2/index.html"
+    ]
+  }
+]

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Métodos Cuantitativos para la Administración Pública – Métodos Cuantitativos FAGOB</title>
+<title>Inicio – Métodos Cuantitativos FAGOB</title>
 <style>
 /* Default styles provided by pandoc.
 ** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
@@ -33,6 +33,8 @@ ul.task-list li input[type="checkbox"] {
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-listing/list.min.js"></script>
+<script src="site_libs/quarto-listing/quarto-listing.js"></script>
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/popper.min.js"></script>
@@ -42,7 +44,7 @@ ul.task-list li input[type="checkbox"] {
 <link href="site_libs/quarto-html/quarto-syntax-highlighting-7f8f88aac4f3542376d5c11b86a4c14d.css" rel="stylesheet" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-60c0ca3f0dfce1e50d1fd66663c20b15.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-579c5304e5f7491035c0a01f1d4c3bf4.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -55,7 +57,6 @@ ul.task-list li input[type="checkbox"] {
     "/",
     "s"
   ],
-  "show-item-context": false,
   "language": {
     "search-no-results-text": "No se han encontrado resultados",
     "search-matching-documents-text": "documentos encontrados",
@@ -70,11 +71,73 @@ ul.task-list li input[type="checkbox"] {
     "search-label": "Buscar"
   }
 }</script>
+<script>
 
+  window.document.addEventListener("DOMContentLoaded", function (_event) {
+    const listingTargetEl = window.document.querySelector('#listing-sesiones .list');
+    if (!listingTargetEl) {
+      // No listing discovered, do not attach.
+      return; 
+    }
+
+    const options = {
+      valueNames: ['listing-title','listing-description','listing-sesion','listing-seccion',{ data: ['index'] },{ data: ['categories'] },{ data: ['listing-file-modified-sort'] },{ data: ['listing-reading-time-sort'] },{ data: ['listing-word-count-sort'] }],
+      
+      searchColumns: ["listing-project","listing-execute","listing-lang","listing-website","listing-format","listing-engines","listing-language","listing-title","listing-subtitle","listing-description","listing-sesion","listing-seccion","listing-toc","listing-path","listing-outputHref","listing-author","listing-filename","listing-file-modified","listing-reading-time","listing-word-count"],
+    };
+
+    window['quarto-listings'] = window['quarto-listings'] || {};
+    window['quarto-listings']['listing-sesiones'] = new List('listing-sesiones', options);
+
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  });
+
+  window.addEventListener('hashchange',() => {
+    if (window['quarto-listing-loaded']) {
+      window['quarto-listing-loaded']();
+    }
+  })
+  </script>
+<script>
+// Si la página se abre dentro de un recuadro (iframe), se oculta el menú del sitio
+if (window.self !== window.top) document.documentElement.classList.add("embebido");
+</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script defer="" src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
 
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed quarto-light">
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -93,7 +156,59 @@ ul.task-list li input[type="checkbox"] {
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link active" href="./index.html" aria-current="page"> 
-<span class="menu-text">Sesiones</span></a>
+<span class="menu-text">Inicio</span></a>
+  </li>  
+  <li class="nav-item dropdown ">
+    <a class="nav-link dropdown-toggle" href="#" id="nav-menu-sesiones" role="link" data-bs-toggle="dropdown" aria-expanded="false">
+ <span class="menu-text">Sesiones</span>
+    </a>
+    <ul class="dropdown-menu" aria-labelledby="nav-menu-sesiones">    
+        <li class="dropdown-header">Fundamentos de R</li>
+        <li>
+    <a class="dropdown-item" href="./clases/01-intro-r/index.html">
+ <span class="dropdown-text">Introducción a R y RStudio</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/02-tidyverse/index.html">
+ <span class="dropdown-text">Procesamiento de datos con tidyverse</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/03-descriptivos-graficos/index.html">
+ <span class="dropdown-text">Análisis descriptivo, bivariado y gráficos</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/04-quarto/index.html">
+ <span class="dropdown-text">Documentos dinámicos y Quarto</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Inferencia y regresión</li>
+        <li>
+    <a class="dropdown-item" href="./clases/06-inferencia-regresion/index.html">
+ <span class="dropdown-text">Inferencia, correlación y regresión simple</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/07-regresion-multiple/index.html">
+ <span class="dropdown-text">Modelos de regresión múltiple</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/08-ejercicios-regresion/index.html">
+ <span class="dropdown-text">Ejercicios aplicados de regresión</span></a>
+  </li>  
+        <li><hr class="dropdown-divider"></li>
+        <li class="dropdown-header">Repasos</li>
+        <li>
+    <a class="dropdown-item" href="./clases/05-repaso-1/index.html">
+ <span class="dropdown-text">Repaso prueba de cátedra 1</span></a>
+  </li>  
+        <li>
+    <a class="dropdown-item" href="./clases/09-repaso-2/index.html">
+ <span class="dropdown-text">Repaso: logística, ACP y cuestionario</span></a>
+  </li>  
+    </ul>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="./datos.html"> 
+<span class="menu-text">Datos</span></a>
   </li>  
   <li class="nav-item">
     <a class="nav-link" href="./guia-estilo.html"> 
@@ -102,7 +217,7 @@ ul.task-list li input[type="checkbox"] {
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item compact">
-    <a class="nav-link" href="https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob"> <i class="bi bi-github" role="img">
+    <a class="nav-link" href="https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob"> <i class="bi bi-github" role="img" aria-label="Repositorio en GitHub">
 </i> 
 <span class="menu-text"></span></a>
   </li>  
@@ -114,149 +229,108 @@ ul.task-list li input[type="checkbox"] {
     </nav>
 </header>
 <!-- content -->
-<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-full page-navbar">
 <!-- sidebar -->
 <!-- margin-sidebar -->
     
 <!-- main -->
-<main class="content" id="quarto-document-content">
+<main class="content column-page" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
 
-<header id="title-block-header" class="quarto-title-block default">
-<div class="quarto-title">
-<h1 class="title">Métodos Cuantitativos para la Administración Pública</h1>
-<p class="subtitle lead">Ayudantías de R · Facultad de Gobierno, Universidad de Chile · 2026</p>
+
+
+
+<section id="métodos-cuantitativos-para-la-administración-pública" class="level1 hero">
+<h1>Métodos Cuantitativos para la Administración Pública</h1>
+<p>Ayudantías de R del curso dictado por el profesor Carlos Budnevich · Facultad de Gobierno, Universidad de Chile · 2026.</p>
+<p>Cada sesión tiene su presentación, que puedes ver aquí mismo, junto con los paquetes, las bases de datos y el código.</p>
+<p><a href="./clases/01-intro-r/index.html" class="btn btn-warning">Empezar por la sesión 01</a> <a href="./datos.html" class="btn btn-outline-light">Bases de datos</a></p>
+</section>
+<div id="listing-sesiones" class="quarto-listing quarto-listing-container-custom">
+
+<h2 class="seccion-titulo anchored">Fundamentos de R</h2>
+<div class="grilla-sesiones">
+
+<a class="tarjeta-sesion" href="./clases/01-intro-r/index.html" data-index="0" data-listing-file-modified-sort="1792459681653" data-listing-reading-time-sort="1" data-listing-word-count-sort="153">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">01</span><span class="tarjeta-titulo">Introducción a R y RStudio</span></div>
+<div class="tarjeta-cuerpo">Qué es R, cómo se organiza un proyecto y primer contacto con la CASEN 2024.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/02-tidyverse/index.html" data-index="1" data-listing-file-modified-sort="1792459681669" data-listing-reading-time-sort="1" data-listing-word-count-sort="155">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">02</span><span class="tarjeta-titulo">Procesamiento de datos con tidyverse</span></div>
+<div class="tarjeta-cuerpo">Tipos de variables, pipe, select, filter, mutate y tratamiento de valores perdidos.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/03-descriptivos-graficos/index.html" data-index="2" data-listing-file-modified-sort="1792459681683" data-listing-reading-time-sort="1" data-listing-word-count-sort="145">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">03</span><span class="tarjeta-titulo">Análisis descriptivo, bivariado y gráficos</span></div>
+<div class="tarjeta-cuerpo">Tablas de frecuencia, descriptivos por grupo, tablas para informes y gráficos con ggplot2.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/04-quarto/index.html" data-index="3" data-listing-file-modified-sort="1792459681692" data-listing-reading-time-sort="1" data-listing-word-count-sort="81">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">04</span><span class="tarjeta-titulo">Documentos dinámicos y Quarto</span></div>
+<div class="tarjeta-cuerpo">Documentos reproducibles: Markdown, chunks, referencias cruzadas y presentaciones.</div>
+</a>
+
+</div>
+
+<h2 class="seccion-titulo anchored">Inferencia y regresión</h2>
+<div class="grilla-sesiones">
+
+<a class="tarjeta-sesion" href="./clases/06-inferencia-regresion/index.html" data-index="4" data-listing-file-modified-sort="1792459681716" data-listing-reading-time-sort="1" data-listing-word-count-sort="173">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">06</span><span class="tarjeta-titulo">Inferencia, correlación y regresión simple</span></div>
+<div class="tarjeta-cuerpo">Intervalos de confianza, test t, correlación de Pearson y regresión lineal simple.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/07-regresion-multiple/index.html" data-index="5" data-listing-file-modified-sort="1792459681732" data-listing-reading-time-sort="1" data-listing-word-count-sort="146">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">07</span><span class="tarjeta-titulo">Modelos de regresión múltiple</span></div>
+<div class="tarjeta-cuerpo">Control estadístico, variables categóricas, dummies y modelos anidados con la CEP 2025.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/08-ejercicios-regresion/index.html" data-index="6" data-listing-file-modified-sort="1792459681732" data-listing-reading-time-sort="1" data-listing-word-count-sort="177">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">08</span><span class="tarjeta-titulo">Ejercicios aplicados de regresión</span></div>
+<div class="tarjeta-cuerpo">Cinco casos de la administración pública para interpretar, predecir y criticar modelos.</div>
+</a>
+
+</div>
+
+<h2 class="seccion-titulo anchored">Repasos</h2>
+<div class="grilla-sesiones">
+
+<a class="tarjeta-sesion" href="./clases/05-repaso-1/index.html" data-index="7" data-listing-file-modified-sort="1792459681700" data-listing-reading-time-sort="1" data-listing-word-count-sort="144">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">05</span><span class="tarjeta-titulo">Repaso prueba de cátedra 1</span></div>
+<div class="tarjeta-cuerpo">Unidades 1 a 4: investigación cuantitativa, diseño, medición e inferencia.</div>
+</a>
+
+<a class="tarjeta-sesion" href="./clases/09-repaso-2/index.html" data-index="8" data-listing-file-modified-sort="1792459681749" data-listing-reading-time-sort="1" data-listing-word-count-sort="142">
+<div class="tarjeta-cabecera"><span class="tarjeta-numero">09</span><span class="tarjeta-titulo">Repaso: logística, ACP y cuestionario</span></div>
+<div class="tarjeta-cuerpo">Regresión logística, análisis de componentes principales y diseño de cuestionarios.</div>
+</a>
+
+</div>
+
+<div class="listing-no-matching d-none">No hay resultados</div>
+</div>
+<section id="cómo-trabajar-con-este-material" class="level2">
+<h2 class="anchored" data-anchor-id="cómo-trabajar-con-este-material">Cómo trabajar con este material</h2>
+<div class="grid">
+<div class="g-col-12 g-col-md-4">
+<p><strong>1. Descarga el repositorio</strong></p>
+<p>En <a href="https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob">GitHub</a>, botón <strong>Code → Download ZIP</strong>.</p>
+</div>
+<div class="g-col-12 g-col-md-4">
+<p><strong>2. Abre el proyecto</strong></p>
+<p>Abre <code>metodos-cuantitativos-fagob.Rproj</code> en RStudio o Positron. Las rutas funcionan solas.</p>
+</div>
+<div class="g-col-12 g-col-md-4">
+<p><strong>3. Sigue cada sesión</strong></p>
+<p>Cada sesión vive en <code>clases/NN-tema/</code>. Las bases están en <code>datos/</code>.</p>
+</div>
 </div>
 
 
 
-<div class="quarto-title-meta">
-
-    
-  
-    
-  </div>
-  
-
-
-</header>
-
-
-<p>Sitio con las presentaciones, códigos y pautas de las sesiones prácticas de <strong>R</strong> del curso dictado por el profesor Carlos Budnevich.</p>
-<section id="sesiones" class="level2">
-<h2 class="anchored" data-anchor-id="sesiones">Sesiones</h2>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th style="text-align: left;">Sesión</th>
-<th style="text-align: left;">Tema</th>
-<th style="text-align: left;">Material</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;">01</td>
-<td style="text-align: left;">Introducción a R y RStudio</td>
-<td style="text-align: left;"><a href="./clases/01-intro-r/slides.html">Presentación</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">02</td>
-<td style="text-align: left;">Procesamiento de datos con tidyverse</td>
-<td style="text-align: left;"><a href="./clases/02-tidyverse/slides.html">Presentación</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">03</td>
-<td style="text-align: left;">Análisis descriptivo, bivariado y gráficos</td>
-<td style="text-align: left;"><a href="./clases/03-descriptivos-graficos/slides.html">Presentación</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">04</td>
-<td style="text-align: left;">Documentos dinámicos y Quarto</td>
-<td style="text-align: left;"><a href="./clases/04-quarto/documento.html">Documento</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">05</td>
-<td style="text-align: left;">Repaso prueba de cátedra 1</td>
-<td style="text-align: left;"><a href="./clases/05-repaso-1/slides.html">Presentación</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">06</td>
-<td style="text-align: left;">Inferencia, correlación y regresión simple</td>
-<td style="text-align: left;"><a href="./clases/06-inferencia-regresion/slides.html">Presentación</a> · <a href="./clases/06-inferencia-regresion/pauta.html">Pauta</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">07</td>
-<td style="text-align: left;">Modelos de regresión múltiple</td>
-<td style="text-align: left;"><a href="./clases/07-regresion-multiple/slides.html">Presentación</a></td>
-</tr>
-<tr class="even">
-<td style="text-align: left;">08</td>
-<td style="text-align: left;">Ejercicios aplicados: regresión simple y múltiple</td>
-<td style="text-align: left;"><a href="./clases/08-ejercicios-regresion/slides.html">Presentación</a> · <a href="./clases/08-ejercicios-regresion/pauta.html">Pauta</a></td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;">09</td>
-<td style="text-align: left;">Repaso: regresión logística, ACP y cuestionario</td>
-<td style="text-align: left;"><a href="./clases/09-repaso-2/slides.html">Presentación</a></td>
-</tr>
-</tbody>
-</table>
-</section>
-<section id="cómo-usar-este-repositorio" class="level2">
-<h2 class="anchored" data-anchor-id="cómo-usar-este-repositorio">Cómo usar este repositorio</h2>
-<ol type="1">
-<li>Descarga el repositorio (botón <strong>Code → Download ZIP</strong> en GitHub) y abre <code>metodos-cuantitativos-fagob.Rproj</code> en RStudio o Positron.</li>
-<li>Todas las bases están en la carpeta <code>datos/</code>.</li>
-<li>Cada sesión está en <code>clases/NN-tema/</code>, con su presentación (<code>slides.qmd</code>) y, cuando corresponde, su pauta (<code>pauta.qmd</code>).</li>
-</ol>
-</section>
-<section id="bases-de-datos" class="level2">
-<h2 class="anchored" data-anchor-id="bases-de-datos">Bases de datos</h2>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 33%">
-<col style="width: 33%">
-<col style="width: 33%">
-</colgroup>
-<thead>
-<tr class="header">
-<th style="text-align: left;">Archivo</th>
-<th style="text-align: left;">Fuente</th>
-<th style="text-align: left;">Sesiones</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td style="text-align: left;"><code>casen_ay1.csv</code></td>
-<td style="text-align: left;">CASEN 2024 (1.000 casos, 10 variables)</td>
-<td style="text-align: left;">01</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>casen_fagob.dta</code></td>
-<td style="text-align: left;">CASEN 2024 (5.000 casos, 16 variables)</td>
-<td style="text-align: left;">02</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>casen_proc.rds</code></td>
-<td style="text-align: left;">CASEN procesada en la sesión 02</td>
-<td style="text-align: left;">03, 09</td>
-</tr>
-<tr class="even">
-<td style="text-align: left;"><code>issp_2009_chile.RData</code></td>
-<td style="text-align: left;">ISSP 2009, Chile</td>
-<td style="text-align: left;">04, 06, 09</td>
-</tr>
-<tr class="odd">
-<td style="text-align: left;"><code>cep95.rds</code></td>
-<td style="text-align: left;">Encuesta CEP N° 95, octubre 2025 (generada con <code>preparar_cep95.R</code>)</td>
-<td style="text-align: left;">07</td>
-</tr>
-</tbody>
-</table>
-
-
 </section>
 
-</main> <!-- /main -->
+<a onclick="window.scrollTo(0, 0); return false;" role="button" id="quarto-back-to-top"><i class="bi bi-arrow-up"></i> Volver arriba</a></main> <!-- /main -->
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
     const icon = "";
@@ -658,6 +732,19 @@ ul.task-list li input[type="checkbox"] {
   });
   </script>
 </div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p>Cristóbal Mejías · Facultad de Gobierno, Universidad de Chile</p>
+</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">
+<p>Hecho con <a href="https://quarto.org/">Quarto</a></p>
+</div>
+  </div>
+</footer>
 
 
 

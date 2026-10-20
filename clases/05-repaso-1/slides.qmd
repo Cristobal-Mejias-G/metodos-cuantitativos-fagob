@@ -3,7 +3,7 @@ title: "Repaso prueba de cátedra 1"
 subtitle: "Ayudantía 05 · FAGOB 2026"
 institute: "Métodos Cuantitativos para la Administración Pública"
 author: "Cristóbal Mejías · Facultad de Gobierno"
-date: 2026-04-24
+date: 2026-04-26
 format: fagob-revealjs
 execute:
   echo: true

@@ -1,0 +1,54 @@
+---
+title: "Análisis descriptivo, bivariado y gráficos"
+subtitle: "Sesión 03 · Fundamentos de R"
+description: "Tablas de frecuencia, descriptivos por grupo, tablas para informes y gráficos con ggplot2."
+sesion: "03"
+seccion: "Fundamentos de R"
+toc: false
+---
+
+```{=html}
+<div class="visor">
+  <iframe id="visor-slides" src="slides.html" title="Presentación" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="visor-acciones">
+  <button class="btn btn-primary btn-sm" onclick="document.getElementById('visor-slides').requestFullscreen()">
+    <i class="bi bi-arrows-fullscreen"></i> Pantalla completa
+  </button>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html" target="_blank">
+    <i class="bi bi-box-arrow-up-right"></i> Abrir en otra pestaña
+  </a>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html?print-pdf" target="_blank">
+    <i class="bi bi-printer"></i> Imprimir o guardar en PDF
+  </a>
+</div>
+```
+
+[Haz clic en la presentación y usa las flechas del teclado para avanzar. Con la tecla `F` se abre en pantalla completa.]{.small .text-muted}
+
+:::: ficha-sesion
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+### En esta sesión
+
+-   Frecuencias con `count()` y tablas cruzadas con `tabyl()`
+-   Descriptivos por grupo con `group_by()` y `summarise()`
+-   Tablas para informes con `gt` y `gtsummary`
+-   Gráficos de barras, boxplot y dispersión con `ggplot2`
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Paquetes
+
+`tidyverse`, `janitor`, `gt`, `gtsummary`, `sjmisc`
+
+### Datos
+
+-   [`casen_proc.rds`](../../datos/casen_proc.rds){download="casen_proc.rds"}
+
+### Código fuente
+
+[Ver `slides.qmd` en GitHub](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/blob/main/clases/03-descriptivos-graficos/slides.qmd)
+:::
+:::
+::::

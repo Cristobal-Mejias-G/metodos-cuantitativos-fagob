@@ -1,0 +1,74 @@
+---
+title: "Ejercicios aplicados de regresión"
+subtitle: "Sesión 08 · Inferencia y regresión"
+description: "Cinco casos de la administración pública para interpretar, predecir y criticar modelos."
+sesion: "08"
+seccion: "Inferencia y regresión"
+toc: false
+---
+
+::: {.panel-tabset}
+
+## Presentación
+
+```{=html}
+<div class="visor">
+  <iframe id="visor-slides" src="slides.html" title="Presentación" allowfullscreen loading="lazy"></iframe>
+</div>
+<div class="visor-acciones">
+  <button class="btn btn-primary btn-sm" onclick="document.getElementById('visor-slides').requestFullscreen()">
+    <i class="bi bi-arrows-fullscreen"></i> Pantalla completa
+  </button>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html" target="_blank">
+    <i class="bi bi-box-arrow-up-right"></i> Abrir en otra pestaña
+  </a>
+  <a class="btn btn-outline-secondary btn-sm" href="slides.html?print-pdf" target="_blank">
+    <i class="bi bi-printer"></i> Imprimir o guardar en PDF
+  </a>
+</div>
+```
+
+[Haz clic en la presentación y usa las flechas del teclado para avanzar. Con la tecla `F` se abre en pantalla completa.]{.small .text-muted}
+
+## Pauta
+
+```{=html}
+<div class="visor visor-documento">
+  <iframe src="pauta.html" title="Pauta" loading="lazy"></iframe>
+</div>
+<div class="visor-acciones">
+  <a class="btn btn-outline-secondary btn-sm" href="pauta.html" target="_blank">
+    <i class="bi bi-box-arrow-up-right"></i> Abrir en otra pestaña
+  </a>
+</div>
+```
+
+:::
+
+:::: ficha-sesion
+::: {.grid}
+::: {.g-col-12 .g-col-md-6}
+### En esta sesión
+
+-   Predicción e interpretación en regresión simple
+-   Residuos y ajuste del modelo
+-   Interpretación de coeficientes en regresión múltiple
+-   Modelos anidados y selección de modelo
+-   Correlación espuria y diseño de investigación
+:::
+
+::: {.g-col-12 .g-col-md-6}
+### Paquetes
+
+`tidyverse`
+
+### Datos
+
+Esta sesión no usa bases de datos.
+
+### Código fuente
+
+[Ver `slides.qmd` en GitHub](https://github.com/Cristobal-Mejias-G/metodos-cuantitativos-fagob/blob/main/clases/08-ejercicios-regresion/slides.qmd)
+:::
+:::
+::::
